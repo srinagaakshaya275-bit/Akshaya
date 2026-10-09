@@ -48,20 +48,25 @@ const revealObserver = new IntersectionObserver((entries) => {
 document.querySelectorAll('.reveal').forEach((el) => revealObserver.observe(el));
 
 /* ---------- Count-up numbers ----------
-   Any .countup whose text starts with a number (e.g. "250K+", "12%", "3.5")
-   animates from 0. Placeholder text like "XXK+" is left as-is. */
+   Any .countup whose text starts with a number (e.g. "2.5M", "3,600+", "9.15")
+   animates up from 0 when it scrolls into view. */
 const animateCount = (el) => {
-  const match = el.textContent.trim().match(/^(\d+(?:\.\d+)?)(.*)$/);
+  const match = el.textContent.trim().match(/^(\d[\d,]*(?:\.\d+)?)(.*)$/);
   if (!match || reduceMotion) return;
-  const target = parseFloat(match[1]);
-  const decimals = (match[1].split('.')[1] || '').length;
+  const raw = match[1];
+  const target = parseFloat(raw.replace(/,/g, ''));
+  const decimals = (raw.split('.')[1] || '').length;
+  const useCommas = raw.includes(',');
   const suffix = match[2];
+  const fmt = (n) => useCommas
+    ? n.toLocaleString('en-US', { minimumFractionDigits: decimals, maximumFractionDigits: decimals })
+    : n.toFixed(decimals);
   const start = performance.now();
   const duration = 1600;
   const tick = (now) => {
     const t = Math.min((now - start) / duration, 1);
     const eased = 1 - Math.pow(1 - t, 3);
-    el.textContent = (target * eased).toFixed(decimals) + suffix;
+    el.textContent = fmt(target * eased) + suffix;
     if (t < 1) requestAnimationFrame(tick);
   };
   requestAnimationFrame(tick);
@@ -103,14 +108,13 @@ if (finePointer && !reduceMotion) {
   });
 }
 
-/* ---------- Accordion ---------- */
-document.querySelectorAll('.acc').forEach((acc) => {
-  const head = acc.querySelector('.acc__head');
+/* ---------- Expandable internship rows ---------- */
+document.querySelectorAll('.xp').forEach((row) => {
+  const head = row.querySelector('.xp__head');
   head.addEventListener('click', () => {
-    const open = !acc.classList.contains('is-open');
-    acc.classList.toggle('is-open', open);
+    const open = !row.classList.contains('is-open');
+    row.classList.toggle('is-open', open);
     head.setAttribute('aria-expanded', String(open));
-    if (open) acc.querySelectorAll('.chart').forEach(drawChart);
   });
 });
 
@@ -128,61 +132,65 @@ filters.forEach((btn) => btn.addEventListener('click', () => {
   });
 }));
 
-/* ---------- Line chart (SVG, no libraries) ---------- */
+/* ---------- Line chart (SVG, no libraries) ----------
+   Reads data-labels, data-points and data-suffix from each .chart. */
 const SVG_NS = 'http://www.w3.org/2000/svg';
-const svgEl = (tag, attrs) => {
+const svgEl = (tag, attrs, text) => {
   const el = document.createElementNS(SVG_NS, tag);
   Object.entries(attrs).forEach(([k, v]) => el.setAttribute(k, v));
+  if (text != null) el.textContent = text;
   return el;
 };
 
 function buildChart(chart) {
   const labels = chart.dataset.labels.split(',');
   const values = chart.dataset.points.split(',').map(Number);
-  const W = 600, H = 200, padX = 10, padTop = 16, padBottom = 30;
-  const max = Math.max(...values) * 1.15;
+  const suffix = chart.dataset.suffix || '';
+  const name = chart.dataset.name || 'Value';
+  const W = 600, H = 180, padX = 24, padTop = 34, padBottom = 30;
+  const max = Math.max(...values) * 1.1;
   const x = (i) => padX + (i * (W - padX * 2)) / (values.length - 1);
   const y = (v) => padTop + (1 - v / max) * (H - padTop - padBottom);
+  const base = H - padBottom;
 
-  const svg = svgEl('svg', { viewBox: `0 0 ${W} ${H}`, role: 'img', 'aria-label': chart.querySelector('.chart__caption')?.textContent || 'Chart' });
+  const svg = svgEl('svg', { viewBox: `0 0 ${W} ${H}`, role: 'img',
+    'aria-label': `${name}: ${values.map((v, i) => `${labels[i]} ${v}${suffix}`).join(', ')}` });
   svg.innerHTML = `<defs>
     <linearGradient id="lineGrad" x1="0" x2="1"><stop offset="0" stop-color="#22d3ee"/><stop offset=".5" stop-color="#4da3ff"/><stop offset="1" stop-color="#7c6cff"/></linearGradient>
     <linearGradient id="areaGrad" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#4da3ff" stop-opacity=".35"/><stop offset="1" stop-color="#4da3ff" stop-opacity="0"/></linearGradient>
   </defs>`;
 
-  [0.25, 0.5, 0.75].forEach((f) => {
-    const gy = padTop + f * (H - padTop - padBottom);
+  [0.33, 0.66, 1].forEach((f) => {
+    const gy = padTop + f * (base - padTop);
     svg.appendChild(svgEl('line', { x1: padX, x2: W - padX, y1: gy, y2: gy, class: 'gridline' }));
   });
 
-  // Smooth curve through the points
-  let d = `M ${x(0)} ${y(values[0])}`;
-  for (let i = 1; i < values.length; i++) {
-    const cx = (x(i - 1) + x(i)) / 2;
-    d += ` C ${cx} ${y(values[i - 1])}, ${cx} ${y(values[i])}, ${x(i)} ${y(values[i])}`;
-  }
-  const base = H - padBottom;
+  const d = values.map((v, i) => `${i ? 'L' : 'M'} ${x(i)} ${y(v)}`).join(' ');
   svg.appendChild(svgEl('path', { d: `${d} L ${x(values.length - 1)} ${base} L ${x(0)} ${base} Z`, class: 'area' }));
   const line = svgEl('path', { d, class: 'line' });
   svg.appendChild(line);
 
   const tip = document.createElement('div');
   tip.className = 'chart__tip';
+  const last = values.length - 1;
   values.forEach((v, i) => {
-    svg.appendChild(Object.assign(svgEl('text', { x: x(i), y: H - 6, 'text-anchor': i === 0 ? 'start' : i === values.length - 1 ? 'end' : 'middle', class: 'axis' }), { textContent: labels[i] }));
-    const pt = svgEl('circle', { cx: x(i), cy: y(v), r: 5, class: 'pt', tabindex: 0 });
+    const anchor = i === 0 ? 'start' : i === last ? 'end' : 'middle';
+    svg.appendChild(svgEl('text', { x: x(i), y: H - 6, 'text-anchor': anchor, class: 'axis' }, labels[i]));
+    svg.appendChild(svgEl('text', { x: x(i), y: y(v) - 14, 'text-anchor': anchor, class: 'val' }, `${v}${suffix}`));
+    const pt = svgEl('circle', { cx: x(i), cy: y(v), r: 6, class: 'pt', tabindex: 0 });
     const show = () => {
       const r = svg.getBoundingClientRect();
       const cr = chart.getBoundingClientRect();
-      tip.innerHTML = `<b>${labels[i]}</b><span>value : ${v}</span>`;
+      tip.innerHTML = `<b>${labels[i]}</b><span>${v}${suffix} ${name.toLowerCase()}</span>`;
       tip.style.left = `${r.left - cr.left + (x(i) / W) * r.width}px`;
       tip.style.top = `${r.top - cr.top + (y(v) / H) * r.height}px`;
       tip.style.opacity = 1;
     };
+    const hide = () => { tip.style.opacity = 0; };
     pt.addEventListener('pointerenter', show);
     pt.addEventListener('focus', show);
-    pt.addEventListener('pointerleave', () => { tip.style.opacity = 0; });
-    pt.addEventListener('blur', () => { tip.style.opacity = 0; });
+    pt.addEventListener('pointerleave', hide);
+    pt.addEventListener('blur', hide);
     svg.appendChild(pt);
   });
 
@@ -207,8 +215,9 @@ function drawChart(chart) {
 
 const chartObserver = new IntersectionObserver((entries) => {
   entries.forEach((entry) => {
-    if (!entry.isIntersecting || !entry.target.closest('.acc')?.classList.contains('is-open')) return;
+    if (!entry.isIntersecting) return;
     drawChart(entry.target);
+    chartObserver.unobserve(entry.target);
   });
 }, { threshold: 0.4 });
 document.querySelectorAll('.chart').forEach((c) => { buildChart(c); chartObserver.observe(c); });

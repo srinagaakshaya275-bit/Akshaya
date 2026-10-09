@@ -20,13 +20,12 @@ Hero · About · Experience (full-time + internship) · Impact (expandable campa
 python3 -m http.server 8000   # then open http://localhost:8000
 ```
 
-## Fill in your details (all in `index.html`)
-- Replace every `[bracketed]` placeholder with your own text.
-- Replace `XX`, `XXK+`, `XX%` with real numbers (e.g. `250K+`, `12%`). Real numbers automatically get the count-up animation.
-- **Chart:** edit `data-labels` and `data-points` on the `.chart` element (the current values are sample data).
-- **Projects:** each card's `data-cat` decides which filter it appears under (`campaigns`, `social`, `creator`, `content`, `brand`, `growth`).
-- **Links:** update the LinkedIn and Instagram URLs in the Contact section.
-- **Colours:** change `--accent`, `--accent-2` and `--accent-3` at the top of `styles.css`.
+## Editing (all content is in `index.html`)
+- Numbers inside `class="countup"` animate automatically (e.g. `2.5M`, `3,600+`, `9.15`).
+- **Follower chart:** edit `data-labels`, `data-points` and `data-suffix` on the `.chart` element.
+- **Projects:** each card's `data-cat` decides its filter (`campaigns`, `growth`, `brand`, `social`, `content`, `creator`, `offline`).
+- **Fonts:** headings use Gramatika and body uses TT Norms, falling back to Space Grotesk and Inter. Once you have web licenses, add the `.woff2` files to a `fonts/` folder and uncomment the `@font-face` block at the top of `styles.css`.
+- **Sizes, corners, colours:** all set as tokens at the top of `styles.css`.
 
 ## Deploy with GitHub Pages
 Settings → Pages → *Deploy from a branch* → pick the branch and `/ (root)`.
