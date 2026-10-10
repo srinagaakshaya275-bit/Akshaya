@@ -227,12 +227,28 @@ const chartObserver = new IntersectionObserver((entries) => {
 }, { threshold: 0.4 });
 document.querySelectorAll('.chart').forEach((c) => { buildChart(c); chartObserver.observe(c); });
 
-/* ---------- Contact form → opens the visitor's email app ----------
-   Swap for a form service (e.g. Formspree) to receive messages directly. */
-document.getElementById('contact-form').addEventListener('submit', (e) => {
+/* ---------- Contact form ----------
+   All three fields are required. Empty or invalid fields turn red with a
+   message; once complete, the visitor's email app opens with the message. */
+const form = document.getElementById('contact-form');
+const fieldValid = (el) => el.value.trim() !== '' && el.checkValidity();
+const showState = (el) => {
+  const ok = fieldValid(el);
+  el.classList.toggle('is-invalid', !ok);
+  el.setAttribute('aria-invalid', String(!ok));
+  document.getElementById(`${el.id}-error`).hidden = ok;
+  return ok;
+};
+form.querySelectorAll('input, textarea').forEach((el) => {
+  el.addEventListener('input', () => { if (el.classList.contains('is-invalid')) showState(el); });
+});
+form.addEventListener('submit', (e) => {
   e.preventDefault();
-  const f = e.target;
-  const subject = encodeURIComponent(`Portfolio enquiry from ${f.name.value.trim()}`);
-  const body = encodeURIComponent(`${f.message.value.trim()}\n\n— ${f.name.value.trim()} (${f.email.value.trim()})`);
+  const fields = [form.name, form.email, form.message];
+  const results = fields.map(showState);
+  const firstBad = fields[results.indexOf(false)];
+  if (firstBad) { firstBad.focus(); return; }
+  const subject = encodeURIComponent(`Portfolio enquiry from ${form.name.value.trim()}`);
+  const body = encodeURIComponent(`${form.message.value.trim()}\n\n— ${form.name.value.trim()} (${form.email.value.trim()})`);
   window.location.href = `mailto:srinagaakshaya275@gmail.com?subject=${subject}&body=${body}`;
 });

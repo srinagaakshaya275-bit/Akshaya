@@ -482,6 +482,13 @@ button { font: inherit; color: inherit; }
 .form input:focus, .form textarea:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 4px rgba(77,163,255,.15); }
 .form .btn { margin-top: 24px; }
 
+.xp__list { padding: 0 20px 16px 40px; display: grid; gap: 6px; }
+.xp__list li { list-style: disc; color: var(--muted); }
+.xp__list li::marker { color: var(--accent); }
+.req { color: var(--bad); font-weight: 700; letter-spacing: 0; }
+.field-error { color: var(--bad); font-size: 13px; margin-top: 6px; }
+.form .is-invalid { border-color: var(--bad); box-shadow: 0 0 0 3px rgba(242,137,143,.15); }
+
 /* Footer */
 .footer { padding: 36px 0; border-top: 1px solid var(--border); color: var(--dim); font-size: 14px; }
 .footer__inner { display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; }
@@ -628,6 +635,7 @@ button { font: inherit; color: inherit; }
   .xp__org, .xp__date { grid-column: 1; text-align: left; }
   .xp__chev { grid-column: 2; grid-row: 1 / span 3; }
   .xp__body p { padding: 0 16px 14px; }
+  .xp__list { padding: 0 16px 14px 32px; }
   .sentiment__list li { grid-template-columns: 1fr; gap: 8px; }
   .sentiment__arrow { transform: rotate(90deg); }
   .impact, .case, .steps, .projects, .skills, .process, .edu { grid-template-columns: 1fr; }
