@@ -73,6 +73,7 @@ p { margin: 0; }
 a { color: inherit; text-decoration: none; }
 ul, ol, dl, dd { list-style: none; margin: 0; padding: 0; }
 button { font: inherit; color: inherit; }
+[hidden] { display: none !important; }
 ::selection { background: var(--accent); color: #031021; }
 .muted { color: var(--muted); font-weight: 500; }
 
@@ -488,6 +489,87 @@ button { font: inherit; color: inherit; }
 
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 
+/* Masai stat tiles: four across */
+.tiles--4 { grid-template-columns: repeat(4, 1fr); }
+
+/* Reddit & Quora citation note */
+.cited { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-top: 8px; padding-top: 18px; border-top: 1px solid var(--border); }
+.cited p { color: var(--text); flex: 1; min-width: 220px; }
+.cited__badges { display: inline-flex; gap: 6px; }
+.cited__badge { padding: 4px 12px; border-radius: var(--r-pill); font-size: 12px; font-weight: 700; letter-spacing: .04em; border: 1px solid; }
+.cited__badge--reddit { color: #ffb08a; background: rgba(255,120,60,.1); border-color: rgba(255,120,60,.3); }
+.cited__badge--quora { color: #ff9a9a; background: rgba(200,50,50,.12); border-color: rgba(220,70,70,.3); }
+
+/* Skills bento */
+.bento { display: grid; grid-template-columns: repeat(6, 1fr); gap: 20px; }
+.skill { grid-column: span 3; padding: 28px; display: flex; flex-direction: column; gap: 20px; }
+.skill--search { grid-column: span 4; }
+.skill--search + .skill { grid-column: span 2; }
+.skill--tools { grid-column: 1 / -1; }
+.skill__head { display: flex; gap: 14px; align-items: center; }
+.skill__head h3 { font-size: var(--fs-h3); }
+.skill__head p { color: var(--dim); font-size: 13px; margin-top: 2px; }
+.skill__icon { flex: none; width: 44px; height: 44px; display: grid; place-items: center; border-radius: var(--r-inner); color: var(--accent);
+  background: linear-gradient(140deg, rgba(77,163,255,.25), rgba(124,108,255,.1)); border: 1px solid var(--border-strong);
+  box-shadow: 0 0 24px -8px var(--glow); }
+
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chips li { position: relative; padding: 9px 16px; border-radius: var(--r-pill); font-size: 14px; font-weight: 500; color: var(--text);
+  background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.02));
+  border: 1px solid var(--border-strong); box-shadow: inset 0 1px 0 rgba(255,255,255,.08);
+  transition: transform .25s var(--ease), border-color .25s, box-shadow .25s, background .25s; }
+.chips li::before { content: ""; display: inline-block; width: 6px; height: 6px; border-radius: 50%; margin-right: 8px; vertical-align: 2px;
+  background: var(--accent); box-shadow: 0 0 8px var(--glow); }
+.chips li:hover { transform: translateY(-2px); border-color: var(--accent);
+  background: linear-gradient(180deg, rgba(77,163,255,.22), rgba(77,163,255,.06)); box-shadow: 0 8px 22px -10px var(--glow), inset 0 1px 0 rgba(255,255,255,.12); }
+.skill--search .chips { margin-top: auto; }
+
+/* Mock search → AI answer, inside the ORM card */
+.query { display: grid; gap: 10px; padding: 18px; border-radius: var(--r-inner); background: var(--inset); border: 1px solid var(--border); }
+.query__bar { display: flex; align-items: center; gap: 10px; padding: 11px 16px; border-radius: var(--r-pill);
+  background: rgba(255,255,255,.05); border: 1px solid var(--border-strong); color: var(--muted); font-size: 14px; }
+.query__text { overflow: hidden; white-space: nowrap; border-right: 0; width: 0; animation: typing 2.4s steps(24) .6s forwards; }
+.query__caret { width: 2px; height: 16px; background: var(--accent); animation: blink 1s steps(1) infinite; }
+@keyframes typing { to { width: 24ch; } }
+@keyframes blink { 50% { opacity: 0; } }
+.query__answer { display: grid; grid-template-columns: auto 1fr; gap: 8px 12px; align-items: center; padding: 14px 16px; border-radius: var(--r-inner);
+  background: linear-gradient(140deg, rgba(77,163,255,.1), rgba(124,108,255,.06)); border: 1px solid var(--border); }
+.query__tag { grid-row: span 2; font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); }
+.query__line { height: 8px; border-radius: 4px; background: rgba(238,243,255,.14); }
+.query__line--2 { width: 70%; }
+.query__verdict { grid-column: 2; justify-self: start; padding: 3px 12px; border-radius: var(--r-pill); font-size: 12px; font-weight: 700;
+  color: #a6f0cf; background: rgba(94,224,168,.12); border: 1px solid rgba(94,224,168,.3); opacity: 0; animation: fadein .6s 3.2s forwards; }
+@keyframes fadein { to { opacity: 1; } }
+
+.toolgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 8px; }
+.toolgrid li { display: flex; align-items: center; gap: 10px; padding: 8px 12px 8px 8px; border-radius: var(--r-inner); font-size: 14px; font-weight: 500;
+  background: var(--inset); border: 1px solid var(--border); transition: border-color .25s, transform .25s var(--ease); min-width: 0; }
+.toolgrid li:hover { border-color: var(--accent); transform: translateY(-2px); }
+.mono { flex: none; width: 30px; height: 30px; display: grid; place-items: center; border-radius: 10px; font-family: var(--font-display);
+  font-size: 12px; font-weight: 700; color: #041226; background: linear-gradient(135deg, #8fd0ff, var(--accent)); }
+
+/* Certifications */
+.certs { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.certs li { display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-radius: var(--r-inner); font-size: 14px; font-weight: 500;
+  background: var(--inset); border: 1px solid var(--border); transition: border-color .25s; }
+.certs li:hover { border-color: var(--accent); }
+.certs .ico { color: var(--accent); }
+.certs li:first-child { grid-column: 1 / -1; }
+
+@media (max-width: 1020px) {
+  .bento { grid-template-columns: 1fr 1fr; }
+  .skill, .skill--search + .skill { grid-column: span 1; }
+  .skill--search, .skill--tools { grid-column: 1 / -1; }
+}
+@media (max-width: 680px) {
+  .tiles--4 { grid-template-columns: 1fr 1fr; }
+  .bento { grid-template-columns: 1fr; }
+  .skill { padding: 22px; }
+  .toolgrid { grid-template-columns: 1fr 1fr; }
+  .bento > * { grid-column: 1 / -1 !important; }
+  .certs { grid-template-columns: 1fr; }
+}
+
 /* ============================================================
    Reveal animation
    ============================================================ */
@@ -556,4 +638,6 @@ button { font: inherit; color: inherit; }
   *, *::before, *::after { animation: none !important; transition: none !important; }
   html { scroll-behavior: auto; }
   .reveal { opacity: 1; transform: none; filter: none; }
+  .query__text { width: auto; }
+  .query__verdict { opacity: 1; }
 }

@@ -3,6 +3,11 @@ const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matc
 
 document.getElementById('year').textContent = new Date().getFullYear();
 
+/* ---------- Resume buttons appear once resume.pdf is in the repo ---------- */
+fetch('resume.pdf', { method: 'HEAD' })
+  .then((res) => { if (res.ok) document.querySelectorAll('[data-resume]').forEach((el) => { el.hidden = false; }); })
+  .catch(() => {});
+
 /* ---------- Nav: scrolled state, progress bar, mobile menu ---------- */
 const nav = document.getElementById('nav');
 const progress = document.getElementById('progress');
