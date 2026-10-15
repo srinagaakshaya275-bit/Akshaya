@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Akshaya Reddy · Marketing Portfolio</title>
   <meta name="description" content="Akshaya Reddy is an Associate Marketing Manager at Masai School working across ORM, AEO, creator programs, social and on-ground campaigns.">
-  <meta name="theme-color" content="#F4EEE1">
+  <meta name="theme-color" content="#0E1D61">
   <link rel="canonical" href="https://srinagaakshaya275-bit.github.io/Akshaya/">
 
   <meta property="og:type" content="profile">
@@ -37,6 +37,9 @@
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
+
+  <!-- Soft colour washes behind the glass -->
+  <div class="wash" aria-hidden="true"><span></span><span></span><span></span></div>
 
   <!-- MASTHEAD -->
   <header class="masthead">
@@ -70,12 +73,12 @@
       </aside>
 
       <div class="cover__story fade">
-        <p class="label label--accent">Cover story</p>
+        <p class="label label--gold">Cover story</p>
         <h1 id="cover-title" class="cover__headline">The marketer who changed what <em>AI</em> says about a brand.</h1>
         <p class="standfirst">Promoted to Associate Marketing Manager in under a year, Akshaya Reddy builds reputation, creator programs and on-ground campaigns, and judges them all by the bookings they bring in.</p>
         <div class="cover__cta">
-          <a class="btn btn--ink" href="#feature">Read the feature</a>
-          <a class="btn btn--line" href="Akshaya_Resume.pdf" download>Download resume</a>
+          <a class="btn btn--navy" href="#feature">Read the feature</a>
+          <a class="btn btn--glass" href="Akshaya_Resume.pdf" download>Download resume</a>
         </div>
       </div>
 
@@ -92,38 +95,47 @@
     <section id="numbers" class="numbers wrap" aria-labelledby="numbers-title">
       <h2 id="numbers-title" class="label">By the Numbers</h2>
       <dl class="numbers__grid">
-        <div class="fade"><dt>Monthly organic reach</dt><dd>2.5M</dd></div>
-        <div class="fade"><dt>Leads a month, organic</dt><dd>3,600+</dd></div>
-        <div class="fade"><dt>Followers across Instagram and LinkedIn</dt><dd>369K</dd></div>
-        <div class="fade"><dt>AI Overview verdicts turned positive</dt><dd>5</dd></div>
+        <div class="glass fade"><dt>Monthly organic reach</dt><dd>2.5M</dd></div>
+        <div class="glass fade"><dt>Leads a month, organic</dt><dd>3,600+</dd></div>
+        <div class="glass fade"><dt>Followers, Instagram + LinkedIn</dt><dd>369K</dd></div>
+        <div class="glass fade"><dt>AI Overview verdicts turned positive</dt><dd>5</dd></div>
       </dl>
     </section>
 
     <!-- THE FEATURE -->
     <article id="feature" class="feature wrap" aria-labelledby="feature-title">
       <header class="feature__head fade">
-        <p class="label label--accent">The Feature · ORM &amp; AEO</p>
+        <p class="label label--gold">The Feature · ORM &amp; AEO</p>
         <h2 id="feature-title" class="feature__title">Scam allegations to <em>‘potentially worthwhile’</em>: how 60 videos moved Google’s AI answers.</h2>
-        <p class="byline">By Akshaya Reddy · Reputation, search and creators</p>
       </header>
 
       <div class="feature__body">
-        <div class="article fade">
-          <p class="dropcap">People researching the courses were getting scam allegations and mixed verdicts straight from Google’s AI Overviews, before they ever reached the website.</p>
-          <h3 class="article__sub">The insight</h3>
-          <p>AI answers summarize what the web already says. So instead of arguing with the answer, I changed the sources it pulls from.</p>
-          <h3 class="article__sub">What I did</h3>
-          <p>I ran a ₹[X]L-a-month YouTube program with 30 creators a month across Tamil, Hindi, Telugu and English channels, briefed documentary-style for Tier 2 and 3 audiences rather than as testimonials.</p>
-          <p>I owned scouting and negotiation, reviewed every script, tuned titles and descriptions to the queries that feed AI Overviews, and tracked sentiment every week, adjusting briefs as the answers moved.</p>
-          <h3 class="article__sub">The result</h3>
-          <p>60 videos went live in two months, and the AI answers for the brand and its courses turned from doubtful to positive.</p>
-
-          <figure class="shots">
-            <div class="shots__pair">
-              <div class="shot"><span>[Before: AI Overview screenshot, brand blurred]</span></div>
-              <div class="shot"><span>[After: AI Overview screenshot, brand blurred]</span></div>
+        <div class="feature__main">
+          <div class="steps">
+            <div class="step glass fade">
+              <p class="step__k">The problem</p>
+              <p>Google’s AI Overviews showed scam allegations and mixed verdicts before people reached the website.</p>
             </div>
-            <figcaption>Google AI Overview for the same query, before and after the program.</figcaption>
+            <div class="step glass fade">
+              <p class="step__k">The insight</p>
+              <p>AI answers summarize what the web says. So I changed the sources, not the answer.</p>
+            </div>
+            <div class="step glass fade">
+              <p class="step__k">What I did</p>
+              <p>A ₹[X]L-a-month YouTube program: 30 creators a month in Tamil, Hindi, Telugu and English, briefed documentary-style for Tier 2 and 3 audiences.</p>
+              <ul class="mini-tags"><li>Scouting</li><li>Negotiation</li><li>Script reviews</li><li>AI-query titles</li><li>Weekly sentiment tracking</li></ul>
+            </div>
+            <div class="step glass fade">
+              <p class="step__k">The result</p>
+              <p><b>60 videos</b> live in two months.</p>
+            </div>
+          </div>
+
+          <figure class="shots fade">
+            <div class="shots__pair">
+              <div class="shot glass"><span class="shot__tag">Before</span><span>[AI Overview screenshot, brand blurred]</span></div>
+              <div class="shot glass"><span class="shot__tag shot__tag--gold">After</span><span>[AI Overview screenshot, brand blurred]</span></div>
+            </div>
           </figure>
         </div>
 
@@ -132,28 +144,19 @@
             <p>“Fix the source first. Neutral explainers moved AI answers more than glowing reviews did.”</p>
           </blockquote>
 
-          <section class="card verdicts fade" aria-labelledby="verdicts-title">
-            <h3 id="verdicts-title" class="label">The verdict, before and after</h3>
+          <section class="glass verdicts fade" aria-labelledby="verdicts-title">
+            <h3 id="verdicts-title" class="label">The verdict, before → after</h3>
             <ul>
-              <li>
-                <p class="verdicts__q">Digital marketing course</p>
-                <p class="verdicts__row"><s>Scam allegations</s><span aria-hidden="true">→</span><strong>Potentially worthwhile</strong></p>
-              </li>
-              <li>
-                <p class="verdicts__q">Business analytics course</p>
-                <p class="verdicts__row"><s>Can be good</s><span aria-hidden="true">→</span><strong>Best course, job-ready curriculum</strong></p>
-              </li>
-              <li>
-                <p class="verdicts__q">The brand itself</p>
-                <p class="verdicts__row"><s>An existing option</s><span aria-hidden="true">→</span><strong>Good, intensive, industry-relevant career school</strong></p>
-              </li>
+              <li><p class="verdicts__q">Digital marketing course</p><p class="verdicts__row"><s>Scam allegations</s><span aria-hidden="true">→</span><strong>Potentially worthwhile</strong></p></li>
+              <li><p class="verdicts__q">Business analytics course</p><p class="verdicts__row"><s>Can be good</s><span aria-hidden="true">→</span><strong>Best course, job-ready curriculum</strong></p></li>
+              <li><p class="verdicts__q">The brand itself</p><p class="verdicts__row"><s>An existing option</s><span aria-hidden="true">→</span><strong>Good, intensive, industry-relevant career school</strong></p></li>
             </ul>
           </section>
 
           <dl class="sidestats fade">
-            <div><dt>Videos</dt><dd>60</dd></div>
-            <div><dt>Bookings</dt><dd>600+</dd></div>
-            <div><dt>Registrations</dt><dd>55</dd></div>
+            <div class="glass"><dt>Videos</dt><dd>60</dd></div>
+            <div class="glass"><dt>Bookings</dt><dd>600+</dd></div>
+            <div class="glass"><dt>Registrations</dt><dd>55</dd></div>
           </dl>
         </aside>
       </div>
@@ -161,28 +164,29 @@
 
     <!-- THREE STORIES -->
     <section id="stories" class="stories wrap" aria-labelledby="stories-title">
-      <h2 id="stories-title" class="section-title fade">Also in this issue</h2>
+      <h2 id="stories-title" class="section-title fade">Also in this <em>issue</em></h2>
       <div class="stories__grid">
-        <article class="story fade">
-          <div class="story__img story__img--blue"><span>[Image]</span></div>
-          <p class="label label--accent">Creators</p>
+        <article class="story glass fade">
+          <div class="story__img story__img--navy"><span>[Image]</span></div>
+          <p class="label label--gold">Creators</p>
           <h3>Creator in Residence</h3>
-          <p>60 students became brand creators for 2 months, with weekly themes, masterclasses, script reviews and a live leaderboard.</p>
-          <p class="story__result"><b>311</b> bookings · <b>148</b> registrations for IIT Mandi’s AI &amp; Data Science program</p>
+          <p>60 students, 2 months: themes, masterclasses, script reviews, live leaderboard.</p>
+          <dl class="story__stats"><div><dd>311</dd><dt>Bookings</dt></div><div><dd>148</dd><dt>Registrations</dt></div></dl>
+          <p class="story__note">For IIT Mandi’s AI &amp; Data Science program</p>
         </article>
-        <article class="story fade">
-          <div class="story__img story__img--sand"><span>[Image]</span></div>
-          <p class="label label--accent">Social</p>
-          <h3>Instagram, 98K to 167K</h3>
-          <p>Organic growth with no ad budget, built on recurring formats that earned their place through data.</p>
-          <p class="story__result">Best posts <b>378K</b> on Instagram, <b>344K</b> on LinkedIn · <b>1,000</b> bookings from social</p>
+        <article class="story glass fade">
+          <div class="story__img story__img--gold"><span>[Image]</span></div>
+          <p class="label label--gold">Social</p>
+          <h3>Instagram, 98K → 167K</h3>
+          <p>Organic growth with no ad budget.</p>
+          <dl class="story__stats"><div><dd>378K</dd><dt>Best IG post</dt></div><div><dd>344K</dd><dt>Best LinkedIn post</dt></div><div><dd>1,000</dd><dt>Bookings</dt></div></dl>
         </article>
-        <article class="story fade">
-          <div class="story__img story__img--ink"><span>[Image]</span></div>
-          <p class="label label--accent">On the ground</p>
+        <article class="story glass fade">
+          <div class="story__img story__img--ivory"><span>[Image]</span></div>
+          <p class="label label--gold">On the ground</p>
           <h3>[Guerilla campaign or event]</h3>
           <p>[One line on what it was.]</p>
-          <p class="story__result">[Result]</p>
+          <dl class="story__stats"><div><dd>[Result]</dd><dt>[Metric]</dt></div></dl>
         </article>
       </div>
     </section>
@@ -190,106 +194,117 @@
     <!-- CAREER -->
     <section id="career" class="career wrap" aria-labelledby="career-title">
       <h2 id="career-title" class="section-title fade">Career</h2>
-      <ol class="ledger">
-        <li class="fade">
-          <p class="ledger__date">[Mon 2026] – now</p>
-          <div class="ledger__role">
-            <h3>Associate Marketing Manager <span class="pill">Promoted</span></h3>
-            <p class="ledger__org">Masai School</p>
-            <p>Leads AEO, SERP visibility and organic lead generation, and plans BTL, guerilla and offline events.</p>
+
+      <article class="masai glass fade">
+        <div class="masai__brand">
+          <p class="label label--gold">Now</p>
+          <h3>Masai School</h3>
+          <p class="muted">Jun 2025 – present · Bengaluru</p>
+        </div>
+        <div class="masai__roles">
+          <div class="role role--now">
+            <p class="role__date">[Mon 2026] – now <span class="pill">Promoted</span></p>
+            <h4>Associate Marketing Manager</h4>
+            <ul class="mini-tags"><li>AEO</li><li>SERP visibility</li><li>Organic leads</li><li>BTL &amp; guerilla</li><li>Offline events</li></ul>
           </div>
+          <div class="role">
+            <p class="role__date">Jun 2025 – [Mon 2026]</p>
+            <h4>Marketing Operations Specialist</h4>
+            <ul class="mini-tags"><li>ORM</li><li>DM desk: 4,000+ DMs, 100+ escalations</li><li>Influencer marketing</li><li>Instagram &amp; LinkedIn</li></ul>
+          </div>
+        </div>
+      </article>
+
+      <p class="label career__sub fade">Internships</p>
+      <ol class="interns">
+        <li class="intern glass fade">
+          <p class="intern__date">Dec 2024 – May 2025</p>
+          <h4>Runverve</h4>
+          <p class="intern__role">Social Media Marketing Intern</p>
+          <p class="intern__what">Content and campaigns for launches and webinars</p>
+          <p class="intern__fig">[number]</p>
         </li>
-        <li class="fade">
-          <p class="ledger__date">Jun 2025 – [Mon 2026]</p>
-          <div class="ledger__role">
-            <h3>Marketing Operations Specialist</h3>
-            <p class="ledger__org">Masai School</p>
-            <p>Owned ORM and the DM desk (4,000+ DMs, 100+ escalations), influencer marketing, Instagram and LinkedIn.</p>
-          </div>
+        <li class="intern glass fade">
+          <p class="intern__date">Sep – Dec 2024</p>
+          <h4>Phantasm Solutions</h4>
+          <p class="intern__role">Digital Marketing Strategy Intern</p>
+          <p class="intern__what">Marketing and budget plans, SEO, backlinking</p>
+          <p class="intern__fig">[clients]</p>
         </li>
-        <li class="fade">
-          <p class="ledger__date">Dec 2024 – May 2025</p>
-          <div class="ledger__role">
-            <h3>Social Media Marketing Intern</h3>
-            <p class="ledger__org">Runverve</p>
-            <p>Multi-platform content and campaigns for launches and webinars. <span class="ledger__fig">[number]</span></p>
-          </div>
+        <li class="intern glass fade">
+          <p class="intern__date">Jul – Aug 2024</p>
+          <h4>Trixal Media</h4>
+          <p class="intern__role">Social Media Marketing Intern</p>
+          <p class="intern__what">Social content and brand visual assets</p>
+          <p class="intern__fig">+65% engagement</p>
         </li>
-        <li class="fade">
-          <p class="ledger__date">Sep – Dec 2024</p>
-          <div class="ledger__role">
-            <h3>Digital Marketing Strategy Intern</h3>
-            <p class="ledger__org">Phantasm Solutions</p>
-            <p>Marketing and budget plans, SEO and backlinking for clients. <span class="ledger__fig">[clients]</span></p>
-          </div>
+        <li class="intern glass fade">
+          <p class="intern__date">Feb – Jun 2024</p>
+          <h4>GrowUMedia</h4>
+          <p class="intern__role">Content Marketing Strategy Intern</p>
+          <p class="intern__what">Social pages and podcast marketing</p>
+          <p class="intern__fig">4 clients</p>
         </li>
-        <li class="fade">
-          <p class="ledger__date">Jul – Aug 2024</p>
-          <div class="ledger__role">
-            <h3>Social Media Marketing Intern</h3>
-            <p class="ledger__org">Trixal Media</p>
-            <p>Social content and visual assets aligned to brand identity. <span class="ledger__fig">+65% engagement</span></p>
-          </div>
-        </li>
-        <li class="fade">
-          <p class="ledger__date">Feb – Jun 2024</p>
-          <div class="ledger__role">
-            <h3>Content Marketing Strategy Intern</h3>
-            <p class="ledger__org">GrowUMedia</p>
-            <p>Managed social pages and ran podcast marketing. <span class="ledger__fig">4 clients</span></p>
-          </div>
-        </li>
-        <li class="fade">
-          <p class="ledger__date">Aug 2023 – Jan 2024</p>
-          <div class="ledger__role">
-            <h3>Administrative &amp; Social Media Intern</h3>
-            <p class="ledger__org">Center for Teaching &amp; Learning</p>
-            <p>Ran social media, built orientation reports and decks. <span class="ledger__fig">[number]</span></p>
-          </div>
+        <li class="intern glass fade">
+          <p class="intern__date">Aug 2023 – Jan 2024</p>
+          <h4>Center for Teaching &amp; Learning</h4>
+          <p class="intern__role">Administrative &amp; Social Media Intern</p>
+          <p class="intern__what">Social media, orientation reports and decks</p>
+          <p class="intern__fig">[number]</p>
         </li>
       </ol>
     </section>
 
     <!-- SKILLS INDEX -->
-    <section id="skills" class="wrap" aria-labelledby="skills-title">
-      <div class="index fade">
-        <h2 id="skills-title" class="index__title">Skills <em>Index</em></h2>
-        <div class="index__grid">
-          <div>
-            <h3 class="index__head">Reputation &amp; search</h3>
-            <ul><li>ORM</li><li>AEO / GEO</li><li>SERP visibility</li><li>SEO</li><li>Crisis management</li></ul>
-          </div>
-          <div>
-            <h3 class="index__head">Campaigns</h3>
-            <ul><li>Influencer marketing</li><li>UGC</li><li>Community</li><li>BTL &amp; guerilla</li><li>Offline events</li></ul>
-          </div>
-          <div>
-            <h3 class="index__head">Content</h3>
-            <ul><li>Social strategy</li><li>Video shooting</li><li>Video editing</li><li>Copywriting</li><li>Content calendars</li></ul>
-          </div>
-          <div>
-            <h3 class="index__head">Tools</h3>
-            <ul><li>Sprout Social</li><li>Agorapulse</li><li>Hootsuite</li><li>Metabase</li><li>Notion</li><li>Canva</li><li>InShot</li><li>VN</li></ul>
-          </div>
+    <section id="skills" class="skills" aria-labelledby="skills-title">
+      <div class="wrap">
+        <div class="skills__head fade">
+          <p class="label label--light">The back pages</p>
+          <h2 id="skills-title" class="skills__title">Skills <em>Index</em></h2>
+        </div>
+        <div class="skills__grid">
+          <article class="skill glass glass--dark fade">
+            <p class="skill__letter" aria-hidden="true">A</p>
+            <h3>Reputation &amp; search</h3>
+            <ul class="chips"><li>ORM</li><li>AEO / GEO</li><li>SERP visibility</li><li>SEO</li><li>Crisis management</li></ul>
+          </article>
+          <article class="skill glass glass--dark fade">
+            <p class="skill__letter" aria-hidden="true">B</p>
+            <h3>Campaigns</h3>
+            <ul class="chips"><li>Influencer marketing</li><li>UGC</li><li>Community</li><li>BTL &amp; guerilla</li><li>Offline events</li></ul>
+          </article>
+          <article class="skill glass glass--dark fade">
+            <p class="skill__letter" aria-hidden="true">C</p>
+            <h3>Content</h3>
+            <ul class="chips"><li>Social strategy</li><li>Video shooting</li><li>Video editing</li><li>Copywriting</li><li>Content calendars</li></ul>
+          </article>
+          <article class="skill skill--tools glass glass--dark fade">
+            <p class="skill__letter" aria-hidden="true">D</p>
+            <h3>Tools</h3>
+            <ul class="tools">
+              <li><span>Sp</span>Sprout Social</li><li><span>Ag</span>Agorapulse</li><li><span>Hs</span>Hootsuite</li><li><span>Mb</span>Metabase</li>
+              <li><span>No</span>Notion</li><li><span>Ca</span>Canva</li><li><span>In</span>InShot</li><li><span>VN</span>VN</li>
+            </ul>
+          </article>
         </div>
       </div>
     </section>
 
     <!-- EDUCATION -->
     <section id="education" class="education wrap" aria-labelledby="edu-title">
-      <h2 id="edu-title" class="section-title fade">Education &amp; certifications</h2>
+      <h2 id="edu-title" class="section-title fade">Education &amp; <em>certifications</em></h2>
       <div class="edu">
-        <article class="edu__school fade">
-          <p class="label">2022 – 2025</p>
+        <article class="edu__school glass fade">
+          <p class="label label--gold">2022 – 2025</p>
           <h3>Vellore Institute of Technology</h3>
-          <p>BBA Digital Marketing</p>
-          <p class="edu__cgpa"><span>9.15</span> CGPA</p>
+          <p class="muted">BBA Digital Marketing</p>
+          <p class="edu__cgpa"><span>9.15</span>CGPA</p>
         </article>
         <ul class="certs">
-          <li class="cert fade"><h3>Meta Social Media Marketing Specialization</h3><p>[issuer] · [year]</p></li>
-          <li class="cert fade"><h3>Google Analytics</h3><p>[issuer] · [year]</p></li>
-          <li class="cert fade"><h3>Google Ads</h3><p>[issuer] · [year]</p></li>
-          <li class="cert fade"><h3>SEO</h3><p>[issuer] · [year]</p></li>
+          <li class="cert glass fade"><h3>Meta Social Media Marketing Specialization</h3><p>[issuer] · [year]</p></li>
+          <li class="cert glass fade"><h3>Google Analytics</h3><p>[issuer] · [year]</p></li>
+          <li class="cert glass fade"><h3>Google Ads</h3><p>[issuer] · [year]</p></li>
+          <li class="cert glass fade"><h3>SEO</h3><p>[issuer] · [year]</p></li>
         </ul>
       </div>
     </section>
@@ -297,17 +312,17 @@
     <!-- WRITE TO THE EDITOR -->
     <section id="contact" class="contact wrap" aria-labelledby="contact-title">
       <div class="contact__copy fade">
-        <p class="label label--accent">Write to the Editor</p>
+        <p class="label label--gold">Write to the Editor</p>
         <h2 id="contact-title" class="contact__title">Hiring, or need marketing that shows up in <em>metrics?</em></h2>
         <p>Open to full-time roles and marketing projects in ORM, AEO, creators and social.</p>
         <div class="contact__links">
-          <a class="btn btn--ink" href="https://www.linkedin.com/in/akshayareddyp/" target="_blank" rel="noopener">LinkedIn</a>
-          <a class="btn btn--line" href="mailto:srinagaakshaya275@gmail.com">Email</a>
+          <a class="btn btn--navy" href="https://www.linkedin.com/in/akshayareddyp/" target="_blank" rel="noopener">LinkedIn</a>
+          <a class="btn btn--glass" href="mailto:srinagaakshaya275@gmail.com">Email</a>
         </div>
       </div>
 
       <!-- Replace [your-form-id] with the ID from your Formspree form -->
-      <form class="form fade" id="contact-form" action="https://formspree.io/f/[your-form-id]" method="POST" novalidate>
+      <form class="form glass fade" id="contact-form" action="https://formspree.io/f/[your-form-id]" method="POST" novalidate>
         <div class="field">
           <label for="name">Name <span class="req" aria-hidden="true">*</span></label>
           <input id="name" name="name" type="text" autocomplete="name" required aria-describedby="name-err">
@@ -323,7 +338,7 @@
           <textarea id="message" name="message" rows="5" required aria-describedby="message-err"></textarea>
           <p class="field__err" id="message-err" hidden>Please write a message.</p>
         </div>
-        <button class="btn btn--ink" type="submit">Send letter</button>
+        <button class="btn btn--navy" type="submit">Send letter</button>
         <p class="form__status" id="form-status" role="status" aria-live="polite"></p>
       </form>
     </section>
