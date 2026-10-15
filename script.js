@@ -1,5 +1,4 @@
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
 document.getElementById('year').textContent = new Date().getFullYear();
 
@@ -8,35 +7,72 @@ fetch('resume.pdf', { method: 'HEAD' })
   .then((res) => { if (res.ok) document.querySelectorAll('[data-resume]').forEach((el) => { el.hidden = false; }); })
   .catch(() => {});
 
-/* ---------- Nav: scrolled state, progress bar, mobile menu ---------- */
-const nav = document.getElementById('nav');
+/* ---------- Sidebar drawer (mobile) ---------- */
+const side = document.getElementById('side');
+const scrim = document.getElementById('scrim');
+const menuBtn = document.getElementById('menu-btn');
+const setDrawer = (open) => {
+  side.classList.toggle('is-open', open);
+  scrim.hidden = !open;
+  menuBtn.setAttribute('aria-expanded', String(open));
+};
+menuBtn.addEventListener('click', () => setDrawer(!side.classList.contains('is-open')));
+scrim.addEventListener('click', () => setDrawer(false));
+side.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => setDrawer(false)));
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setDrawer(false); });
+
+/* ---------- Player bar: current section, prev/next, guided tour ---------- */
+const tracks = [...document.querySelectorAll('main [data-track]')];
+const navLinks = [...document.querySelectorAll('.side__nav a')];
+const nowTitle = document.getElementById('now-title');
+const nowIndex = document.getElementById('now-index');
 const progress = document.getElementById('progress');
+const playBtn = document.getElementById('play-btn');
+document.getElementById('now-total').textContent = tracks.length;
+let current = 0;
+
+const setCurrent = (i) => {
+  current = i;
+  const t = tracks[i];
+  nowTitle.textContent = t.dataset.track;
+  nowIndex.textContent = i + 1;
+  const id = i === 0 ? 'top' : t.id;
+  navLinks.forEach((a) => a.classList.toggle('is-active', a.getAttribute('href') === `#${id}`));
+};
+const goTo = (i) => {
+  const t = tracks[Math.max(0, Math.min(tracks.length - 1, i))];
+  (t.id ? t : document.getElementById('top')).scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' });
+};
+document.getElementById('prev-btn').addEventListener('click', () => goTo(current - 1));
+document.getElementById('next-btn').addEventListener('click', () => goTo(current + 1));
+
+let tour = null;
+const setPlaying = (on) => {
+  clearInterval(tour);
+  tour = on ? setInterval(() => {
+    if (current >= tracks.length - 1) { setPlaying(false); return; }
+    goTo(current + 1);
+  }, 5000) : null;
+  playBtn.innerHTML = `<svg class="ico"><use href="#i-${on ? 'pause' : 'play'}"/></svg>`;
+  playBtn.setAttribute('aria-label', on ? 'Pause the guided tour' : 'Play a guided tour of the page');
+  if (on) goTo(current + 1);
+};
+playBtn.addEventListener('click', () => setPlaying(!tour));
+['wheel', 'touchstart', 'keydown'].forEach((ev) => window.addEventListener(ev, (e) => {
+  if (tour && !(e.target instanceof Element && e.target.closest('.player'))) setPlaying(false);
+}, { passive: true }));
+
 const onScroll = () => {
   const max = document.documentElement.scrollHeight - window.innerHeight;
-  nav.classList.toggle('is-scrolled', window.scrollY > 10);
-  progress.style.transform = `scaleX(${max > 0 ? window.scrollY / max : 0})`;
+  progress.style.width = `${max > 0 ? (window.scrollY / max) * 100 : 0}%`;
+  const mid = window.innerHeight * 0.4;
+  let idx = 0;
+  tracks.forEach((t, i) => { if (t.getBoundingClientRect().top <= mid) idx = i; });
+  if (idx !== current || nowTitle.textContent !== tracks[idx].dataset.track) setCurrent(idx);
 };
 window.addEventListener('scroll', onScroll, { passive: true });
+window.addEventListener('resize', onScroll);
 onScroll();
-
-const toggle = document.getElementById('nav-toggle');
-const menu = document.getElementById('nav-menu');
-const setMenu = (open) => {
-  menu.classList.toggle('is-open', open);
-  toggle.setAttribute('aria-expanded', String(open));
-};
-toggle.addEventListener('click', () => setMenu(!menu.classList.contains('is-open')));
-menu.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => setMenu(false)));
-
-/* ---------- Active nav link ---------- */
-const navLinks = [...menu.querySelectorAll('a[href^="#"]')];
-const sectionObserver = new IntersectionObserver((entries) => {
-  entries.forEach((entry) => {
-    if (!entry.isIntersecting) return;
-    navLinks.forEach((a) => a.classList.toggle('is-active', a.getAttribute('href') === `#${entry.target.id}`));
-  });
-}, { rootMargin: '-45% 0px -50% 0px' });
-document.querySelectorAll('main section[id]').forEach((s) => sectionObserver.observe(s));
 
 /* ---------- Reveal on scroll, staggered within each parent ---------- */
 document.querySelectorAll('.reveal').forEach((el) => {
@@ -85,34 +121,6 @@ const countObserver = new IntersectionObserver((entries) => {
 }, { threshold: 0.6 });
 document.querySelectorAll('.countup').forEach((el) => countObserver.observe(el));
 
-/* ---------- Hero bars stagger ---------- */
-document.querySelectorAll('.dash__bars span').forEach((b, i) => b.style.setProperty('--i', i));
-
-/* ---------- Glossy spotlight that follows the cursor ---------- */
-if (finePointer) {
-  document.querySelectorAll('.glass').forEach((el) => {
-    el.addEventListener('pointermove', (e) => {
-      const r = el.getBoundingClientRect();
-      el.style.setProperty('--mx', `${e.clientX - r.left}px`);
-      el.style.setProperty('--my', `${e.clientY - r.top}px`);
-    });
-  });
-}
-
-/* ---------- 3D tilt ---------- */
-if (finePointer && !reduceMotion) {
-  document.querySelectorAll('.tilt').forEach((el) => {
-    const base = el.classList.contains('dash') ? 'rotateY(-10deg) rotateX(6deg)' : '';
-    el.addEventListener('pointermove', (e) => {
-      const r = el.getBoundingClientRect();
-      const x = (e.clientX - r.left) / r.width - 0.5;
-      const y = (e.clientY - r.top) / r.height - 0.5;
-      el.style.transform = `perspective(900px) rotateY(${x * 8}deg) rotateX(${-y * 8}deg) translateY(-4px)`;
-    });
-    el.addEventListener('pointerleave', () => { el.style.transform = base; });
-  });
-}
-
 /* ---------- Expandable internship rows ---------- */
 document.querySelectorAll('.xp').forEach((row) => {
   const head = row.querySelector('.xp__head');
@@ -126,16 +134,24 @@ document.querySelectorAll('.xp').forEach((row) => {
 /* ---------- Project filters ---------- */
 const filters = document.querySelectorAll('.filter');
 const projects = document.querySelectorAll('.project');
-filters.forEach((btn) => btn.addEventListener('click', () => {
-  filters.forEach((f) => f.classList.toggle('is-active', f === btn));
-  const cat = btn.dataset.filter;
+const applyFilter = (cat) => {
+  filters.forEach((f) => f.classList.toggle('is-active', f.dataset.filter === cat));
   projects.forEach((p) => {
     const show = cat === 'all' || p.dataset.cat === cat;
     p.classList.toggle('is-hidden', !show);
     p.classList.remove('is-entering');
     if (show) { p.classList.add('is-visible'); void p.offsetWidth; p.classList.add('is-entering'); }
   });
-}));
+};
+filters.forEach((btn) => btn.addEventListener('click', () => applyFilter(btn.dataset.filter)));
+document.querySelectorAll('[data-jump]').forEach((a) => a.addEventListener('click', () => applyFilter(a.dataset.jump)));
+
+/* Sidebar playlist counts come from the project cards themselves */
+document.querySelectorAll('[data-count]').forEach((el) => {
+  const cats = el.dataset.count.split(',');
+  const n = [...projects].filter((p) => cats.includes(p.dataset.cat)).length;
+  el.textContent = `${n} project${n === 1 ? '' : 's'}`;
+});
 
 /* ---------- Line chart (SVG, no libraries) ----------
    Reads data-labels, data-points and data-suffix from each .chart. */
@@ -152,7 +168,7 @@ function buildChart(chart) {
   const values = chart.dataset.points.split(',').map(Number);
   const suffix = chart.dataset.suffix || '';
   const name = chart.dataset.name || 'Value';
-  const W = 600, H = 180, padX = 24, padTop = 34, padBottom = 30;
+  const W = Math.round(Math.min(900, Math.max(300, chart.clientWidth - 36))), H = 200, padX = 24, padTop = 34, padBottom = 30;
   const max = Math.max(...values) * 1.1;
   const x = (i) => padX + (i * (W - padX * 2)) / (values.length - 1);
   const y = (v) => padTop + (1 - v / max) * (H - padTop - padBottom);
@@ -161,8 +177,7 @@ function buildChart(chart) {
   const svg = svgEl('svg', { viewBox: `0 0 ${W} ${H}`, role: 'img',
     'aria-label': `${name}: ${values.map((v, i) => `${labels[i]} ${v}${suffix}`).join(', ')}` });
   svg.innerHTML = `<defs>
-    <linearGradient id="lineGrad" x1="0" x2="1"><stop offset="0" stop-color="#22d3ee"/><stop offset=".5" stop-color="#4da3ff"/><stop offset="1" stop-color="#7c6cff"/></linearGradient>
-    <linearGradient id="areaGrad" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#4da3ff" stop-opacity=".35"/><stop offset="1" stop-color="#4da3ff" stop-opacity="0"/></linearGradient>
+    <linearGradient id="areaGrad" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#D2B87E" stop-opacity=".35"/><stop offset="1" stop-color="#D2B87E" stop-opacity="0"/></linearGradient>
   </defs>`;
 
   [0.33, 0.66, 1].forEach((f) => {
