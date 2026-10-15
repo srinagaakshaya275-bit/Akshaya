@@ -1,19 +1,23 @@
-# Akshaya Reddy · Marketing Portfolio
+# Akshaya Reddy · Issue No. 01
 
-A one-page portfolio styled like a music app: a navy sidebar and player bar around an ivory editorial page. Ivory, Deep Atlas Navy and Antique Gold, with Playfair Display headings and DM Sans body text. Plain HTML, CSS and JavaScript, no build step.
+A one-page portfolio styled as a print-magazine cover story. Plain HTML, CSS and a little vanilla JS, no frameworks or build step, ready for GitHub Pages.
+
+- `index.html`: all content
+- `styles.css`: design tokens (colours, fonts, radius) at the top, mobile-first
+- `script.js`: scroll fade-ins and contact form validation and sending
+- `Akshaya_Resume.pdf`: the resume behind the "Download resume" button
 
 ## Run locally
 ```bash
 python3 -m http.server 8000   # then open http://localhost:8000
 ```
 
-## Editing (all content is in `index.html`)
-- Numbers inside `class="countup"` animate automatically (e.g. `2.5M`, `3,600+`, `9.15`).
-- **Follower chart:** edit `data-labels`, `data-points` and `data-suffix` on the `.chart` element.
-- **Projects:** each card's `data-cat` decides its filter (`campaigns`, `growth`, `brand`, `social`, `content`, `creator`, `offline`).
-- **Player bar:** every section with a `data-track` name becomes a "track". Prev/next jump between them and play scrolls through them on its own.
-- **Resume:** replace `resume.pdf`; the resume buttons appear automatically when the file exists.
-- **Sizes, corners, colours:** all set as tokens at the top of `styles.css`.
+## Things to fill in
+Search `index.html` for `[` to find every placeholder.
+
+- **Contact form:** create a free form at formspree.io and replace `[your-form-id]` in the form's `action`.
+- **Portrait:** replace the `.portrait` block with `<img src="portrait.jpg" alt="Akshaya Reddy">` and keep the class for the rounded frame.
+- **Resume:** replace `Akshaya_Resume.pdf`, keeping the same file name.
 
 ## Deploy with GitHub Pages
-Settings → Pages → *Deploy from a branch* → pick the branch and `/ (root)`.
+Settings → Pages → *Deploy from a branch* → pick the branch and `/ (root)` → Save.
