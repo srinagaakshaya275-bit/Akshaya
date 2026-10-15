@@ -1,19 +1,6 @@
-# Akshaya — Marketing Portfolio
+# Akshaya Reddy · Marketing Portfolio
 
-A glossy, animated, dark-themed portfolio for a marketing professional. Plain HTML, CSS and JavaScript — no build step, no libraries.
-
-## Sections
-Hero · About · Experience (full-time + internship) · Impact (expandable campaigns with chart) · Featured case study · Selected work (filterable) · Skills & tools · Process · Education · Highlights · Contact
-
-## Effects
-- Drifting glow orbs, grid and grain background
-- Glass cards with a glossy sheen and a cursor-following light rim
-- Shimmering gradient headline, shine sweep on buttons
-- Floating 3D campaign dashboard in the hero, 3D tilt on project cards
-- Scroll-reveal with blur, scroll progress bar, scrolling skills marquee
-- Numbers count up when they come into view
-- Animated line chart with hover tooltips
-- Respects "reduce motion" settings
+A one-page portfolio styled like a music app: a navy sidebar and player bar around an ivory editorial page. Ivory, Deep Atlas Navy and Antique Gold, with Playfair Display headings and DM Sans body text. Plain HTML, CSS and JavaScript, no build step.
 
 ## Run locally
 ```bash
@@ -24,7 +11,8 @@ python3 -m http.server 8000   # then open http://localhost:8000
 - Numbers inside `class="countup"` animate automatically (e.g. `2.5M`, `3,600+`, `9.15`).
 - **Follower chart:** edit `data-labels`, `data-points` and `data-suffix` on the `.chart` element.
 - **Projects:** each card's `data-cat` decides its filter (`campaigns`, `growth`, `brand`, `social`, `content`, `creator`, `offline`).
-- **Fonts:** headings use Gramatika and body uses TT Norms, falling back to Space Grotesk and Inter. Once you have web licenses, add the `.woff2` files to a `fonts/` folder and uncomment the `@font-face` block at the top of `styles.css`.
+- **Player bar:** every section with a `data-track` name becomes a "track". Prev/next jump between them and play scrolls through them on its own.
+- **Resume:** replace `resume.pdf`; the resume buttons appear automatically when the file exists.
 - **Sizes, corners, colours:** all set as tokens at the top of `styles.css`.
 
 ## Deploy with GitHub Pages
