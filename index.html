@@ -3,317 +3,166 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>The Glasshouse · Akshaya Reddy</title>
-  <meta name="description" content="Akshaya Reddy, Associate Marketing Manager at Masai School. ORM, AEO, creator partnerships, social and on-ground marketing.">
-  <meta name="theme-color" content="#070B18">
+  <title>The Curiosity Index · Akshaya Reddy</title>
+  <meta name="description" content="A searchable archive of the work of Akshaya Reddy, Associate Marketing Manager at Masai School: projects, experience and skills across ORM, AEO, creator partnerships, social and events.">
+  <meta name="theme-color" content="#050914">
   <link rel="canonical" href="https://srinagaakshaya275-bit.github.io/Akshaya/">
   <meta property="og:type" content="profile">
-  <meta property="og:title" content="The Glasshouse · Akshaya Reddy">
-  <meta property="og:description" content="A portfolio you walk through: ORM, AEO, creators, social and on-ground marketing.">
+  <meta property="og:title" content="The Curiosity Index · Akshaya Reddy">
+  <meta property="og:description" content="Search the work, experience and skills of a marketer who changed what AI says about a brand.">
   <meta property="og:url" content="https://srinagaakshaya275-bit.github.io/Akshaya/">
+  <meta property="og:site_name" content="The Curiosity Index">
   <meta name="twitter:card" content="summary">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Akshaya Reddy",
-    "jobTitle": "Associate Marketing Manager",
-    "worksFor": { "@type": "Organization", "name": "Masai School" },
-    "address": { "@type": "PostalAddress", "addressLocality": "Bengaluru", "addressCountry": "IN" },
-    "sameAs": ["https://www.linkedin.com/in/akshayareddyp/"]
+    "@graph": [
+      { "@type": "WebSite", "name": "The Curiosity Index", "url": "https://srinagaakshaya275-bit.github.io/Akshaya/" },
+      { "@type": "Person", "name": "Akshaya Reddy", "jobTitle": "Associate Marketing Manager",
+        "worksFor": { "@type": "Organization", "name": "Masai School" },
+        "address": { "@type": "PostalAddress", "addressLocality": "Bengaluru", "addressCountry": "IN" },
+        "alumniOf": { "@type": "CollegeOrUniversity", "name": "Vellore Institute of Technology" },
+        "sameAs": ["https://www.linkedin.com/in/akshayareddyp/"] }
+    ]
   }
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
 
-  <!-- Building directory: always visible -->
-  <header class="directory" id="directory">
-    <a class="directory__mark" href="#entrance" aria-label="Back to the entrance">
-      <span class="directory__glyph" aria-hidden="true"></span>
-      <span>The Glasshouse</span>
-    </a>
-    <nav aria-label="Rooms">
-      <ol class="directory__rooms">
-        <li><a href="#welcome"><span>01</span>Welcome Room</a></li>
-        <li><a href="#corridors"><span>02</span>Corridors</a></li>
-        <li><a href="#exhibition"><span>03</span>Exhibition</a></li>
-        <li><a href="#structure"><span>04</span>Structure</a></li>
-        <li><a href="#foundation"><span>05</span>Foundation</a></li>
-        <li><a href="#exit"><span>06</span>Exit</a></li>
-      </ol>
+  <header class="bar">
+    <a class="bar__brand" href="#top"><span class="bar__mark" aria-hidden="true"></span>The Curiosity Index</a>
+    <nav class="bar__nav" aria-label="Sections">
+      <a href="#about">About</a>
+      <a href="#experience">Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#education">Education</a>
+      <a href="#contact">Enquiry</a>
     </nav>
   </header>
 
   <main id="main">
-    <!-- 00 · THE ENTRANCE -->
-    <section class="entrance" id="entrance" aria-labelledby="entrance-name">
-      <div class="scene" aria-hidden="true">
-        <div class="scene__room">
-          <div class="plane plane--floor"></div>
-          <div class="plane plane--ceiling"></div>
-          <div class="plane plane--left"></div>
-          <div class="plane plane--right"></div>
-          <div class="plane plane--back"></div>
+    <!-- HERO · THE INDEX -->
+    <section class="hero wrap" id="top" aria-labelledby="hero-name">
+      <p class="tag"><span>INDEX</span> / 001 <i aria-hidden="true">·</i> <span>FILED UNDER</span> / MARKETING</p>
+      <p class="hero__kicker">INDEX 001 — THE PERSON BEHIND THE WORK</p>
+      <h1 class="hero__name" id="hero-name">Akshaya Reddy</h1>
+      <p class="hero__role">Associate Marketing Manager at Masai School</p>
+      <p class="hero__intro">I make brands look right wherever people check them, from Google and AI answers to the feed and the campus floor.</p>
+
+      <form class="search glass" role="search" id="search-form" autocomplete="off">
+        <label class="search__label" for="q">Search my work, experience, or skills</label>
+        <div class="search__row">
+          <svg class="search__ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+          <input id="q" name="q" type="search" placeholder="Try “creator”, “AEO” or “2026”" enterkeyhint="search" aria-controls="results">
+          <button class="search__clear" type="button" id="q-clear" hidden>Clear</button>
+          <kbd class="search__key" aria-hidden="true">/</kbd>
         </div>
-        <div class="scene__beam"></div>
-        <div class="scene__glow"></div>
+      </form>
+
+      <div class="cats" role="group" aria-label="Browse the index by category" id="cats">
+        <button type="button" data-cat="project" aria-pressed="false">Projects <b></b></button>
+        <button type="button" data-cat="experience" aria-pressed="false">Experience <b></b></button>
+        <button type="button" data-cat="skill" aria-pressed="false">Skills <b></b></button>
+        <button type="button" data-cat="about" aria-pressed="false">About <b></b></button>
       </div>
 
-      <div class="entrance__stage">
-        <p class="entrance__plaque">Entrance · Bengaluru, India</p>
-        <h1 class="entrance__name" id="entrance-name">
-          <span class="entrance__line">Akshaya</span>
-          <span class="entrance__line entrance__line--2">Reddy</span>
-        </h1>
-        <div class="pane pane--hero" aria-hidden="true"><span class="pane__frame"></span></div>
-
-        <div class="entrance__brief">
-          <p class="entrance__role">Associate Marketing Manager · Masai School</p>
-          <p class="entrance__intro">I make brands look right wherever people check them, from Google and AI answers to the feed and the campus floor.</p>
-          <div class="entrance__actions">
-            <a class="btn btn--light" href="#welcome">Explore the Space</a>
-            <a class="btn btn--ghost" href="#exit">Get in Touch</a>
-          </div>
-        </div>
-      </div>
-
-      <a class="entrance__cue" href="#welcome"><span>Step inside</span><i aria-hidden="true"></i></a>
+      <section class="results" id="results" aria-label="Search results" hidden>
+        <p class="results__status" id="results-status" role="status" aria-live="polite"></p>
+        <div id="results-body"></div>
+      </section>
     </section>
 
-    <!-- 01 · THE WELCOME ROOM -->
-    <section class="room welcome" id="welcome" aria-labelledby="welcome-title">
-      <div class="room__label"><span>01</span>The Welcome Room</div>
-      <div class="welcome__grid">
-        <div class="welcome__panel glass reveal">
-          <h2 class="welcome__title" id="welcome-title">When someone looks up a brand, what do they <em>actually</em> find?</h2>
-          <div class="welcome__text">
-            <p>That question took me from social media into ORM, search visibility, and now AEO, where I shape what Google's AI Overviews and ChatGPT say about a brand.</p>
-            <p>Today I run reputation, creators, social and on-ground campaigns at Masai, and I judge all of it by the numbers.</p>
+    <!-- ABOUT · THE PROFILE RECORD -->
+    <section class="sec wrap" id="about" aria-labelledby="about-h"></section>
+    <!-- EXPERIENCE · THE ACTIVITY LOG -->
+    <section class="sec wrap" id="experience" aria-labelledby="exp-h"></section>
+    <!-- PROJECTS · THE CASE FILE LIBRARY -->
+    <section class="sec wrap" id="projects" aria-labelledby="proj-h"></section>
+    <!-- SKILLS · THE CAPABILITY MAP -->
+    <section class="sec wrap" id="skills" aria-labelledby="skills-h"></section>
+    <!-- EDUCATION · THE ACADEMIC REGISTER -->
+    <section class="sec wrap" id="education" aria-labelledby="edu-h"></section>
+
+    <!-- CONTACT · SUBMIT AN ENQUIRY -->
+    <section class="sec wrap" id="contact" aria-labelledby="contact-h">
+      <header class="sec__head">
+        <p class="tag"><span>FORM</span> / ENQ-001 <i aria-hidden="true">·</i> <span>RECORD TYPE</span> / SUBMISSION</p>
+        <h2 id="contact-h">Submit an enquiry</h2>
+        <p class="sec__lede">Hiring, or need marketing that shows up in metrics? Open to full-time roles and marketing projects in ORM, AEO, creators and social.</p>
+      </header>
+      <div class="contact">
+        <form class="enq glass" id="enq" novalidate>
+          <div class="field">
+            <label for="e-name">Name <span class="req" aria-hidden="true">*</span></label>
+            <input id="e-name" name="name" type="text" autocomplete="name" required aria-describedby="e-name-err">
+            <p class="field__err" id="e-name-err" hidden>Please enter your name.</p>
           </div>
-        </div>
-
-        <aside class="welcome__side reveal">
-          <blockquote class="philosophy">
-            <p>Start with the audience and what they find when they search. Ship fast. Keep what works, cut what doesn't.</p>
-          </blockquote>
-
-          <div class="welcome__block">
-            <h3 class="kicker">Areas of interest</h3>
-            <ul class="tags">
-              <li>ORM &amp; AEO</li><li>Social media</li><li>Creators &amp; UGC</li><li>Community</li><li>Offline &amp; events</li>
-            </ul>
+          <div class="field">
+            <label for="e-email">Email <span class="req" aria-hidden="true">*</span></label>
+            <input id="e-email" name="email" type="email" autocomplete="email" required aria-describedby="e-email-err">
+            <p class="field__err" id="e-email-err" hidden>Please enter a valid email address.</p>
           </div>
+          <div class="field">
+            <label for="e-org">Organisation</label>
+            <input id="e-org" name="organisation" type="text" autocomplete="organization">
+          </div>
+          <div class="field">
+            <label for="e-type">Enquiry category <span class="req" aria-hidden="true">*</span></label>
+            <select id="e-type" name="enquiry_category" required aria-describedby="e-type-err"><option value="">Choose one</option></select>
+            <p class="field__err" id="e-type-err" hidden>Please choose a category.</p>
+          </div>
+          <div class="field field--wide">
+            <label for="e-msg">Message <span class="req" aria-hidden="true">*</span></label>
+            <textarea id="e-msg" name="message" rows="5" required aria-describedby="e-msg-err"></textarea>
+            <p class="field__err" id="e-msg-err" hidden>Please write a message.</p>
+          </div>
+          <input type="text" name="_gotcha" class="honeypot" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <div class="enq__foot field--wide">
+            <button class="btn btn--solid" type="submit" id="e-submit"><span class="btn__label">Submit enquiry</span><span class="spinner" aria-hidden="true"></span></button>
+            <p class="enq__status" id="e-status" role="status" aria-live="polite"></p>
+          </div>
+        </form>
 
-          <dl class="facts">
-            <div><dt>Based in</dt><dd>Bengaluru</dd></div>
-            <div><dt>Languages</dt><dd>English, Hindi, Telugu</dd></div>
-            <div><dt>Studied</dt><dd>BBA Digital Marketing, VIT</dd></div>
-          </dl>
+        <aside class="next" aria-label="What happens next">
+          <p class="tag"><span>NEXT STEPS</span></p>
+          <ol>
+            <li>Fill in the four required fields marked *.</li>
+            <li>Submit. You will see a confirmation on this page only once the message has actually been sent.</li>
+            <li>I will reply to the email address you give.</li>
+          </ol>
+          <p class="next__alt">Prefer to write directly?</p>
+          <p class="next__links">
+            <a class="btn btn--line" id="link-email" href="#">Email</a>
+            <a class="btn btn--line" id="link-linkedin" href="#" target="_blank" rel="noopener">LinkedIn</a>
+            <a class="btn btn--line" id="link-resume" href="#" download>Resume (PDF)</a>
+          </p>
         </aside>
       </div>
     </section>
-
-    <!-- 02 · THE CORRIDORS -->
-    <section class="room corridors" id="corridors" aria-labelledby="corridors-title">
-      <div class="room__label"><span>02</span>The Corridors</div>
-      <div class="room__head reveal">
-        <h2 class="room__title" id="corridors-title">Seven rooms, <em>one</em> direction.</h2>
-        <p class="room__lede">Five internships lead to a full-time role and a promotion. Open any door to see the work inside.</p>
-      </div>
-
-      <div class="corridor" data-corridor>
-        <div class="corridor__track" role="list" id="corridor-track"></div>
-        <div class="corridor__floor" aria-hidden="true"></div>
-      </div>
-      <div class="corridor__hint" aria-hidden="true">Scroll sideways or use ← → keys</div>
-
-      <div class="dossier glass" id="dossier" role="region" aria-live="polite" aria-label="Role details" hidden></div>
-    </section>
-
-    <!-- 03 · THE EXHIBITION -->
-    <section class="room exhibition" id="exhibition" aria-labelledby="exhibition-title">
-      <div class="room__label"><span>03</span>The Exhibition Chambers</div>
-      <div class="room__head reveal">
-        <h2 class="room__title" id="exhibition-title">Work on <em>display.</em></h2>
-        <p class="room__lede">Each case holds one project. Open it to walk into the full case study.</p>
-      </div>
-
-      <div class="filters" role="group" aria-label="Filter projects" id="filters">
-        <button class="filter is-on" data-filter="all" aria-pressed="true">All</button>
-        <button class="filter" data-filter="campaigns" aria-pressed="false">Campaigns</button>
-        <button class="filter" data-filter="creators" aria-pressed="false">Creator partnerships</button>
-        <button class="filter" data-filter="content" aria-pressed="false">Content</button>
-        <button class="filter" data-filter="community" aria-pressed="false">Community</button>
-        <button class="filter" data-filter="events" aria-pressed="false">Events</button>
-      </div>
-
-      <div class="chambers" id="chambers"></div>
-
-      <nav class="catalogue" aria-label="Project catalogue">
-        <h3 class="kicker">Catalogue</h3>
-        <ol id="catalogue"></ol>
-      </nav>
-    </section>
-
-    <!-- 04 · THE STRUCTURAL SYSTEM -->
-    <section class="room structure" id="structure" aria-labelledby="structure-title">
-      <div class="room__label"><span>04</span>The Structural System</div>
-      <div class="room__head reveal">
-        <h2 class="room__title" id="structure-title">What holds the <em>building</em> up.</h2>
-        <p class="room__lede">Strategy is the foundation. Content, creators and community are the columns. Analytics and operations tie it together, and the tools are the instruments.</p>
-      </div>
-
-      <div class="section-drawing reveal">
-        <div class="beam glass">
-          <p class="part"><span>Beam</span>Ties it together</p>
-          <div class="beam__halves">
-            <div><h3>Analytics</h3><ul class="tags"><li>Performance tracking</li><li>Reporting</li><li>Sentiment tracking</li><li>UTMs</li></ul></div>
-            <div><h3>Operations</h3><ul class="tags"><li>Process improvement</li><li>Team management</li><li>Vendor coordination</li><li>Crisis management</li></ul></div>
-          </div>
-        </div>
-
-        <div class="columns">
-          <div class="column glass">
-            <p class="part"><span>Column A</span>Content</p>
-            <ul class="column__list"><li>Social media strategy</li><li>Content creation</li><li>Short-form video</li><li>Video shooting &amp; editing</li><li>Copywriting</li><li>Content calendars</li></ul>
-          </div>
-          <div class="column glass">
-            <p class="part"><span>Column B</span>Creator partnerships</p>
-            <ul class="column__list"><li>Influencer marketing</li><li>Scouting &amp; negotiation</li><li>UGC</li><li>Creator briefs</li><li>Script reviews</li></ul>
-          </div>
-          <div class="column glass">
-            <p class="part"><span>Column C</span>Community</p>
-            <ul class="column__list"><li>Community management</li><li>Hackathons</li><li>On-ground events</li><li>BTL &amp; guerilla</li></ul>
-          </div>
-        </div>
-
-        <div class="slab glass">
-          <p class="part"><span>Foundation</span>Marketing strategy</p>
-          <ul class="tags"><li>Campaign planning &amp; execution</li><li>ORM</li><li>AEO / GEO</li><li>SEO</li><li>SERP visibility</li><li>Brand marketing</li><li>Lead generation</li></ul>
-        </div>
-      </div>
-
-      <div class="instruments reveal">
-        <h3 class="kicker">Instruments · tools I use</h3>
-        <ul class="instruments__rack">
-          <li>Meta Business Suite</li><li>Sprout Social</li><li>Agorapulse</li><li>Hootsuite</li><li>Metabase</li>
-          <li>Notion</li><li>Jira</li><li>CRM tools</li><li>ChatGPT</li><li>Claude</li><li>Automation tools</li>
-          <li>Canva</li><li>InShot</li><li>VN</li><li>Office 365</li>
-        </ul>
-      </div>
-    </section>
-
-    <!-- 05 · THE FOUNDATION -->
-    <section class="room foundation" id="foundation" aria-labelledby="foundation-title">
-      <div class="room__label"><span>05</span>The Foundation</div>
-      <div class="foundation__grid">
-        <div class="reveal">
-          <h2 class="room__title" id="foundation-title">Where it <em>started.</em></h2>
-          <ol class="strata">
-            <li>
-              <p class="strata__year">2022 – 2025</p>
-              <h3>BBA Digital Marketing</h3>
-              <p>Vellore Institute of Technology</p>
-              <p class="strata__score">CGPA 9.15</p>
-            </li>
-            <li>
-              <p class="strata__year">2022</p>
-              <h3>Class XII</h3>
-              <p>Sri Shirdi Sai Junior College, AP</p>
-              <p class="strata__score">93.2%</p>
-            </li>
-            <li>
-              <p class="strata__year">2020</p>
-              <h3>Class X</h3>
-              <p>Sri Shirdi Sai Vidya Nikethan, AP</p>
-              <p class="strata__score">97.33%</p>
-            </li>
-          </ol>
-        </div>
-        <div class="coursework glass reveal">
-          <h3 class="kicker">Courses &amp; certifications</h3>
-          <div class="coursework__group">
-            <h4>Digital marketing</h4>
-            <ul class="tags"><li>Fundamentals of Digital Marketing</li><li>Search Engine Optimisation</li><li>Google Analytics</li><li>Google Ads</li><li>CRM</li><li>Omni-channel Marketing</li><li>Gen AI</li><li>Content Writing</li></ul>
-          </div>
-          <div class="coursework__group">
-            <h4>Social media marketing</h4>
-            <ul class="tags"><li>Fundamentals of Social Media Marketing</li><li>Social Media Marketing Specialization (Meta)</li><li>Social Media Monitoring</li><li>Content Creating using Canva</li></ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 06 · THE EXIT -->
-    <section class="exit" id="exit" aria-labelledby="exit-title">
-      <div class="exit__light" aria-hidden="true"></div>
-      <div class="exit__inner">
-        <div class="exit__copy reveal">
-          <div class="room__label room__label--dark"><span>06</span>The Exit, into what's next</div>
-          <h2 class="exit__title" id="exit-title">Let's build the <em>next room</em> together.</h2>
-          <p>Open to full-time roles and marketing projects in ORM, AEO, creators and social.</p>
-          <div class="exit__links">
-            <a class="btn btn--dark" href="https://www.linkedin.com/in/akshayareddyp/" target="_blank" rel="noopener">LinkedIn</a>
-            <a class="btn btn--outline" href="mailto:srinagaakshaya275@gmail.com">Email</a>
-            <a class="btn btn--outline" href="Akshaya_Resume.pdf" download>Resume (PDF)</a>
-          </div>
-        </div>
-
-        <form class="enquiry reveal" id="enquiry" novalidate>
-          <div class="field">
-            <label for="f-name">Name <span class="req" aria-hidden="true">*</span></label>
-            <input id="f-name" name="name" type="text" autocomplete="name" required aria-describedby="f-name-err">
-            <p class="field__err" id="f-name-err" hidden>Please enter your name.</p>
-          </div>
-          <div class="field">
-            <label for="f-email">Email <span class="req" aria-hidden="true">*</span></label>
-            <input id="f-email" name="email" type="email" autocomplete="email" required aria-describedby="f-email-err">
-            <p class="field__err" id="f-email-err" hidden>Please enter a valid email address.</p>
-          </div>
-          <div class="field">
-            <label for="f-org">Organisation</label>
-            <input id="f-org" name="organisation" type="text" autocomplete="organization">
-          </div>
-          <div class="field">
-            <label for="f-type">Enquiry type <span class="req" aria-hidden="true">*</span></label>
-            <select id="f-type" name="enquiry_type" required aria-describedby="f-type-err">
-              <option value="">Choose one</option>
-              <option>Full-time role</option>
-              <option>Marketing project</option>
-              <option>Creator or brand collaboration</option>
-              <option>Something else</option>
-            </select>
-            <p class="field__err" id="f-type-err" hidden>Please choose an enquiry type.</p>
-          </div>
-          <div class="field field--wide">
-            <label for="f-msg">Message <span class="req" aria-hidden="true">*</span></label>
-            <textarea id="f-msg" name="message" rows="5" required aria-describedby="f-msg-err"></textarea>
-            <p class="field__err" id="f-msg-err" hidden>Please write a message.</p>
-          </div>
-          <input type="text" name="_gotcha" class="honeypot" tabindex="-1" autocomplete="off" aria-hidden="true">
-          <div class="enquiry__foot field--wide">
-            <button class="btn btn--dark" type="submit" id="f-submit"><span class="btn__label">Send enquiry</span><span class="spinner" aria-hidden="true"></span></button>
-            <p class="enquiry__status" id="f-status" role="status" aria-live="polite"></p>
-          </div>
-        </form>
-      </div>
-
-      <footer class="footer">
-        <p>© 2026 Akshaya Reddy</p>
-        <a href="#entrance">Back to the entrance ↑</a>
-      </footer>
-    </section>
   </main>
 
-  <!-- Case study room (filled by script.js) -->
-  <dialog class="case" id="case" aria-labelledby="case-title">
-    <div class="case__inner" id="case-inner"></div>
+  <footer class="foot wrap">
+    <p><span>INDEX</span> / THE CURIOSITY INDEX <i aria-hidden="true">·</i> <span>LAST UPDATED</span> / <span id="foot-updated"></span></p>
+    <p>© 2026 Akshaya Reddy <a href="#top">Back to the index ↑</a></p>
+  </footer>
+
+  <!-- Record viewer: project case files and experience records -->
+  <dialog class="rec glass" id="rec" aria-labelledby="rec-title">
+    <div class="rec__inner" id="rec-inner"></div>
   </dialog>
+
+  <noscript>
+    <div class="wrap noscript">
+      <h2>Akshaya Reddy · Associate Marketing Manager, Masai School</h2>
+      <p>This archive needs JavaScript for search and filters. In short: ORM, AEO, creator partnerships, social and on-ground marketing; BBA Digital Marketing, VIT. Email <a href="mailto:srinagaakshaya275@gmail.com">srinagaakshaya275@gmail.com</a> or find me on <a href="https://www.linkedin.com/in/akshayareddyp/">LinkedIn</a>.</p>
+    </div>
+  </noscript>
 
   <script src="data.js"></script>
   <script src="script.js"></script>
