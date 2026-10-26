@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>The Curiosity Index · Akshaya Reddy</title>
   <meta name="description" content="A searchable archive of the work of Akshaya Reddy, Associate Marketing Manager at Masai School: projects, experience and skills across ORM, AEO, creator partnerships, social and events.">
-  <meta name="theme-color" content="#050914">
+  <meta name="theme-color" content="#FBF8F0">
   <link rel="canonical" href="https://srinagaakshaya275-bit.github.io/Akshaya/">
   <meta property="og:type" content="profile">
   <meta property="og:title" content="The Curiosity Index · Akshaya Reddy">
@@ -28,11 +28,32 @@
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Kalam:wght@400;700&family=Patrick+Hand&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
+
+  <!-- Hand-drawn kit: one pen filter, and doodles reused with <use href="#d-…"> -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <defs>
+      <!-- Wobbles edges slightly so borders look pen-drawn. Applied only to border layers, never to text. -->
+      <filter id="pen" x="-4%" y="-8%" width="108%" height="116%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency="0.009 0.013" numOctaves="1" seed="7" result="noise"/>
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="2.6" xChannelSelector="R" yChannelSelector="G"/>
+      </filter>
+      <symbol id="d-star" viewBox="0 0 24 24"><path d="M12 2.8l2.6 6.3 6.7.6-5.1 4.4 1.6 6.6L12 17.2 6.2 20.7l1.7-6.6L2.8 9.7l6.7-.7z"/></symbol>
+      <symbol id="d-check" viewBox="0 0 24 24"><path d="M3.6 12.8c1.5 1.3 3 3.7 4.6 6.2C11.2 12.6 15.6 7.6 20.8 3.6"/></symbol>
+      <symbol id="d-box" viewBox="0 0 24 24"><path d="M4.2 5.4c5-.9 10.2-.6 15.6-.2.5 5 .4 9.6 0 14.4-5.3.6-10.2.4-15.4.2-.5-4.8-.4-9.6-.2-14.4z"/></symbol>
+      <symbol id="d-arrow" viewBox="0 0 48 24"><path d="M2.5 16C12 6.5 24.5 5.5 42 11.5"/><path d="M33.5 4.8L42.4 11.6 32.6 17.2"/></symbol>
+      <symbol id="d-bul1" viewBox="0 0 24 24"><path d="M12 4.6c4 0 7 3 7 7.2 0 4-3.2 7-7.4 6.8C7.6 18.5 5 15.6 5 11.8c0-3.9 2.9-6.6 7-6.4"/><path d="M11.8 11.6l.4.4"/></symbol>
+      <symbol id="d-bul2" viewBox="0 0 24 24"><path d="M12 4.2c.2 5.2.1 10 0 15.6M5.2 8.2c4.6 2.6 9 5 13.6 7.6M18.8 8c-4.7 2.7-9.2 5.1-13.6 7.7"/></symbol>
+      <symbol id="d-bul3" viewBox="0 0 24 24"><path d="M4.2 12.3c4.8-.3 9.4-.3 14 0M13.2 6.8c2 1.8 3.6 3.6 5.4 5.4-1.8 1.8-3.6 3.6-5.4 5.2"/></symbol>
+      <symbol id="d-brL" viewBox="0 0 20 120"><path d="M16 3C8 4 5.5 8.5 5.5 15v34c0 5-1.6 8-4 10 2.4 2 4 5 4 10v34c0 6.5 2.5 11 10.5 12"/><path d="M14.5 6C9 8 8 11 8 16v33c0 4-1 7-3 9.4"/></symbol>
+      <symbol id="d-brR" viewBox="0 0 20 120"><path d="M4 3c8 1 10.5 5.500 10.500 12v34c0 5 1.600 8 4 10-2.400 2-4 5-4 10v34c0 6.500-2.500 11-10.500 12"/><path d="M5.500 6C11 8 12 11 12 16v33c0 4 1 7 3 9.400"/></symbol>
+    </defs>
+  </svg>
+
 
   <header class="bar">
     <a class="bar__brand" href="#top"><span class="bar__mark" aria-hidden="true"></span>The Curiosity Index</a>
@@ -53,7 +74,7 @@
       <p class="hero__kicker">INDEX 001 — THE PERSON BEHIND THE WORK</p>
       <h1 class="hero__name" id="hero-name">Akshaya Reddy</h1>
       <p class="hero__role">Associate Marketing Manager at Masai School</p>
-      <p class="hero__intro">I make brands look right wherever people check them, from Google and AI answers to the feed and the campus floor.</p>
+      <p class="hero__intro">I make brands <span class="hl">look right</span> wherever people check them, from Google and AI answers to the feed and the campus floor.</p>
 
       <form class="search glass" role="search" id="search-form" autocomplete="off">
         <label class="search__label" for="q">Search my work, experience, or skills</label>
@@ -94,7 +115,7 @@
       <header class="sec__head">
         <p class="tag"><span>FORM</span> / ENQ-001 <i aria-hidden="true">·</i> <span>RECORD TYPE</span> / SUBMISSION</p>
         <h2 id="contact-h">Submit an enquiry</h2>
-        <p class="sec__lede">Hiring, or need marketing that shows up in metrics? Open to full-time roles and marketing projects in ORM, AEO, creators and social.</p>
+        <p class="sec__lede">Hiring, or need marketing that shows up <span class="circ">in metrics<svg class="ring" viewBox="0 0 100 50" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path pathLength="1" d="M53 4C80 1 97 13 96 26 95 40 72 48 47 47 21 46 4 37 5 23 6 10 28 3 60 6"/></svg></span>? Open to full-time roles and marketing projects in ORM, AEO, creators and social.</p>
       </header>
       <div class="contact">
         <form class="enq glass" id="enq" novalidate>

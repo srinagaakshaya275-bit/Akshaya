@@ -1,13 +1,13 @@
 # The Curiosity Index · Akshaya Reddy
 
-A searchable personal archive. Plain HTML, CSS and vanilla JavaScript, no build step, so GitHub Pages serves it as is.
+A searchable personal archive, styled as a hand-written notebook. Plain HTML, CSS and vanilla JavaScript, no build step, so GitHub Pages serves it as is.
 
 | File | What it holds |
 | --- | --- |
 | `data.js` | **Every record**: profile, roles, projects, skills, education, and the form endpoint. Almost all edits happen here. |
 | `index.html` | Page shell, SEO tags and the enquiry form |
 | `script.js` | Search, filters, record viewer, skill map, history routing, form |
-| `styles.css` | Visual identity; colour and type tokens at the top |
+| `styles.css` | The notebook look; ink colours and fonts are tokens at the top |
 | `Akshaya_Resume.pdf` | Linked from the enquiry section |
 
 ## How the data drives the site
@@ -16,6 +16,13 @@ A searchable personal archive. Plain HTML, CSS and vanilla JavaScript, no build 
 - **Capability Map**: a skill links to a project only if its id is in that project's `skills` list, and to a responsibility only if it is in that responsibility's `skills` list. Nothing else is inferred, and no proficiency levels exist.
 - **Placeholders**: anything in `[square brackets]` shows in italics, and any record still containing one is marked **DRAFT**. Fill it in and the label becomes **FILED**.
 - **Routes**: `#/p/CF-001` opens a case file, `#/x/XP-007` an experience record, `#/s/creator` a skill. Back, forward and shared links all work.
+
+## The notebook look
+- **Ink:** navy pen `#1F2A5C` for text, red pen `#C2412D` for underlines, circles and ticks, yellow highlighter `#FFE27A` on key words. Change them in `:root` in `styles.css`.
+- **Fonts:** Caveat for headlines, numbers, nav and annotations (never below 16px); Patrick Hand for body text, with Kalam filling in glyphs such as ₹.
+- **Hand-drawn parts are inline SVG** (the doodle kit sits at the top of `index.html`). Box borders use a small `feTurbulence` + `feDisplacementMap` filter (`#pen`, scale 2.6) on a border-only layer, so text is never distorted.
+- **Margin notes:** edit or delete the `marginNotes` list at the bottom of `data.js`. They show only on screens wider than 1340px. The red margin line and the tiny rotations appear from 768px up.
+- **Reduced motion:** with that setting on, nothing redraws, animates or tilts.
 
 ## Adding things
 - **New project**: copy a project block in `data.js`, give it the next id (`CF-010`), set `layout` to `feature`, `exhibit` or `text`, and tag its `skills`.

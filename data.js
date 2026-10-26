@@ -357,5 +357,17 @@ window.ARCHIVE = {
     { group: "Social media marketing", items: ["Fundamentals of Social Media Marketing", "Social Media Marketing Specialization (Meta)", "Social Media Monitoring", "Content Creating using Canva"] }
   ],
 
+
+  /* ---------------------------- MARGIN NOTES ---------------------------- */
+  /* Short handwritten asides in the side margins (wide screens only).
+     on:   a section id ("#experience") or a case-file id ("CF-001")
+     side: "l" or "r"      top: distance from the top of that element
+     Delete a line to remove a note. */
+  marginNotes: [
+    { on: "#experience", side: "r", top: "330px", text: "newest first" },
+    { on: "CF-001", side: "r", top: "46%", text: "this is where AI changed its mind" },
+    { on: "#skills", side: "l", top: "300px", text: "pick one and watch the lines" }
+  ],
+
   enquiryTypes: ["Full-time role", "Marketing project", "Creator or brand collaboration", "Something else"]
 };

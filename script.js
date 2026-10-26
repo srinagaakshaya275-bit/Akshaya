@@ -24,6 +24,17 @@
   const gapCount = (rec) => strings(rec).join(' ').match(GAP)?.length || 0;
   const tokens = (q) => (String(q).toLowerCase().match(/[\p{L}\p{N}₹+]+/gu) || []);
 
+  /* ---------- hand-drawn helpers ---------- */
+  const SQ = '<svg class="sq" viewBox="0 0 100 8" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path pathLength="1" d="M1 5.5C10 2 17 7.5 28 4.2S47 2.2 58 5s20 2.600 30-.4c5-1.500 8-.6 11 .4"/></svg>';
+  const RING = '<svg class="ring" viewBox="0 0 100 50" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path pathLength="1" d="M53 4C80 1 97 13 96 26 95 40 72 48 47 47 21 46 4 37 5 23 6 10 28 3 60 6"/></svg>';
+  /* U: text with a wobbly underline that redraws on hover (or always shown with 'on') */
+  const U = (html, mode = '') => `<span class="u ${mode}">${html}${SQ}</span>`;
+  const dd = (id, cls = '') => `<svg class="dd ${cls}" aria-hidden="true" focusable="false"><use href="#d-${id}"/></svg>`;
+  /* num: a figure circled in red pen */
+  const num = (v) => `<span class="num">${ph(v)}${RING}</span>`;
+
+  const noteHtml = (n) => (n ? `<aside class="mn mn--${esc(n.side)}" style="top:${esc(n.top)}" aria-hidden="true"><span>${esc(n.text)}</span>${dd('arrow', 'dd--arrow mn__arrow')}</aside>` : '');
+
   /* ---------- derived data ---------- */
   const skillById = Object.fromEntries(A.skills.map((s) => [s.id, s]));
   const projectById = Object.fromEntries(A.projects.map((p) => [p.id, p]));
@@ -38,7 +49,7 @@
   const skillLink = (id) => link(`#/s/${id}`, esc(skillById[id].name), 'chip chip--link');
   const meta = (pairs, cls = '') => `<dl class="meta ${cls}">${pairs.filter(Boolean).map(([k, v]) => `<div><dt>${esc(k)}</dt><dd>${v}</dd></div>`).join('')}</dl>`;
   const statusPair = (rec) => { const s = status(rec); return ['STATUS', `<span class="status status--${s.cls}">${s.label}</span>${s.note ? ` <span class="muted">${s.note}</span>` : ''}`]; };
-  const leadStats = (p, n = 2) => p.outcome.slice(0, n).map((o) => `<li><b>${ph(o.value)}</b> <span>${ph(o.label)}</span></li>`).join('');
+  const leadStats = (p, n = 2) => p.outcome.slice(0, n).map((o, i) => `<li>${i === 0 ? dd('arrow', 'dd--arrow') : ''}<b>${i === 0 ? num(o.value) : ph(o.value)}</b> <span>${ph(o.label)}</span></li>`).join('');
 
   /* ---------- search index ---------- */
   const entries = [];
@@ -115,7 +126,7 @@
       <section class="group"><h3 class="label">${TYPE_LABEL[t]} <span>${l.length}</span></h3>
       <ol class="hits">${l.map((e) => `
         <li class="hit"><a class="idlink" href="${e.route}" tabindex="-1" aria-hidden="true">${esc(e.id)}</a>
-          <div><a class="hit__title" href="${e.route}">${mark(e.title, terms)}</a>
+          <div><a class="hit__title" href="${e.route}">${U(mark(e.title, terms))}</a>
           <p class="hit__sub">${mark(e.sub, terms)}</p>
           ${terms.length && terms.some((t) => e.body.toLowerCase().includes(t)) ? `<p class="hit__snip">${mark(snippet(e.body, terms), terms)}</p>` : ''}</div></li>`).join('')}</ol></section>`).join('');
   }
@@ -147,7 +158,7 @@
   /* ==========================================================================
      SECTION HEADERS
      ========================================================================== */
-  const head = (id, tagPairs, title, lede) => `<header class="sec__head"><p class="tag">${tagPairs.map(([k, v]) => `<span>${k}</span> / ${v}`).join(' <i aria-hidden="true">·</i> ')}</p><h2 id="${id}">${title}</h2>${lede ? `<p class="sec__lede">${lede}</p>` : ''}</header>`;
+  const head = (id, tagPairs, title, lede) => `<header class="sec__head"><p class="tag">${tagPairs.map(([k, v]) => `<span>${k}</span> / ${v}`).join(' <i aria-hidden="true">·</i> ')}</p><h2 id="${id}">${U(title, 'on')}</h2>${lede ? `<p class="sec__lede">${lede}</p>` : ''}</header>`;
   const banner = () => state.q ? `<p class="banner" role="status">Also filtered by search “${esc(state.q)}”. <button type="button" class="linkbtn" data-clear-search>Clear</button></p>` : '';
 
   /* ---------- ABOUT · profile record ---------- */
@@ -155,7 +166,7 @@
     <div class="profile">
       <div class="profile__main">
         <p class="label">Personal statement</p>
-        <div class="statement">${A.about.statement.map((p) => `<p>${ph(p)}</p>`).join('')}</div>
+        <div class="statement">${A.about.statement.map((p, i) => i === 0 ? `<div class="pull">${dd('brL', 'br br--l')}<p>${ph(p).replace('actually find', '<span class="hl">actually find</span>')}</p>${dd('brR', 'br br--r')}</div>` : `<p>${ph(p)}</p>`).join('')}</div>
         <p class="label">Working principles</p>
         <ol class="principles">${A.about.principles.map((p) => `<li>${ph(p)}</li>`).join('')}</ol>
       </div>
@@ -188,14 +199,14 @@
   function logRow(r) {
     const skills = [...new Set(r.responsibilities.flatMap((x) => x.skills))].slice(0, 4);
     return `<li class="log">
-      <div class="log__when"><a class="idlink" href="#/x/${r.id}">${r.id}</a><span>${ph(r.dates)}</span></div>
+      <div class="log__when"><span class="chk" aria-hidden="true">${dd('box')}${dd('check', 'chk__tick')}</span><a class="idlink" href="#/x/${r.id}">${r.id}</a><span>${ph(r.dates)}</span></div>
       <div class="log__main">
-        <h4><a class="stretch" href="#/x/${r.id}">${esc(r.title)}</a>${r.promoted ? ' <span class="pill">Promoted</span>' : ''}</h4>
+        <h4><a class="stretch" href="#/x/${r.id}">${U(esc(r.title))}</a>${r.promoted ? ' <span class="pill">Promoted</span>' : ''}</h4>
         <p class="log__org">${esc(r.company)} · ${esc(r.place)}</p>
         <p>${ph(r.summary)}</p>
         ${skills.length ? `<ul class="chips chips--sm">${skills.map((s) => `<li><span class="chip">${esc(skillById[s].name)}</span></li>`).join('')}</ul>` : ''}
       </div>
-      ${r.achievements.length ? `<ul class="log__figs">${r.achievements.slice(0, 2).map((a) => `<li><b>${ph(a.value)}</b><span>${ph(a.label)}</span></li>`).join('')}</ul>` : '<span></span>'}
+      ${r.achievements.length ? `<ul class="log__figs">${r.achievements.slice(0, 2).map((a) => `<li>${dd('check', 'tick')}<b>${num(a.value)}</b><span>${ph(a.label)}</span></li>`).join('')}</ul>` : '<span></span>'}
     </li>`;
   }
   function renderLog() {
@@ -241,16 +252,17 @@
     : `<span class="art__ph">[${esc(p.visualHints[i] || p.visualHints[0] || 'Visual evidence')}]</span>`;
   const tagLinks = (p, n = 4) => `<ul class="chips chips--sm">${p.skills.slice(0, n).map((s) => `<li>${skillLink(s)}</li>`).join('')}</ul>`;
   const fileCard = (p) => {
+    const note = noteHtml((A.marginNotes || []).find((n) => n.on === p.id));
     const idl = `<a class="idlink" href="#/p/${p.id}">${p.id}</a>`;
     const st = status(p);
     const top = `<div class="file__top">${idl}<span class="muted">${esc(A.projectTypes[p.type])} · ${ph(p.year)}</span><span class="status status--${st.cls}">${st.label}</span></div>`;
     if (p.layout === 'feature') return `<li class="file file--feature"><div class="file__art art">${art(p, 0)}</div>
-      <div class="file__body">${top}<h3><a class="stretch" href="#/p/${p.id}">${ph(p.title)}</a></h3><p class="file__sum">${ph(p.summary)}</p>
-      <ul class="stats">${leadStats(p, 4)}</ul>${tagLinks(p, 5)}</div></li>`;
+      <div class="file__body">${top}<h3><a class="stretch" href="#/p/${p.id}">${U(ph(p.title))}</a></h3><p class="file__sum">${ph(p.summary)}</p>
+      <ul class="stats">${leadStats(p, 4)}</ul>${tagLinks(p, 5)}</div>${note}</li>`;
     if (p.layout === 'exhibit') return `<li class="file file--exhibit"><div class="file__art art">${art(p, 0)}</div>
-      <div class="file__body">${top}<h3><a class="stretch" href="#/p/${p.id}">${ph(p.title)}</a></h3><p class="file__sum">${ph(p.summary)}</p>
+      <div class="file__body">${top}<h3><a class="stretch" href="#/p/${p.id}">${U(ph(p.title))}</a></h3><p class="file__sum">${ph(p.summary)}</p>
       <ul class="stats">${leadStats(p, 2)}</ul>${tagLinks(p, 3)}</div></li>`;
-    return `<li class="file file--text"><div class="file__body">${top}<h3><a class="stretch" href="#/p/${p.id}">${ph(p.title)}</a></h3><p class="file__sum">${ph(p.summary)}</p></div>
+    return `<li class="file file--text"><div class="file__body">${top}<h3><a class="stretch" href="#/p/${p.id}">${U(ph(p.title))}</a></h3><p class="file__sum">${ph(p.summary)}</p></div>
       <div class="file__side"><ul class="stats">${leadStats(p, 1)}</ul>${tagLinks(p, 3)}</div></li>`;
   };
   function renderLibrary() {
@@ -283,7 +295,7 @@
         <p class="label">Capabilities</p>
         <ul class="skilllist" id="skilllist">${groupOrder.map((g) => `
           <li class="skilllist__group" role="presentation"><span>${esc(A.skillGroups[g])}</span></li>
-          ${orderedSkills.filter((s) => s.group === g).map((s) => { const n = projectsOfSkill(s.id).length; return `<li><button type="button" class="skill" data-skill="${s.id}" aria-pressed="false">${esc(s.name)}<b aria-label="${n} case files">${n}</b></button></li>`; }).join('')}`).join('')}
+          ${orderedSkills.filter((s) => s.group === g).map((s) => { const n = projectsOfSkill(s.id).length; return `<li><button type="button" class="skill" data-skill="${s.id}" aria-pressed="false">${dd('bul' + (1 + (A.skills.indexOf(s) % 3)), 'bul')}<span>${esc(s.name)}</span><b aria-label="${n} case files">${n}</b></button></li>`; }).join('')}`).join('')}
         </ul>
       </div>
       <div class="map__col map__col--files">
@@ -362,7 +374,7 @@
 
   const topbar = (id) => `<div class="rec__top"><p class="tag"><span>INDEX</span> / ${esc(id)}</p><button type="button" class="btn btn--line" data-close>Close file</button></div>`;
   const list = (arr) => (arr && arr.length ? `<ul class="bullets">${arr.map((x) => `<li>${ph(x)}</li>`).join('')}</ul>` : '<p class="muted">[Nothing recorded yet]</p>');
-  const figures = (arr) => `<div class="figs">${arr.map((a) => `<div class="fig"><b>${ph(a.value)}</b><span>${ph(a.label)}</span></div>`).join('')}</div>`;
+  const figures = (arr) => `<div class="figs">${arr.map((a) => `<div class="fig">${dd('star', 'star')}<b>${num(a.value)}</b><span>${ph(a.label)}</span></div>`).join('')}</div>`;
 
   function projectView(p) {
     const roles = (p.roleIds || []).map((id) => link(`#/x/${id}`, `${id} · ${esc(roleById[id].title)}`, 'chip chip--link')).join('') || '<span class="muted">[Role record to confirm]</span>';
@@ -499,6 +511,11 @@
     } catch { say('Your enquiry could not be sent. Please try again, or use the Email button.', 'err'); }
     finally { submit.classList.remove('is-loading'); submit.removeAttribute('aria-busy'); label.textContent = 'Submit enquiry'; }
   });
+
+  /* ---------- hand-drawn finishing: underlined headings and nav, margin notes ---------- */
+  $$('#contact-h, .hero__name').forEach((el) => { el.innerHTML = U(esc(el.textContent), 'on'); });
+  $$('.bar__nav a').forEach((a) => { a.innerHTML = U(esc(a.textContent)); });
+  (A.marginNotes || []).filter((n) => n.on.startsWith('#')).forEach((n) => { $(n.on)?.insertAdjacentHTML('beforeend', noteHtml(n)); });
 
   /* ---------- start ---------- */
   renderResults(); renderLog(); renderLibrary(); renderSkillPanel();
