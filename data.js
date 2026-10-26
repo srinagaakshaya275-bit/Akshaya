@@ -30,6 +30,18 @@ window.ARCHIVE = {
     formEndpoint: ""
   },
 
+  /* Portrait for the polaroid in the hero. Put a photo in assets/ and set src,
+     e.g. "assets/portrait.jpg". While src is empty a placeholder shows. */
+  portrait: { src: "", caption: "Akshaya Reddy, Associate Marketing Manager, Masai School" },
+
+  /* The four sticky notes under the search. Colours cycle butter, blush, sage, sky. */
+  highlights: [
+    { value: "2.5M", label: "monthly organic reach" },
+    { value: "3,600+", label: "leads a month" },
+    { value: "369K", label: "followers" },
+    { value: "5", label: "AI verdicts flipped" }
+  ],
+
   /* ---------------------------- ABOUT ---------------------------------- */
   about: {
     id: "PR-001",
@@ -184,6 +196,7 @@ window.ARCHIVE = {
     {
       id: "CF-001", layout: "feature", type: "campaigns", filedUnder: "ORM · AEO · Creators",
       title: "Rewriting what AI says about a brand", year: "2025–26", years: [2025, 2026],
+      stamp: "Verdicts flipped ×5",
       role: "Scouting, negotiation, script reviews and sentiment tracking", roleIds: ["XP-007"],
       skills: ["aeo", "orm", "creator", "seo", "analytics"],
       summary: "AI Overviews were calling courses scams. A creator-led YouTube program changed the sources the answers were built from.",
@@ -358,16 +371,6 @@ window.ARCHIVE = {
   ],
 
 
-  /* ---------------------------- MARGIN NOTES ---------------------------- */
-  /* Short handwritten asides in the side margins (wide screens only).
-     on:   a section id ("#experience") or a case-file id ("CF-001")
-     side: "l" or "r"      top: distance from the top of that element
-     Delete a line to remove a note. */
-  marginNotes: [
-    { on: "#experience", side: "r", top: "330px", text: "newest first" },
-    { on: "CF-001", side: "r", top: "46%", text: "this is where AI changed its mind" },
-    { on: "#skills", side: "l", top: "300px", text: "pick one and watch the lines" }
-  ],
 
   enquiryTypes: ["Full-time role", "Marketing project", "Creator or brand collaboration", "Something else"]
 };

@@ -1,6 +1,6 @@
 # The Curiosity Index · Akshaya Reddy
 
-A searchable personal archive, styled as a hand-written notebook. Plain HTML, CSS and vanilla JavaScript, no build step, so GitHub Pages serves it as is.
+A searchable personal archive, styled as a scrapbook. Plain HTML, CSS and vanilla JavaScript, no build step, so GitHub Pages serves it as is.
 
 | File | What it holds |
 | --- | --- |
@@ -17,12 +17,12 @@ A searchable personal archive, styled as a hand-written notebook. Plain HTML, CS
 - **Placeholders**: anything in `[square brackets]` shows in italics, and any record still containing one is marked **DRAFT**. Fill it in and the label becomes **FILED**.
 - **Routes**: `#/p/CF-001` opens a case file, `#/x/XP-007` an experience record, `#/s/creator` a skill. Back, forward and shared links all work.
 
-## The notebook look
-- **Ink:** navy pen `#1F2A5C` for text, red pen `#C2412D` for underlines, circles and ticks, yellow highlighter `#FFE27A` on key words. Change them in `:root` in `styles.css`.
-- **Fonts:** Caveat for headlines, numbers, nav and annotations (never below 16px); Patrick Hand for body text, with Kalam filling in glyphs such as ₹.
-- **Hand-drawn parts are inline SVG** (the doodle kit sits at the top of `index.html`). Box borders use a small `feTurbulence` + `feDisplacementMap` filter (`#pen`, scale 2.6) on a border-only layer, so text is never distorted.
-- **Margin notes:** edit or delete the `marginNotes` list at the bottom of `data.js`. They show only on screens wider than 1340px. The red margin line and the tiny rotations appear from 768px up.
-- **Reduced motion:** with that setting on, nothing redraws, animates or tilts.
+## The scrapbook look
+- **Palette** (tokens at the top of `styles.css`): kraft page `#EADFC9` with a dot grid, ivory cards `#FFFDF6`, navy ink `#26253A`, accents butter / blush / sage / sky for notes and tags only, and one red `#B23A55` for the stamp and "before" marks.
+- **Fonts:** Caveat for numbers, labels and annotations; Special Elite for headlines and small labels; DM Sans 15px for body text.
+- **Parts:** paper cards (28px corners), washi tape, polaroids for image slots, sticky notes for key numbers, a ruled notebook page for the main case study with before/after slips and a rubber stamp, ticket stubs for Masai roles, index cards for internships, sticker-pill skills, dashed typewriter tags for tools, and a postcard for contact. All CSS and inline SVG, no images.
+- **Editable fields in `data.js`:** `highlights` (sticky notes), `portrait` (`src` + `caption` for the hero polaroid), `stamp` on a project (the rubber stamp text), `verdicts` on a project (the slips).
+- **Motion:** hover straightens a card and lifts it 4px; cards fade up once on scroll. With reduced motion on, nothing animates or tilts. Below 768px everything is flat and single column.
 
 ## Adding things
 - **New project**: copy a project block in `data.js`, give it the next id (`CF-010`), set `layout` to `feature`, `exhibit` or `text`, and tag its `skills`.

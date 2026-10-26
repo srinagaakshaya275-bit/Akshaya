@@ -4,6 +4,7 @@
    ========================================================================== */
 (() => {
   'use strict';
+  document.documentElement.classList.add('js');
   const A = window.ARCHIVE;
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
@@ -24,17 +25,6 @@
   const gapCount = (rec) => strings(rec).join(' ').match(GAP)?.length || 0;
   const tokens = (q) => (String(q).toLowerCase().match(/[\p{L}\p{N}₹+]+/gu) || []);
 
-  /* ---------- hand-drawn helpers ---------- */
-  const SQ = '<svg class="sq" viewBox="0 0 100 8" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path pathLength="1" d="M1 5.5C10 2 17 7.5 28 4.2S47 2.2 58 5s20 2.600 30-.4c5-1.500 8-.6 11 .4"/></svg>';
-  const RING = '<svg class="ring" viewBox="0 0 100 50" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path pathLength="1" d="M53 4C80 1 97 13 96 26 95 40 72 48 47 47 21 46 4 37 5 23 6 10 28 3 60 6"/></svg>';
-  /* U: text with a wobbly underline that redraws on hover (or always shown with 'on') */
-  const U = (html, mode = '') => `<span class="u ${mode}">${html}${SQ}</span>`;
-  const dd = (id, cls = '') => `<svg class="dd ${cls}" aria-hidden="true" focusable="false"><use href="#d-${id}"/></svg>`;
-  /* num: a figure circled in red pen */
-  const num = (v) => `<span class="num">${ph(v)}${RING}</span>`;
-
-  const noteHtml = (n) => (n ? `<aside class="mn mn--${esc(n.side)}" style="top:${esc(n.top)}" aria-hidden="true"><span>${esc(n.text)}</span>${dd('arrow', 'dd--arrow mn__arrow')}</aside>` : '');
-
   /* ---------- derived data ---------- */
   const skillById = Object.fromEntries(A.skills.map((s) => [s.id, s]));
   const projectById = Object.fromEntries(A.projects.map((p) => [p.id, p]));
@@ -49,7 +39,7 @@
   const skillLink = (id) => link(`#/s/${id}`, esc(skillById[id].name), 'chip chip--link');
   const meta = (pairs, cls = '') => `<dl class="meta ${cls}">${pairs.filter(Boolean).map(([k, v]) => `<div><dt>${esc(k)}</dt><dd>${v}</dd></div>`).join('')}</dl>`;
   const statusPair = (rec) => { const s = status(rec); return ['STATUS', `<span class="status status--${s.cls}">${s.label}</span>${s.note ? ` <span class="muted">${s.note}</span>` : ''}`]; };
-  const leadStats = (p, n = 2) => p.outcome.slice(0, n).map((o, i) => `<li>${i === 0 ? dd('arrow', 'dd--arrow') : ''}<b>${i === 0 ? num(o.value) : ph(o.value)}</b> <span>${ph(o.label)}</span></li>`).join('');
+  const leadStats = (p, n = 2) => p.outcome.slice(0, n).map((o) => `<li><b>${ph(o.value)}</b> <span>${ph(o.label)}</span></li>`).join('');
 
   /* ---------- search index ---------- */
   const entries = [];
@@ -126,7 +116,7 @@
       <section class="group"><h3 class="label">${TYPE_LABEL[t]} <span>${l.length}</span></h3>
       <ol class="hits">${l.map((e) => `
         <li class="hit"><a class="idlink" href="${e.route}" tabindex="-1" aria-hidden="true">${esc(e.id)}</a>
-          <div><a class="hit__title" href="${e.route}">${U(mark(e.title, terms))}</a>
+          <div><a class="hit__title" href="${e.route}">${mark(e.title, terms)}</a>
           <p class="hit__sub">${mark(e.sub, terms)}</p>
           ${terms.length && terms.some((t) => e.body.toLowerCase().includes(t)) ? `<p class="hit__snip">${mark(snippet(e.body, terms), terms)}</p>` : ''}</div></li>`).join('')}</ol></section>`).join('');
   }
@@ -158,7 +148,7 @@
   /* ==========================================================================
      SECTION HEADERS
      ========================================================================== */
-  const head = (id, tagPairs, title, lede) => `<header class="sec__head"><p class="tag">${tagPairs.map(([k, v]) => `<span>${k}</span> / ${v}`).join(' <i aria-hidden="true">·</i> ')}</p><h2 id="${id}">${U(title, 'on')}</h2>${lede ? `<p class="sec__lede">${lede}</p>` : ''}</header>`;
+  const head = (id, tagPairs, title, lede) => `<header class="sec__head"><p class="tag">${tagPairs.map(([k, v]) => `<span>${k}</span> / ${v}`).join(' <i aria-hidden="true">·</i> ')}</p><h2 id="${id}">${title}</h2>${lede ? `<p class="sec__lede">${lede}</p>` : ''}</header>`;
   const banner = () => state.q ? `<p class="banner" role="status">Also filtered by search “${esc(state.q)}”. <button type="button" class="linkbtn" data-clear-search>Clear</button></p>` : '';
 
   /* ---------- ABOUT · profile record ---------- */
@@ -166,7 +156,7 @@
     <div class="profile">
       <div class="profile__main">
         <p class="label">Personal statement</p>
-        <div class="statement">${A.about.statement.map((p, i) => i === 0 ? `<div class="pull">${dd('brL', 'br br--l')}<p>${ph(p).replace('actually find', '<span class="hl">actually find</span>')}</p>${dd('brR', 'br br--r')}</div>` : `<p>${ph(p)}</p>`).join('')}</div>
+        <div class="statement">${A.about.statement.map((p) => `<p>${ph(p)}</p>`).join('')}</div>
         <p class="label">Working principles</p>
         <ol class="principles">${A.about.principles.map((p) => `<li>${ph(p)}</li>`).join('')}</ol>
       </div>
@@ -184,7 +174,7 @@
   const years = [...new Set(A.roles.flatMap((r) => Array.from({ length: r.endYear - r.startYear + 1 }, (_, i) => r.startYear + i)))].sort((a, b) => b - a);
   const log = { type: 'all', year: 'all' };
   $('#experience').innerHTML = `${head('exp-h', [['INDEX', 'XP'], ['RECORD TYPE', 'EXPERIENCE'], ['FILES', A.roles.length]], 'The activity log', 'Full-time employment and internships, newest first. Open a record for responsibilities, projects and verified results.')}
-    <div class="filters glass" role="group" aria-label="Filter experience">
+    <div class="filters paper" role="group" aria-label="Filter experience">
       <div class="seg" id="log-types">
         <button type="button" data-v="all" aria-pressed="true">All</button>
         <button type="button" data-v="full-time" aria-pressed="false">Full-time</button>
@@ -196,17 +186,27 @@
     </div>
     <div id="log-body"></div>`;
 
-  function logRow(r) {
-    const skills = [...new Set(r.responsibilities.flatMap((x) => x.skills))].slice(0, 4);
-    return `<li class="log">
-      <div class="log__when"><span class="chk" aria-hidden="true">${dd('box')}${dd('check', 'chk__tick')}</span><a class="idlink" href="#/x/${r.id}">${r.id}</a><span>${ph(r.dates)}</span></div>
-      <div class="log__main">
-        <h4><a class="stretch" href="#/x/${r.id}">${U(esc(r.title))}</a>${r.promoted ? ' <span class="pill">Promoted</span>' : ''}</h4>
+  const chipsOf = (r) => { const sk = [...new Set(r.responsibilities.flatMap((x) => x.skills))].slice(0, 4); return sk.length ? `<ul class="chips chips--sm">${sk.map((k) => `<li><span class="chip">${esc(skillById[k].name)}</span></li>`).join('')}</ul>` : ''; };
+  const figsOf = (r, cls) => (r.achievements.length ? `<ul class="${cls}">${r.achievements.slice(0, 2).map((x) => `<li><b>${ph(x.value)}</b><span>${ph(x.label)}</span></li>`).join('')}</ul>` : '');
+  /* Full-time roles are ticket stubs; the stub holds the verified figures. */
+  function ticketRow(r) {
+    return `<li class="log ticket paper">
+      <div class="ticket__main">
+        <div class="log__when"><a class="idlink" href="#/x/${r.id}">${r.id}</a><span>${ph(r.dates)}</span></div>
+        <h4><a class="stretch" href="#/x/${r.id}">${esc(r.title)}</a>${r.promoted ? ' <span class="pill">Promoted</span>' : ''}</h4>
         <p class="log__org">${esc(r.company)} · ${esc(r.place)}</p>
-        <p>${ph(r.summary)}</p>
-        ${skills.length ? `<ul class="chips chips--sm">${skills.map((s) => `<li><span class="chip">${esc(skillById[s].name)}</span></li>`).join('')}</ul>` : ''}
+        <p>${ph(r.summary)}</p>${chipsOf(r)}
       </div>
-      ${r.achievements.length ? `<ul class="log__figs">${r.achievements.slice(0, 2).map((a) => `<li>${dd('check', 'tick')}<b>${num(a.value)}</b><span>${ph(a.label)}</span></li>`).join('')}</ul>` : '<span></span>'}
+      ${figsOf(r, 'ticket__stub log__figs') || '<div class="ticket__stub"></div>'}
+    </li>`;
+  }
+  /* Internships are small index cards. */
+  function cardRow(r) {
+    return `<li class="log idx paper">
+      <div class="log__when"><a class="idlink" href="#/x/${r.id}">${r.id}</a><span>${ph(r.dates)}</span></div>
+      <h4><a class="stretch" href="#/x/${r.id}">${esc(r.title)}</a></h4>
+      <p class="log__org">${esc(r.company)} · ${esc(r.place)}</p>
+      <p>${ph(r.summary)}</p>${chipsOf(r)}${figsOf(r, 'log__figs')}
     </li>`;
   }
   function renderLog() {
@@ -218,7 +218,7 @@
     $$('#log-types button').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.v === log.type)));
     const groups = [['full-time', 'Full-time employment'], ['internship', 'Internships']].map(([t, label]) => [label, rows.filter((r) => r.type === t)]).filter(([, l]) => l.length);
     $('#log-body').innerHTML = banner() + (groups.length
-      ? groups.map(([label, l]) => `<section class="loggroup"><h3 class="label">${label} <span>${l.length}</span></h3><ol class="logs">${l.map(logRow).join('')}</ol></section>`).join('')
+      ? groups.map(([label, l]) => `<section class="loggroup"><h3 class="label">${label} <span>${l.length}</span></h3><ol class="logs ${l[0].type === 'full-time' ? 'logs--tickets' : 'logs--cards'}">${l.map(l[0].type === 'full-time' ? ticketRow : cardRow).join('')}</ol></section>`).join('')
       : `<div class="empty"><p class="empty__t">No experience records match these filters.</p><button type="button" class="btn btn--line" id="log-reset-2">Reset filters</button></div>`);
   }
   $('#log-types').addEventListener('click', (e) => { const b = e.target.closest('button'); if (b) { log.type = b.dataset.v; renderLog(); } });
@@ -235,7 +235,7 @@
   const libYears = [...new Set(A.projects.flatMap((p) => p.years))].sort((a, b) => b - a);
   const typeCount = (t) => A.projects.filter((p) => p.type === t).length;
   $('#projects').innerHTML = `${head('proj-h', [['INDEX', 'CF'], ['RECORD TYPE', 'PROJECT'], ['FILES', A.projects.length]], 'The case file library', 'Every project is a searchable file. Filter by type, skill or year, then open one to read the full file.')}
-    <div class="filters glass" role="group" aria-label="Filter projects">
+    <div class="filters paper" role="group" aria-label="Filter projects">
       <div class="seg seg--scroll" id="lib-types">
         <button type="button" data-v="all" aria-pressed="true">All <b>${A.projects.length}</b></button>
         ${Object.entries(A.projectTypes).filter(([t]) => typeCount(t)).map(([t, l]) => `<button type="button" data-v="${t}" aria-pressed="false">${esc(l)} <b>${typeCount(t)}</b></button>`).join('')}
@@ -247,22 +247,29 @@
     </div>
     <div id="lib-body"></div>`;
 
-  const art = (p, i = 0) => p.visuals[i]
-    ? `<img src="${esc(p.visuals[i])}" alt="" loading="lazy" decoding="async">`
-    : `<span class="art__ph">[${esc(p.visualHints[i] || p.visualHints[0] || 'Visual evidence')}]</span>`;
+  /* A polaroid: a photo slot with a handwritten caption. Empty slots show the placeholder as the caption. */
+  const polaroid = (p, i = 0, cls = '') => {
+    const src = p.visuals[i], hint = p.visualHints[i] || p.visualHints[0] || 'Visual evidence';
+    return `<figure class="polaroid ${cls}"><div class="polaroid__photo">${src ? `<img src="${esc(src)}" alt="" loading="lazy" decoding="async">` : ''}</div><figcaption>${src ? esc(hint) : `[${esc(hint)}]`}</figcaption></figure>`;
+  };
   const tagLinks = (p, n = 4) => `<ul class="chips chips--sm">${p.skills.slice(0, n).map((s) => `<li>${skillLink(s)}</li>`).join('')}</ul>`;
+  const slipsOf = (p) => p.verdicts.map((v) => `<div class="slip"><p class="slip__q">${esc(v.q)}</p><p class="slip__row"><s>${esc(v.before)}</s> <span aria-hidden="true">→</span> <b>${esc(v.after)}</b></p></div>`).join('');
+  const stampOf = (p) => (p.stamp ? `<p class="stamp" aria-hidden="true"><span>${esc(p.stamp)}</span></p>` : '');
   const fileCard = (p) => {
-    const note = noteHtml((A.marginNotes || []).find((n) => n.on === p.id));
     const idl = `<a class="idlink" href="#/p/${p.id}">${p.id}</a>`;
     const st = status(p);
     const top = `<div class="file__top">${idl}<span class="muted">${esc(A.projectTypes[p.type])} · ${ph(p.year)}</span><span class="status status--${st.cls}">${st.label}</span></div>`;
-    if (p.layout === 'feature') return `<li class="file file--feature"><div class="file__art art">${art(p, 0)}</div>
-      <div class="file__body">${top}<h3><a class="stretch" href="#/p/${p.id}">${U(ph(p.title))}</a></h3><p class="file__sum">${ph(p.summary)}</p>
-      <ul class="stats">${leadStats(p, 4)}</ul>${tagLinks(p, 5)}</div>${note}</li>`;
-    if (p.layout === 'exhibit') return `<li class="file file--exhibit"><div class="file__art art">${art(p, 0)}</div>
-      <div class="file__body">${top}<h3><a class="stretch" href="#/p/${p.id}">${U(ph(p.title))}</a></h3><p class="file__sum">${ph(p.summary)}</p>
-      <ul class="stats">${leadStats(p, 2)}</ul>${tagLinks(p, 3)}</div></li>`;
-    return `<li class="file file--text"><div class="file__body">${top}<h3><a class="stretch" href="#/p/${p.id}">${U(ph(p.title))}</a></h3><p class="file__sum">${ph(p.summary)}</p></div>
+    const title = `<h3><a class="stretch" href="#/p/${p.id}">${ph(p.title)}</a></h3><p class="file__sum">${ph(p.summary)}</p>`;
+    /* The main case study: a notebook page, with the verdicts on slips taped beside it */
+    if (p.verdicts) return `<li class="file file--notebook">
+      <article class="nb tape tape--sky"><div class="nb__page">${top}${title}<ul class="stats">${leadStats(p, 4)}</ul>${tagLinks(p, 5)}
+        <div class="polaroids">${polaroid(p, 0)}${polaroid(p, 1)}</div></div></article>
+      <aside class="slips" aria-label="Verdicts, before and after">${slipsOf(p)}${stampOf(p)}</aside></li>`;
+    if (p.layout === 'feature') return `<li class="file file--feature paper"><div class="file__art">${polaroid(p, 0, 'tape tape--butter')}</div>
+      <div class="file__body">${top}${title}<ul class="stats">${leadStats(p, 4)}</ul>${tagLinks(p, 5)}</div></li>`;
+    if (p.layout === 'exhibit') return `<li class="file file--exhibit paper tape"><div class="file__art">${polaroid(p, 0)}</div>
+      <div class="file__body">${top}${title}<ul class="stats">${leadStats(p, 2)}</ul>${tagLinks(p, 3)}</div></li>`;
+    return `<li class="file file--text paper"><div class="file__body">${top}${title}</div>
       <div class="file__side"><ul class="stats">${leadStats(p, 1)}</ul>${tagLinks(p, 3)}</div></li>`;
   };
   function renderLibrary() {
@@ -295,7 +302,7 @@
         <p class="label">Capabilities</p>
         <ul class="skilllist" id="skilllist">${groupOrder.map((g) => `
           <li class="skilllist__group" role="presentation"><span>${esc(A.skillGroups[g])}</span></li>
-          ${orderedSkills.filter((s) => s.group === g).map((s) => { const n = projectsOfSkill(s.id).length; return `<li><button type="button" class="skill" data-skill="${s.id}" aria-pressed="false">${dd('bul' + (1 + (A.skills.indexOf(s) % 3)), 'bul')}<span>${esc(s.name)}</span><b aria-label="${n} case files">${n}</b></button></li>`; }).join('')}`).join('')}
+          ${orderedSkills.filter((s) => s.group === g).map((s) => { const n = projectsOfSkill(s.id).length; return `<li><button type="button" class="skill" data-skill="${s.id}" data-g="${s.group}" aria-pressed="false">${esc(s.name)}<b aria-label="${n} case files">${n}</b></button></li>`; }).join('')}`).join('')}
         </ul>
       </div>
       <div class="map__col map__col--files">
@@ -303,7 +310,7 @@
         <ul class="filelist" id="filelist">${A.projects.map((p) => `<li><a href="#/p/${p.id}" data-file="${p.id}"><span class="idlink">${p.id}</span> ${ph(p.title)}</a></li>`).join('')}</ul>
       </div>
     </div>
-    <div class="skillpanel glass" id="skillpanel" aria-live="polite"></div>
+    <div class="skillpanel paper" id="skillpanel" aria-live="polite"></div>
     <div class="tools"><p class="label">Tools <span class="muted">· no usage data supplied, so these are not linked to projects</span></p>
       <ul class="chips">${A.tools.map((t) => `<li><span class="chip">${esc(t)}</span></li>`).join('')}</ul></div>`;
 
@@ -363,7 +370,7 @@
   $('#education').innerHTML = `${head('edu-h', [['INDEX', 'AR'], ['RECORD TYPE', 'QUALIFICATION'], ['FILES', A.education.length]], 'The academic register')}
     <ol class="register">${A.education.map((e) => `<li><span class="idtext">${e.id}</span><span class="register__yr">${esc(e.years)}</span><span class="register__prog"><b>${esc(e.program)}</b><br><span class="muted">${esc(e.institution)}</span></span><span class="register__score">${esc(e.score)}</span></li>`).join('')}</ol>
     <p class="label sub">Relevant coursework &amp; certifications</p>
-    <div class="coursework">${A.coursework.map((c) => `<section><h3>${esc(c.group)}</h3><ul class="chips">${c.items.map((i) => `<li><span class="chip">${esc(i)}</span></li>`).join('')}</ul></section>`).join('')}</div>`;
+    <div class="coursework">${A.coursework.map((c, ci) => `<section data-c="${ci}"><h3>${esc(c.group)}</h3><ul class="chips">${c.items.map((i) => `<li><span class="chip">${esc(i)}</span></li>`).join('')}</ul></section>`).join('')}</div>`;
 
   /* ==========================================================================
      RECORD VIEWER (dialog)
@@ -374,19 +381,18 @@
 
   const topbar = (id) => `<div class="rec__top"><p class="tag"><span>INDEX</span> / ${esc(id)}</p><button type="button" class="btn btn--line" data-close>Close file</button></div>`;
   const list = (arr) => (arr && arr.length ? `<ul class="bullets">${arr.map((x) => `<li>${ph(x)}</li>`).join('')}</ul>` : '<p class="muted">[Nothing recorded yet]</p>');
-  const figures = (arr) => `<div class="figs">${arr.map((a) => `<div class="fig">${dd('star', 'star')}<b>${num(a.value)}</b><span>${ph(a.label)}</span></div>`).join('')}</div>`;
+  const figures = (arr) => `<div class="figs">${arr.map((a) => `<div class="fig"><b>${ph(a.value)}</b><span>${ph(a.label)}</span></div>`).join('')}</div>`;
 
   function projectView(p) {
     const roles = (p.roleIds || []).map((id) => link(`#/x/${id}`, `${id} · ${esc(roleById[id].title)}`, 'chip chip--link')).join('') || '<span class="muted">[Role record to confirm]</span>';
-    const evidence = (p.visuals.length ? p.visuals.map((src, i) => `<figure class="ev"><img src="${esc(src)}" alt="${esc(p.visualHints[i] || p.title)}" loading="lazy" decoding="async"><figcaption>${esc(p.visualHints[i] || '')}</figcaption></figure>`).join('')
-      : p.visualHints.map((h) => `<figure class="ev ev--ph"><span>[${esc(h)}]</span></figure>`).join(''))
+    const evidence = p.visualHints.map((h, i) => polaroid(p, i)).join('')
       + (p.video ? `<figure class="ev"><iframe src="${esc(p.video)}" title="${esc(p.title)} video" loading="lazy" allowfullscreen></iframe></figure>` : '');
     const tabs = [
       ['overview', 'Overview', `<h3 class="label">Objective</h3><p>${ph(p.objective)}</p><h3 class="label">Challenge</h3><p>${ph(p.challenge)}</p><h3 class="label">My role</h3><p>${ph(p.role)}</p>`],
       ['strategy', 'Strategy', `<h3 class="label">Strategy</h3><p>${ph(p.strategy)}</p>`],
       ['execution', 'Execution', `<h3 class="label">Execution</h3>${list(p.execution)}<h3 class="label">Deliverables</h3>${list(p.deliverables)}`],
       ['evidence', 'Evidence', `<h3 class="label">Visual evidence</h3><div class="evs">${evidence}</div>`],
-      ['outcome', 'Outcome', `<h3 class="label">Verified outcome</h3>${figures(p.outcome)}${p.verdicts ? `<div class="verdicts">${p.verdicts.map((v) => `<div class="verdict"><p>${esc(v.q)}</p><p><s>${esc(v.before)}</s> <span aria-hidden="true">→</span> <b>${esc(v.after)}</b></p></div>`).join('')}</div>` : ''}<h3 class="label">Key learning</h3>${list(p.learnings)}`]
+      ['outcome', 'Outcome', `<h3 class="label">Verified outcome</h3>${figures(p.outcome)}${p.verdicts ? `<div class="slips slips--inline">${slipsOf(p)}${stampOf(p)}</div>` : ''}<h3 class="label">Key learning</h3>${list(p.learnings)}`]
     ];
     return `${topbar(p.id)}
       <h2 id="rec-title">${ph(p.title)}</h2>
@@ -512,14 +518,23 @@
     finally { submit.classList.remove('is-loading'); submit.removeAttribute('aria-busy'); label.textContent = 'Submit enquiry'; }
   });
 
-  /* ---------- hand-drawn finishing: underlined headings and nav, margin notes ---------- */
-  $$('#contact-h, .hero__name').forEach((el) => { el.innerHTML = U(esc(el.textContent), 'on'); });
-  $$('.bar__nav a').forEach((a) => { a.innerHTML = U(esc(a.textContent)); });
-  (A.marginNotes || []).filter((n) => n.on.startsWith('#')).forEach((n) => { $(n.on)?.insertAdjacentHTML('beforeend', noteHtml(n)); });
+  /* ---------- sticky notes and portrait (from data.js) ---------- */
+  const NOTE_COLOURS = ['butter', 'blush', 'sage', 'sky'];
+  $('#stickies').innerHTML = (A.highlights || []).map((h, i) => `<li><div class="sticky sticky--${NOTE_COLOURS[i % 4]}"><b>${ph(h.value)}</b><span>${ph(h.label)}</span></div></li>`).join('');
+  const por = A.portrait || {};
+  $('#portrait-cap').textContent = por.caption || '';
+  if (por.src) $('#portrait-photo').innerHTML = `<img src="${esc(por.src)}" alt="Portrait of ${esc(A.meta.name)}" decoding="async">`;
 
   /* ---------- start ---------- */
   renderResults(); renderLog(); renderLibrary(); renderSkillPanel();
   route.first = true; route(); route.first = false;
   markNav();
+
+  /* ---------- each card fades up once as it scrolls into view ---------- */
+  const fadeTargets = '.sec__head, .profile, .filters, .map, .skillpanel, .tools, .register, .coursework, .postcard, .hero__top, .search, .cats, .stickies li, #lib-body .file, #log-body .log';
+  const io = 'IntersectionObserver' in window && !reduceMotion
+    ? new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); } }), { rootMargin: '0px 0px -8% 0px' })
+    : null;
+  $$(fadeTargets).forEach((el) => { el.classList.add('fade'); if (io) io.observe(el); else el.classList.add('is-in'); });
   requestAnimationFrame(drawEdges);
 })();
