@@ -501,3 +501,10 @@ h2 { background: linear-gradient(180deg, #FFFFFF 30%, #B9D3FF); -webkit-backgrou
   .tl__dot { left: -24px; width: 14px; height: 14px; top: 24px; }
   .role { padding: 18px; }
 }
+
+/* hero: who is this */
+.who { display: inline-flex; align-items: center; gap: 16px; padding: 8px 26px 8px 8px; border-radius: 99px; }
+.avatar { width: 72px; height: 72px; border-radius: 50%; object-fit: cover; border: 2px solid rgba(255, 255, 255, .55); box-shadow: 0 8px 24px -8px rgba(76, 141, 255, .7); background: #F4F2F4; }
+.who span { display: grid; line-height: 1.3; font-size: 14px; color: var(--muted); }
+.who b { color: var(--ink); font: 600 17px/1.3 var(--head); }
+@media (max-width: 420px) { .who span { font-size: 13px; } .avatar { width: 60px; height: 60px; } }

@@ -15,8 +15,9 @@ A dark, glass-style single-page portfolio. Plain HTML, CSS and vanilla JavaScrip
 Hero · stat strip · skills marquee · About (with How I work) · Experience · Impact (featured results, follower charts, and all projects, each opening a full file) · AI case study · Skills (with tools, education and certifications) · Let's talk.
 
 ## Editing content
+- **Portrait**: replace `assets/portrait.jpg` (square, about 560px) or set `portrait.src` to `""` to hide it.
 - **Placeholders**: anything in `[square brackets]` shows in yellow italics on the site. Replace it in `data.js` and it turns into normal text.
-- **Numbers** in the hero card and stat strip: `highlights` and `hero` in `data.js`. The follower bars use the Instagram and LinkedIn figures in the `growth` list at the top of the hero code in `script.js`.
+- **Numbers** in the hero card and stat strip: `highlights` and `hero` in `data.js`. The follower bars and charts read the `growth` list in `data.js`.
 - **New project**: copy a block in `projects`, give it the next id (`CF-010`) and a `type`. It appears in Work automatically. To feature it in Impact, add its id to `impact`.
 - **Screenshots**: save images in an `assets/` folder and tell me, or list them in the project's `visuals`.
 - **Tools**: in `tools`, use `brand` (a logo from `icons.js`) or `glyph` (a generic icon). **Certificates**: make a coursework item `{ name: "...", url: "https://..." }` and it becomes a link.

@@ -35,8 +35,14 @@ window.ARCHIVE = {
     accent: "shows up in metrics."
   },
 
-  /* Portrait: put a photo in assets/ and set src, e.g. "assets/portrait.jpg". */
-  portrait: { src: "", caption: "Akshaya Reddy" },
+  /* Portrait shown in the hero. Replace assets/portrait.jpg, or set src to "" to hide it. */
+  portrait: { src: "assets/portrait.jpg", alt: "Akshaya Reddy" },
+
+  /* Follower growth, used by the hero card and the Impact charts. from/to are in thousands. */
+  growth: [
+    { name: "Instagram", from: 98, to: 166, a: "98K", b: "166K", organic: true },
+    { name: "LinkedIn", from: 162, to: 214, a: "162K", b: "214K" }
+  ],
 
   /* The stat strip under the hero. */
   highlights: [
@@ -145,8 +151,9 @@ window.ARCHIVE = {
       dates: "Aug 2023 – Jan 2024", startYear: 2023, endYear: 2024, place: "Amaravati, AP",
       summary: "Social media and orientation reporting.",
       responsibilities: [
-        { text: "Compiled reports, structured agendas and built presentations for orientation sessions.", skills: [] },
-        { text: "Managed social media presence, from content creation to engagement initiatives.", skills: ["social", "content"] }
+        { text: "Created structured reports, agendas and presentations for orientation sessions to support organisational planning.", skills: [] },
+        { text: "Managed internal and external communication, including social media updates and engagement initiatives.", skills: [] },
+        { text: "Assisted with event coordination and documentation, ensuring streamlined information flow and accessibility.", skills: [] }
       ],
       achievements: []
     },
@@ -155,8 +162,9 @@ window.ARCHIVE = {
       dates: "Feb – Jun 2024", startYear: 2024, endYear: 2024, place: "Remote",
       summary: "Social pages and podcast marketing for 4 clients.",
       responsibilities: [
-        { text: "Built and managed social media pages by curating content and implementing strategies that increased engagement.", skills: ["social", "content"] },
-        { text: "Ran podcast marketing end to end, coordinating client feedback and team collaboration.", skills: ["campaign"] }
+        { text: "Managed content calendars and social media platforms, curating engaging content tailored to diverse audiences.", skills: [] },
+        { text: "Led podcast marketing efforts for multiple clients, aligning content with audience preferences and brand identity.", skills: [] },
+        { text: "Researched industry trends and optimised content strategies for improved audience engagement.", skills: [] }
       ],
       achievements: [{ value: "4", label: "Podcast marketing clients" }]
     },
@@ -165,8 +173,9 @@ window.ARCHIVE = {
       dates: "Jul – Aug 2024", startYear: 2024, endYear: 2024, place: "Remote",
       summary: "Social content and visual assets aligned to brand identity.",
       responsibilities: [
-        { text: "Executed social media content and strategy to strengthen brand presence.", skills: ["social", "content"] },
-        { text: "Directed design projects and built visual assets aligned with brand identity and marketing objectives.", skills: ["brand", "content"] }
+        { text: "Created and scheduled social media content, improving brand presence and engagement by 65%.", skills: [] },
+        { text: "Managed paid advertising campaigns, increasing visibility and engagement through targeted marketing strategies.", skills: [] },
+        { text: "Collaborated on sustainability-focused campaigns to align brand messaging with environmental initiatives.", skills: [] }
       ],
       achievements: [{ value: "+65%", label: "Engagement" }]
     },
@@ -175,8 +184,9 @@ window.ARCHIVE = {
       dates: "Sep – Dec 2024", startYear: 2024, endYear: 2024, place: "Remote",
       summary: "Marketing and budget plans, SEO and backlinking for clients.",
       responsibilities: [
-        { text: "Developed digital marketing and budget strategies for multiple clients, optimising campaigns and resource allocation.", skills: ["campaign"] },
-        { text: "Optimised client SEO, backlinking and content strategies to improve visibility and brand positioning.", skills: ["seo", "brand", "content"] }
+        { text: "Optimised SEO strategies, backlinking and content marketing to enhance digital presence and brand positioning.", skills: [] },
+        { text: "Conducted competitor analysis and web performance tracking to refine digital marketing strategies.", skills: [] },
+        { text: "Developed content calendars and marketing plans to drive engagement across social media and online platforms.", skills: [] }
       ],
       achievements: []
     },
@@ -185,8 +195,9 @@ window.ARCHIVE = {
       dates: "Dec 2024 – May 2025", startYear: 2024, endYear: 2025, place: "Remote",
       summary: "Multi-platform content and campaigns for launches and webinars.",
       responsibilities: [
-        { text: "Executed multi-platform content strategies with a focus on design and storytelling to grow engagement and followers.", skills: ["social", "content"] },
-        { text: "Personalised campaigns for major product updates and webinars through targeted content and audience segmentation.", skills: ["campaign"] }
+        { text: "Developing and managing engaging content for athletes and the sports tech community across multiple platforms.", skills: [] },
+        { text: "Tracking and analysing social media performance, optimising content for brand visibility and engagement.", skills: [] },
+        { text: "Creating and executing multi-platform content strategies to enhance brand awareness and audience interaction.", skills: [] }
       ],
       achievements: []
     },
@@ -284,7 +295,7 @@ window.ARCHIVE = {
       deliverables: ["Monthly content calendars", "Recurring story and post formats"],
       visuals: [], visualHints: ["Best-performing post", "Profile growth screenshot"], video: "",
       outcome: [
-        { value: "98K → 167K", label: "Instagram followers" }, { value: "162K → 202K", label: "LinkedIn followers" },
+        { value: "98K → 166K", label: "Instagram followers" }, { value: "162K → 214K", label: "LinkedIn followers" },
         { value: "378K", label: "Best Instagram post reach" }, { value: "344K", label: "Best LinkedIn post reach" },
         { value: "1,000", label: "Bookings from social" }
       ],

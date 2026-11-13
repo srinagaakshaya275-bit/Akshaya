@@ -42,12 +42,10 @@
   const H = A.hero;
   $('#hero-h').innerHTML = `${esc(H.lead)} <span>${esc(H.accent)}</span>`;
   $('#hero-intro').textContent = A.meta.intro;
+  $('#hero-who').innerHTML = `${A.portrait && A.portrait.src ? `<img class="avatar" src="${esc(A.portrait.src)}" alt="${esc(A.portrait.alt || A.meta.name)}" width="72" height="72">` : ''}<span><b>${esc(A.meta.name)}</b>${esc(A.meta.positioning)}</span>`;
   $('#hero-resume').href = A.meta.resume;
 
-  const growth = [
-    { name: 'Instagram', from: 98, to: 167, a: '98K', b: '167K' },
-    { name: 'LinkedIn', from: 162, to: 202, a: '162K', b: '202K' }
-  ];
+  const growth = A.growth;
   const max = Math.max(...growth.map((g) => g.to));
   const bars = (g) => `<div class="gbar"><div class="gbar__top"><span>${g.name} followers</span><b>${g.a} → ${g.b}</b></div>
     <div class="gbar__track" role="img" aria-label="${g.name} followers grew from ${g.a} to ${g.b}"><i class="gbar__from" style="width:${(g.from / max) * 100}%"></i><i class="gbar__to" style="width:${(g.to / max) * 100}%"></i></div></div>`;
@@ -102,7 +100,7 @@
     const x1 = px, x2 = W - px, y1 = y(g.from), y2 = y(g.to), id = 'lg' + g.name;
     const pct = Math.round((g.to / g.from - 1) * 100);
     return `<div class="growth__card glass">
-      <div class="growth__top"><div><p class="eyebrow">${g.name} followers</p><h3>${g.a} <i aria-hidden="true">→</i> ${g.b}</h3></div><span class="badge">+${pct}%${g.name === 'Instagram' ? ' organic' : ''}</span></div>
+      <div class="growth__top"><div><p class="eyebrow">${g.name} followers</p><h3>${g.a} <i aria-hidden="true">→</i> ${g.b}</h3></div><span class="badge">+${pct}%${g.organic ? ' organic' : ''}</span></div>
       <svg class="chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="${g.name} followers grew from ${g.a} to ${g.b}" preserveAspectRatio="xMidYMid meet">
         <defs><linearGradient id="${id}s" x1="0" x2="1"><stop offset="0" stop-color="#22D3EE"/><stop offset=".5" stop-color="#4C8DFF"/><stop offset="1" stop-color="#8B7BFF"/></linearGradient>
         <linearGradient id="${id}f" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#4C8DFF" stop-opacity=".35"/><stop offset="1" stop-color="#4C8DFF" stop-opacity="0"/></linearGradient></defs>
