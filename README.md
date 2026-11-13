@@ -11,7 +11,7 @@ A dark, glass-style single-page portfolio. Plain HTML, CSS and vanilla JavaScrip
 | `Akshaya_Resume.pdf` | Linked from the Resume and Contact sections |
 
 ## Sections
-Hero · stat strip · skills marquee · About · Experience (Masai timeline + internships) · Impact · Case study · Work (filterable, each opens a full file) · Skills · Resume & education · Contact.
+Hero · stat strip · skills marquee · About (with How I work) · Experience · Impact (featured results, follower charts, and all projects, each opening a full file) · AI case study · Skills (with tools, education and certifications) · Let's talk.
 
 ## Editing content
 - **Placeholders**: anything in `[square brackets]` shows in yellow italics on the site. Replace it in `data.js` and it turns into normal text.

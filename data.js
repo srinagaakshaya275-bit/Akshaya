@@ -110,6 +110,19 @@ window.ARCHIVE = {
     { id: "process", name: "Process improvement", group: "ops" },
     { id: "leadgen", name: "Lead generation", group: "ops" }
   ],
+  /* The Skills section cards. `search` shows a small search mock-up in the first card. */
+  skillCards: [
+    { title: "ORM & Search", sub: "What people and AI find when they look you up", icon: "search", search: true,
+      items: ["ORM", "AEO / GEO", "SEO & SERP visibility", "Crisis management", "Reddit & Quora citations"] },
+    { title: "Marketing", sub: "Campaigns, creators and community", icon: "mega",
+      items: ["Campaign planning & execution", "Brand marketing", "Creator partnerships", "UGC", "Community management", "Lead generation"] },
+    { title: "Content & Social", sub: "From idea to shoot to post", icon: "video",
+      items: ["Social media strategy", "Content creation", "Video shooting & editing", "Copywriting", "Content calendars"] },
+    { title: "Offline & Events", sub: "Where the brand meets people in person", icon: "pin",
+      items: ["Hackathons", "On-ground events", "BTL & guerilla campaigns"] },
+    { title: "Analytics & Ops", sub: "Measure it, then fix it", icon: "chart",
+      items: ["Performance tracking & reporting", "UTM tracking", "Process improvement"] }
+  ],
   tools: ["Meta Business Suite", "Sprout Social", "Agorapulse", "Hootsuite", "Metabase", "Notion", "Jira", "CRM tools", "ChatGPT", "Claude", "Automation tools", "Canva", "InShot", "VN", "Office 365"],
 
   /* ---------------------------- EXPERIENCE ------------------------------ */

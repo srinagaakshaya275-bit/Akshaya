@@ -20,6 +20,10 @@
     chat: '<path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12Z"/><path d="M8.5 12h.01M12 12h.01M15.5 12h.01"/>',
     video: '<rect x="3" y="6" width="13" height="12" rx="3"/><path d="m16 10 5-3v10l-5-3"/>',
     people: '<circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M16 5.2a3.2 3.2 0 0 1 0 5.6M18 14.4c1.9.7 3 2.4 3 5.6"/>',
+    mega: '<path d="M3 11v2a1 1 0 0 0 1 1h3l6 4V6L7 10H4a1 1 0 0 0-1 1Z"/><path d="M16.5 9a4 4 0 0 1 0 6M19 6.500a8 8 0 0 1 0 11"/>',
+    chart: '<path d="M4 20V4M4 20h16"/><path d="m8 15 4-4 3 3 5-6"/>',
+    wrench: '<path d="M4 7h10M18 7h2M4 17h2M10 17h10"/><circle cx="16" cy="7" r="2"/><circle cx="8" cy="17" r="2"/>',
+    award: '<circle cx="12" cy="9" r="5"/><path d="m9 13.500-1.500 7L12 18l4.500 2.500-1.500-7"/>',
     pin: '<path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.500C19 14.800 12 21 12 21Z"/><circle cx="12" cy="9.500" r="2.500"/>'
   };
   const icon = (n) => `<svg viewBox="0 0 24 24" aria-hidden="true">${ICON[n] || ICON.search}</svg>`;
@@ -70,7 +74,9 @@
         <dl class="facts">${ab.facts.map((f) => `<div><dt>${esc(f.k)}</dt><dd>${esc(f.v)}</dd></div>`).join('')}</dl>
       </div>
       <ul class="cards">${ab.cards.map((c) => `<li class="card glass"><span class="card__ico">${icon(c.icon)}</span><div><h3>${esc(c.title)}</h3><p>${esc(c.text)}</p></div></li>`).join('')}</ul>
-    </div>`;
+    </div>
+    <h3 class="sub">How I work</h3>
+    <ol class="how">${ab.principles.map((p, i) => `<li class="glass"><span class="how__n">${String(i + 1).padStart(2, '0')}</span><h4>${esc(['Understand', 'Create', 'Execute', 'Measure'][i] || '')}</h4><p>${esc(p)}</p></li>`).join('')}</ol>`;
 
   /* ---------- experience ---------- */
   const full = A.roles.filter((r) => r.type === 'full-time').reverse();
@@ -157,12 +163,12 @@
       <h3><button type="button" class="wcard__btn" data-open="${p.id}">${ph(p.title)}</button></h3>
       <p class="wcard__sum">${ph(p.summary)}</p>
       <dl class="wcard__rows"><div><dt>Role</dt><dd>${ph(p.role)}</dd></div><div><dt>Outcome</dt><dd class="hi">${p.outcome.slice(0, 1).map((o) => ph(o.value + ' ' + o.label)).join('')}</dd></div></dl></article>`;
-  $('#work').innerHTML = `${head('Selected work', 'work-h', 'Projects worth talking about')}
+  $('#impact').insertAdjacentHTML('beforeend', `<h3 class="sub">More projects</h3>
     <div class="filters" role="group" aria-label="Filter projects" id="filters">
       <button type="button" data-f="all" aria-pressed="true">All <span>${work.length}</span></button>
       ${types.map((t) => `<button type="button" data-f="${t}" aria-pressed="false">${esc(typeName(t))} <span>${work.filter((p) => p.type === t).length}</span></button>`).join('')}
     </div>
-    <div class="wgrid" id="wgrid"></div>`;
+    <div class="wgrid" id="wgrid"></div>`);
   const drawWork = () => { $('#wgrid').innerHTML = work.filter((p) => filt === 'all' || p.type === filt).map(card).join(''); };
   drawWork();
   $('#filters').addEventListener('click', (e) => {
@@ -198,21 +204,26 @@
   });
   dlg.addEventListener('close', () => { if (opener) opener.focus(); opener = null; });
 
-  /* ---------- skills ---------- */
-  $('#skills').innerHTML = `${head('Skills', 'skills-h', 'What I do', 'No self-rated percentages. Each skill sits next to the work that used it.')}
-    <div class="sgrid">${Object.entries(A.skillGroups).map(([k, n]) => `<div class="sgroup glass"><h3>${esc(n)}</h3>
-      <ul class="pills">${A.skills.filter((s) => s.group === k).map((s) => `<li>${esc(s.name)}</li>`).join('')}</ul></div>`).join('')}</div>
-    <h3 class="sub">Tools</h3><ul class="pills pills--tools">${A.tools.map((t) => `<li>${esc(t)}</li>`).join('')}</ul>`;
-
-  /* ---------- resume + education ---------- */
-  $('#resume').innerHTML = `${head('Resume', 'resume-h', 'Education & resume')}
-    <div class="resume">
-      <div class="glass edu">${A.education.map((e) => `<div class="edu__row"><div><b>${esc(e.program)}</b><span>${esc(e.institution)}</span><em>${esc(e.years)}</em></div><strong>${esc(e.score)}</strong></div>`).join('')}</div>
-      <div class="glass dl"><h3>Take it with you</h3><p>One page, with the full list of internships and results.</p>
-        <a class="btn btn--primary" href="${esc(A.meta.resume)}" download>Download resume (PDF)</a></div>
+  /* ---------- skills (+ education & certifications) ---------- */
+  const searchMock = `<div class="mock" aria-hidden="true"><div class="mock__q"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><span>is this course worth it?</span><i class="caret"></i></div>
+    <div class="mock__ai"><b>AI Overview</b><div><s></s><s></s><em>Positive</em></div></div></div>`;
+  const scard = (c, i) => `<div class="scard glass scard--${i}"><div class="scard__h"><span class="card__ico">${icon(c.icon)}</span><div><h3>${esc(c.title)}</h3><p>${esc(c.sub)}</p></div></div>
+    ${c.search ? searchMock : ''}<ul class="dots">${c.items.map((x) => `<li>${esc(x)}</li>`).join('')}</ul></div>`;
+  const init = (t) => t.slice(0, 2);
+  const certs = A.coursework.flatMap((c) => c.items);
+  $('#skills').innerHTML = `${head('Skills', 'skills-h', 'What I bring to the table')}
+    <div class="sgrid">${A.skillCards.map(scard).join('')}
+      <div class="scard glass scard--tools"><div class="scard__h"><span class="card__ico">${icon('wrench')}</span><div><h3>Tools</h3><p>What I work in every day</p></div></div>
+        <ul class="tools">${A.tools.map((t) => `<li><i>${esc(init(t))}</i>${esc(t)}</li>`).join('')}</ul></div>
     </div>
-    <div class="course"><h3 class="sub">Relevant coursework & certifications</h3>
-      <div class="course__grid">${A.coursework.map((c) => `<div><h4>${esc(c.group)}</h4><ul class="pills">${c.items.map((i) => `<li>${esc(i)}</li>`).join('')}</ul></div>`).join('')}</div></div>`;
+    <h3 class="sub">Education</h3>
+    <div class="edu2">
+      <div class="glass edu2__main"><div class="edu2__top"><div><h3>${esc(A.education[0].institution)}</h3><p>${esc(A.education[0].program)}</p></div><span class="role__dates">${esc(A.education[0].years)}</span></div>
+        <div class="tile edu2__score"><b>${esc(A.education[0].score.replace('CGPA ', ''))}</b><span>CGPA</span></div>
+        <ul class="edu2__rows">${A.education.slice(1).map((e) => `<li><span>${esc(e.program)} · ${esc(e.years)}</span><b>${esc(e.score)}</b></li>`).join('')}</ul></div>
+      <div class="glass edu2__certs"><p class="eyebrow">Certifications & coursework</p><ul>${certs.map((c) => `<li>${icon('award')}${esc(c)}</li>`).join('')}</ul></div>
+    </div>
+    <p class="resume-line"><a class="btn btn--ghost" href="${esc(A.meta.resume)}" download>Download resume (PDF)</a></p>`;
 
   /* ---------- contact ---------- */
   $('#link-email').href = `mailto:${A.meta.email}`;
@@ -244,7 +255,7 @@
   const onScroll = () => { const h = document.documentElement; prog.style.transform = `scaleX(${h.scrollTop / Math.max(1, h.scrollHeight - h.clientHeight)})`; $('#bar').classList.toggle('is-scrolled', h.scrollTop > 8); };
   addEventListener('scroll', onScroll, { passive: true }); onScroll();
 
-  const targets = '.sec__head, .about__copy, .card, .exp, .ints, .pcard, .growth, .case__block, .vt, .outcome, .learn3 li, .growth__card, .shot, .wcard, .sgroup, .resume > div, .course, .contact, .hero__copy, .hero__visual, .stats li';
+  const targets = '.sec__head, .about__copy, .card, .exp, .ints, .pcard, .growth, .case__block, .vt, .outcome, .learn3 li, .growth__card, .shot, .wcard, .how li, .scard, .edu2 > div, .resume-line, .contact, .hero__copy, .hero__visual, .stats li';
   const io = 'IntersectionObserver' in window && !reduceMotion
     ? new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); } }), { rootMargin: '0px 0px -6% 0px' })
     : null;
