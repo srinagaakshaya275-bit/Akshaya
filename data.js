@@ -1,8 +1,7 @@
 /* ==========================================================================
-   THE CURIOSITY INDEX · every record lives here
+   PORTFOLIO CONTENT · every word and number lives here
    --------------------------------------------------------------------------
-   This one file feeds the search, the filters, the skill map and the record
-   pages. Edit it and the whole site updates.
+   This one file feeds every section of the site. Edit it and the site updates.
 
    • Anything in [square brackets] is a placeholder. It shows in italics, and
      any record that still contains one is marked DRAFT on the site.
@@ -20,7 +19,7 @@ window.ARCHIVE = {
     focus: "ORM, AEO, creator partnerships, social and on-ground marketing",
     intro: "I make brands look right wherever people check them, from Google and AI answers to the feed and the campus floor.",
     location: "Bengaluru, India",
-    updated: "26 Oct 2026",
+    updated: "13 Nov 2026",
     email: "srinagaakshaya275@gmail.com",
     linkedin: "https://www.linkedin.com/in/akshayareddyp/",
     resume: "Akshaya_Resume.pdf",
@@ -30,17 +29,30 @@ window.ARCHIVE = {
     formEndpoint: ""
   },
 
-  /* Portrait for the polaroid in the hero. Put a photo in assets/ and set src,
-     e.g. "assets/portrait.jpg". While src is empty a placeholder shows. */
-  portrait: { src: "", caption: "Akshaya Reddy, Associate Marketing Manager, Masai School" },
+  /* Hero. `lead` is white, `accent` is blue. */
+  hero: {
+    eyebrow: "ORM · AEO · Social · Creators · On-ground",
+    lead: "Marketing that",
+    accent: "shows up in metrics.",
+    path: ["Internships", "Marketing Ops", "Associate Marketing Manager"]
+  },
 
-  /* The four sticky notes under the search. Colours cycle butter, blush, sage, sky. */
+  /* Portrait: put a photo in assets/ and set src, e.g. "assets/portrait.jpg". */
+  portrait: { src: "", caption: "Akshaya Reddy" },
+
+  /* The stat strip under the hero. */
   highlights: [
-    { value: "2.5M", label: "monthly organic reach" },
-    { value: "3,600+", label: "leads a month" },
-    { value: "369K", label: "followers" },
+    { value: "2.5M", label: "Monthly organic reach" },
+    { value: "369K", label: "Followers managed" },
+    { value: "3,600+", label: "Leads a month" },
     { value: "5", label: "AI verdicts flipped" }
   ],
+
+  /* The scrolling band under the stat strip. */
+  marquee: ["ORM", "AEO", "GEO", "Influencer marketing", "UGC", "Social media", "Community", "Offline & events"],
+
+  /* Projects shown in the Impact section, in order (ids from `projects`). */
+  impact: ["CF-001", "CF-006", "CF-002"],
 
   /* ---------------------------- ABOUT ---------------------------------- */
   about: {
@@ -49,7 +61,13 @@ window.ARCHIVE = {
       "I started in social media and kept chasing one question: when someone looks up a brand, what do they actually find?",
       "That took me into ORM, search visibility, and now AEO, where I shape what Google's AI Overviews and ChatGPT say about a brand. Today I run reputation, creators, social and on-ground campaigns at Masai, and I judge all of it by the numbers."
     ],
-    interests: ["ORM & AEO", "Social media", "Creators & UGC", "Community", "Offline & events"],
+    cards: [
+      { title: "ORM & AEO", text: "Fixing what people and AI find when they search you.", icon: "search" },
+      { title: "Social Media", text: "Organic growth across Instagram, LinkedIn, YouTube and Reddit.", icon: "chat" },
+      { title: "Creators & UGC", text: "Creator programs that build trust as well as reach.", icon: "video" },
+      { title: "Community", text: "Student and creator communities built on value exchange.", icon: "people" },
+      { title: "Offline & Events", text: "Hackathons, on-ground events and BTL marketing.", icon: "pin" }
+    ],
     principles: [
       "Start with the audience and what they find when they search.",
       "Turn insights into content, creator briefs and campaigns.",
@@ -95,6 +113,8 @@ window.ARCHIVE = {
   tools: ["Meta Business Suite", "Sprout Social", "Agorapulse", "Hootsuite", "Metabase", "Notion", "Jira", "CRM tools", "ChatGPT", "Claude", "Automation tools", "Canva", "InShot", "VN", "Office 365"],
 
   /* ---------------------------- EXPERIENCE ------------------------------ */
+  masaiBlurb: "I own reputation, creator marketing and social for an edtech brand working with IITs and BITSoM.",
+
   /* type: "full-time" | "internship". Listed oldest first; the site shows newest first. */
   roles: [
     {

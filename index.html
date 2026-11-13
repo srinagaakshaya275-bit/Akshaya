@@ -3,110 +3,89 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>The Curiosity Index · Akshaya Reddy</title>
-  <meta name="description" content="A searchable archive of the work of Akshaya Reddy, Associate Marketing Manager at Masai School: projects, experience and skills across ORM, AEO, creator partnerships, social and events.">
-  <meta name="theme-color" content="#EADFC9">
+  <title>Akshaya Reddy · Marketing Portfolio</title>
+  <meta name="description" content="Akshaya Reddy, Associate Marketing Manager at Masai School. ORM, AEO, creator partnerships, social and on-ground marketing, with the numbers to show for it.">
+  <meta name="theme-color" content="#050B1A">
   <link rel="canonical" href="https://srinagaakshaya275-bit.github.io/Akshaya/">
   <meta property="og:type" content="profile">
-  <meta property="og:title" content="The Curiosity Index · Akshaya Reddy">
-  <meta property="og:description" content="Search the work, experience and skills of a marketer who changed what AI says about a brand.">
+  <meta property="og:title" content="Akshaya Reddy · Marketing Portfolio">
+  <meta property="og:description" content="Marketing that shows up in metrics: ORM, AEO, creators, social and on-ground.">
   <meta property="og:url" content="https://srinagaakshaya275-bit.github.io/Akshaya/">
-  <meta property="og:site_name" content="The Curiosity Index">
   <meta name="twitter:card" content="summary">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@graph": [
-      { "@type": "WebSite", "name": "The Curiosity Index", "url": "https://srinagaakshaya275-bit.github.io/Akshaya/" },
-      { "@type": "Person", "name": "Akshaya Reddy", "jobTitle": "Associate Marketing Manager",
-        "worksFor": { "@type": "Organization", "name": "Masai School" },
-        "address": { "@type": "PostalAddress", "addressLocality": "Bengaluru", "addressCountry": "IN" },
-        "alumniOf": { "@type": "CollegeOrUniversity", "name": "Vellore Institute of Technology" },
-        "sameAs": ["https://www.linkedin.com/in/akshayareddyp/"] }
-    ]
+    "@type": "Person",
+    "name": "Akshaya Reddy",
+    "jobTitle": "Associate Marketing Manager",
+    "worksFor": { "@type": "Organization", "name": "Masai School" },
+    "address": { "@type": "PostalAddress", "addressLocality": "Bengaluru", "addressCountry": "IN" },
+    "alumniOf": { "@type": "CollegeOrUniversity", "name": "Vellore Institute of Technology" },
+    "sameAs": ["https://www.linkedin.com/in/akshayareddyp/"]
   }
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Special+Elite&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
+  <div class="progress" id="progress" aria-hidden="true"></div>
 
-  <header class="bar">
-    <a class="bar__brand" href="#top"><span class="bar__mark" aria-hidden="true"></span>The Curiosity Index</a>
-    <nav class="bar__nav" aria-label="Sections">
-      <a href="#about">About</a>
-      <a href="#experience">Experience</a>
-      <a href="#projects">Projects</a>
-      <a href="#skills">Skills</a>
-      <a href="#education">Education</a>
-      <a href="#contact">Enquiry</a>
-    </nav>
+  <header class="bar" id="bar">
+    <div class="bar__in">
+      <a class="brand" href="#top">Akshaya<i>.</i></a>
+      <button class="menu" id="menu" type="button" aria-expanded="false" aria-controls="nav"><span class="sr">Menu</span><b></b><b></b></button>
+      <nav class="nav" id="nav" aria-label="Sections">
+        <a href="#about">About</a>
+        <a href="#experience">Experience</a>
+        <a href="#impact">Impact</a>
+        <a href="#case-study">Case study</a>
+        <a href="#work">Work</a>
+        <a href="#skills">Skills</a>
+        <a href="#resume">Resume</a>
+        <a class="nav__cta" href="#contact">Let's talk</a>
+      </nav>
+    </div>
   </header>
 
   <main id="main">
-    <!-- HERO · THE INDEX -->
-    <section class="hero wrap" id="top" aria-labelledby="hero-name">
-      <div class="hero__top">
+    <section class="hero" id="top" aria-labelledby="hero-h">
+      <div class="wrap hero__grid">
         <div class="hero__copy">
-          <p class="tag"><span>INDEX</span> / 001 <i aria-hidden="true">·</i> <span>FILED UNDER</span> / MARKETING</p>
-          <p class="hero__kicker">INDEX 001 — THE PERSON BEHIND THE WORK</p>
-          <h1 class="hero__name" id="hero-name">Akshaya Reddy</h1>
-          <p class="hero__role">Associate Marketing Manager at Masai School</p>
-          <p class="hero__intro">I make brands look right wherever people check them, from Google and AI answers to the feed and the campus floor.</p>
+          <p class="eyebrow-pill" id="hero-eyebrow"></p>
+          <h1 id="hero-h"></h1>
+          <p class="hero__intro" id="hero-intro"></p>
+          <p class="path" id="hero-path"></p>
+          <div class="cta">
+            <a class="btn btn--primary" href="#work">View my work <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+            <a class="btn btn--ghost" href="#contact">Let's talk</a>
+            <a class="btn btn--ghost" id="hero-resume" href="#" download>Resume</a>
+          </div>
         </div>
-        <figure class="polaroid polaroid--portrait tape tape--blush" id="portrait">
-          <div class="polaroid__photo" id="portrait-photo"><span class="polaroid__mark">[Portrait photo]</span></div>
-          <figcaption id="portrait-cap"></figcaption>
-        </figure>
+        <div class="hero__visual" id="hero-visual"></div>
       </div>
-
-      <form class="search paper" role="search" id="search-form" autocomplete="off">
-        <label class="search__label" for="q">Search my work, experience, or skills</label>
-        <div class="search__row">
-          <svg class="search__ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-          <input id="q" name="q" type="search" placeholder="Try “creator”, “AEO” or “2026”" enterkeyhint="search" aria-controls="results">
-          <button class="search__clear" type="button" id="q-clear" hidden>Clear</button>
-          <kbd class="search__key" aria-hidden="true">/</kbd>
-        </div>
-      </form>
-
-      <div class="cats" role="group" aria-label="Browse the index by category" id="cats">
-        <button type="button" data-cat="project" aria-pressed="false">Projects <b></b></button>
-        <button type="button" data-cat="experience" aria-pressed="false">Experience <b></b></button>
-        <button type="button" data-cat="skill" aria-pressed="false">Skills <b></b></button>
-        <button type="button" data-cat="about" aria-pressed="false">About <b></b></button>
-      </div>
-
-      <section class="results" id="results" aria-label="Search results" hidden>
-        <p class="results__status" id="results-status" role="status" aria-live="polite"></p>
-        <div id="results-body"></div>
-      </section>
-
-      <ul class="stickies" id="stickies" aria-label="Key numbers"></ul>
+      <div class="wrap"><ul class="stats" id="stats" aria-label="Key numbers"></ul></div>
     </section>
 
-    <!-- ABOUT · THE PROFILE RECORD -->
-    <section class="sec wrap" id="about" aria-labelledby="about-h"></section>
-    <!-- EXPERIENCE · THE ACTIVITY LOG -->
-    <section class="sec wrap" id="experience" aria-labelledby="exp-h"></section>
-    <!-- PROJECTS · THE CASE FILE LIBRARY -->
-    <section class="sec wrap" id="projects" aria-labelledby="proj-h"></section>
-    <!-- SKILLS · THE CAPABILITY MAP -->
-    <section class="sec wrap" id="skills" aria-labelledby="skills-h"></section>
-    <!-- EDUCATION · THE ACADEMIC REGISTER -->
-    <section class="sec wrap" id="education" aria-labelledby="edu-h"></section>
+    <div class="marquee" aria-hidden="true"><div class="marquee__track" id="marquee"></div></div>
 
-    <!-- CONTACT · SUBMIT AN ENQUIRY -->
+    <section class="sec wrap" id="about" aria-labelledby="about-h"></section>
+    <section class="sec wrap" id="experience" aria-labelledby="exp-h"></section>
+    <section class="sec wrap" id="impact" aria-labelledby="impact-h"></section>
+    <section class="sec wrap" id="case-study" aria-labelledby="case-h"></section>
+    <section class="sec wrap" id="work" aria-labelledby="work-h"></section>
+    <section class="sec wrap" id="skills" aria-labelledby="skills-h"></section>
+    <section class="sec wrap" id="resume" aria-labelledby="resume-h"></section>
+
     <section class="sec wrap" id="contact" aria-labelledby="contact-h">
       <header class="sec__head">
-        <p class="tag"><span>FORM</span> / ENQ-001 <i aria-hidden="true">·</i> <span>RECORD TYPE</span> / SUBMISSION</p>
-        <h2 id="contact-h">Submit an enquiry</h2>
-        <p class="sec__lede">Hiring, or need marketing that shows up in metrics? Open to full-time roles and marketing projects in ORM, AEO, creators and social.</p>
+        <p class="eyebrow">Contact</p>
+        <h2 id="contact-h">Let's talk</h2>
+        <p class="lede">Hiring, or need marketing that shows up in metrics? Open to full-time roles and marketing projects in ORM, AEO, creators and social.</p>
       </header>
-      <div class="contact postcard"><div class="postcard__face">
+      <div class="contact glass">
         <form class="enq" id="enq" novalidate>
           <div class="field">
             <label for="e-name">Name <span class="req" aria-hidden="true">*</span></label>
@@ -123,9 +102,9 @@
             <input id="e-org" name="organisation" type="text" autocomplete="organization">
           </div>
           <div class="field">
-            <label for="e-type">Enquiry category <span class="req" aria-hidden="true">*</span></label>
+            <label for="e-type">I'm reaching out about <span class="req" aria-hidden="true">*</span></label>
             <select id="e-type" name="enquiry_category" required aria-describedby="e-type-err"><option value="">Choose one</option></select>
-            <p class="field__err" id="e-type-err" hidden>Please choose a category.</p>
+            <p class="field__err" id="e-type-err" hidden>Please choose one.</p>
           </div>
           <div class="field field--wide">
             <label for="e-msg">Message <span class="req" aria-hidden="true">*</span></label>
@@ -134,37 +113,28 @@
           </div>
           <input type="text" name="_gotcha" class="honeypot" tabindex="-1" autocomplete="off" aria-hidden="true">
           <div class="enq__foot field--wide">
-            <button class="btn btn--solid" type="submit" id="e-submit"><span class="btn__label">Submit enquiry</span><span class="spinner" aria-hidden="true"></span></button>
+            <button class="btn btn--primary" type="submit" id="e-submit"><span class="btn__label">Send message</span></button>
             <p class="enq__status" id="e-status" role="status" aria-live="polite"></p>
           </div>
         </form>
-
-        <aside class="next" aria-label="What happens next">
-          <p class="tag"><span>NEXT STEPS</span></p>
-          <ol>
-            <li>Fill in the four required fields marked *.</li>
-            <li>Submit. You will see a confirmation on this page only once the message has actually been sent.</li>
-            <li>I will reply to the email address you give.</li>
-          </ol>
-          <p class="next__alt">Prefer to write directly?</p>
-          <p class="next__links">
-            <a class="btn btn--line" id="link-email" href="#">Email</a>
-            <a class="btn btn--line" id="link-linkedin" href="#" target="_blank" rel="noopener">LinkedIn</a>
-            <a class="btn btn--line" id="link-resume" href="#" download>Resume (PDF)</a>
+        <aside class="direct" aria-label="Reach me directly">
+          <h3>Prefer to write directly?</h3>
+          <p>Fields marked * are required. You will see a confirmation here only once the message has actually been sent.</p>
+          <p class="direct__links">
+            <a class="btn btn--ghost" id="link-email" href="#">Email</a>
+            <a class="btn btn--ghost" id="link-linkedin" href="#" target="_blank" rel="noopener">LinkedIn</a>
+            <a class="btn btn--ghost" id="link-resume" href="#" download>Resume (PDF)</a>
           </p>
         </aside>
-          <div class="pstamp" aria-hidden="true"><span>hire me!</span></div>
-        </div>
       </div>
     </section>
   </main>
 
   <footer class="foot wrap">
-    <p><span>INDEX</span> / THE CURIOSITY INDEX <i aria-hidden="true">·</i> <span>LAST UPDATED</span> / <span id="foot-updated"></span></p>
-    <p>© 2026 Akshaya Reddy <a href="#top">Back to the index ↑</a></p>
+    <p>© 2026 Akshaya Reddy · Bengaluru</p>
+    <p>Last updated <span id="foot-updated"></span> · <a href="#top">Back to top ↑</a></p>
   </footer>
 
-  <!-- Record viewer: project case files and experience records -->
   <dialog class="rec" id="rec" aria-labelledby="rec-title">
     <div class="rec__inner" id="rec-inner"></div>
   </dialog>
@@ -172,7 +142,7 @@
   <noscript>
     <div class="wrap noscript">
       <h2>Akshaya Reddy · Associate Marketing Manager, Masai School</h2>
-      <p>This archive needs JavaScript for search and filters. In short: ORM, AEO, creator partnerships, social and on-ground marketing; BBA Digital Marketing, VIT. Email <a href="mailto:srinagaakshaya275@gmail.com">srinagaakshaya275@gmail.com</a> or find me on <a href="https://www.linkedin.com/in/akshayareddyp/">LinkedIn</a>.</p>
+      <p>This portfolio needs JavaScript. In short: ORM, AEO, creator partnerships, social and on-ground marketing; BBA Digital Marketing, VIT. Email <a href="mailto:srinagaakshaya275@gmail.com">srinagaakshaya275@gmail.com</a> or find me on <a href="https://www.linkedin.com/in/akshayareddyp/">LinkedIn</a>.</p>
     </div>
   </noscript>
 
