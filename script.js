@@ -197,31 +197,14 @@
         <ul class="edu2__rows">${A.education.slice(1).map((e) => `<li><span>${esc(e.program)} · ${esc(e.years)}</span><b>${esc(e.score)}</b></li>`).join('')}</ul></div>
       <div class="glass edu2__certs"><p class="eyebrow">Certifications & coursework</p><ul>${certs.map((c) => { const n = typeof c === 'string' ? c : c.name, u = typeof c === 'string' ? '' : c.url; return u ? `<li><a href="${esc(u)}" target="_blank" rel="noopener">${icon('award')}${esc(n)}<span class="sr"> (opens certificate)</span></a></li>` : `<li>${icon('award')}${esc(n)}</li>`; }).join('')}</ul></div>
     </div>
-    <p class="resume-line"><a class="btn btn--ghost" href="${esc(A.meta.resume)}" download>Download resume (PDF)</a></p>`;
+    <p class="resume-line"><a class="btn btn--ghost" href="${esc(A.meta.resume)}" download>Download resume (PDF)</a> <a class="btn btn--ghost" href="${esc(A.meta.linkedin)}" target="_blank" rel="noopener">LinkedIn</a></p>`;
 
   /* ---------- contact ---------- */
   $('#link-email').href = `mailto:${A.meta.email}`;
-  $('#link-linkedin').href = A.meta.linkedin;
+  $('#mail-addr').href = `mailto:${A.meta.email}`;
+  $('#mail-addr').textContent = A.meta.email;
+  $('#hero-linkedin').href = A.meta.linkedin;
   $('#foot-updated').textContent = A.meta.updated;
-  $('#e-type').insertAdjacentHTML('beforeend', A.enquiryTypes.map((t) => `<option>${esc(t)}</option>`).join(''));
-
-  const form = $('#enq'), status = $('#e-status'), submit = $('#e-submit');
-  const fields = [['e-name', (v) => v.trim().length > 0], ['e-email', (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim())], ['e-type', (v) => v !== ''], ['e-msg', (v) => v.trim().length > 0]];
-  const mark = (id, ok) => { const el = $('#' + id); el.classList.toggle('is-invalid', !ok); el.setAttribute('aria-invalid', String(!ok)); $('#' + id + '-err').hidden = ok; return ok; };
-  fields.forEach(([id, test]) => { $('#' + id).addEventListener('blur', () => mark(id, test($('#' + id).value))); $('#' + id).addEventListener('input', () => { if ($('#' + id).classList.contains('is-invalid')) mark(id, test($('#' + id).value)); }); });
-  const say = (msg, kind) => { status.textContent = msg; status.className = 'enq__status' + (kind ? ' is-' + kind : ''); };
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault(); say('');
-    const results = fields.map(([id, test]) => mark(id, test($('#' + id).value)));
-    if (results.includes(false)) { $('.is-invalid', form).focus(); say('Please fix the fields marked above.', 'bad'); return; }
-    if (!A.meta.formEndpoint) { say('The form is not connected yet, so nothing was sent. Please use the email button.', 'bad'); return; }
-    submit.disabled = true; say('Sending…');
-    try {
-      const r = await fetch(A.meta.formEndpoint, { method: 'POST', headers: { Accept: 'application/json' }, body: new FormData(form) });
-      if (r.ok) { form.reset(); say('Thank you. Your message has been sent.', 'ok'); } else say('The message could not be sent. Please use the email button.', 'bad');
-    } catch (err) { say('The message could not be sent. Please check your connection or use the email button.', 'bad'); }
-    submit.disabled = false;
-  });
 
   /* land on the hero (or the #hash target) */
   requestAnimationFrame(() => {

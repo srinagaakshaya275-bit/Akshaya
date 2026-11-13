@@ -22,11 +22,7 @@ window.ARCHIVE = {
     updated: "13 Nov 2026",
     email: "srinagaakshaya275@gmail.com",
     linkedin: "https://www.linkedin.com/in/akshayareddyp/",
-    resume: "Akshaya_Resume.pdf",
-    /* Contact form: create a free form at https://formspree.io and paste its
-       endpoint here, e.g. "https://formspree.io/f/abcdwxyz". While this is
-       empty the form says it is not connected. It never pretends to send. */
-    formEndpoint: ""
+    resume: "Akshaya_Resume.pdf"
   },
 
   /* Hero headline. `lead` is white, `accent` is blue. */
@@ -421,9 +417,5 @@ window.ARCHIVE = {
   coursework: [
     { group: "Digital marketing", items: ["Fundamentals of Digital Marketing", "Search Engine Optimisation", "Google Analytics", "Google Ads", "CRM", "Omni-channel Marketing", "Gen AI", "Content Writing"] },
     { group: "Social media marketing", items: ["Fundamentals of Social Media Marketing", "Social Media Marketing Specialization (Meta)", "Social Media Monitoring", "Content Creating using Canva"] }
-  ],
-
-
-
-  enquiryTypes: ["Full-time role", "Marketing project", "Creator or brand collaboration", "Something else"]
+  ]
 };

@@ -23,11 +23,8 @@ Hero · stat strip · skills marquee · About (with How I work) · Experience ·
 - **Tools**: in `tools`, use `brand` (a logo from `icons.js`) or `glyph` (a generic icon). **Certificates**: make a coursework item `{ name: "...", url: "https://..." }` and it becomes a link.
 - **Update the date** in `meta.updated` when you change anything.
 
-## Contact form
-1. Create a free form at formspree.io.
-2. Paste its endpoint into `meta.formEndpoint` in `data.js`.
-
-Until then the form validates but says it is not connected. It never says "sent" unless the service accepted the message.
+## Contact
+The Let's talk section is just your email (`meta.email` in `data.js`). LinkedIn sits beside Resume in the hero and under Skills.
 
 ## Run locally
 ```bash

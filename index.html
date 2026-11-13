@@ -60,6 +60,7 @@
             <a class="btn btn--primary" href="#impact">View my work <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
             <a class="btn btn--ghost" href="#contact">Let's talk</a>
             <a class="btn btn--ghost" id="hero-resume" href="#" download>Resume</a>
+            <a class="btn btn--ghost" id="hero-linkedin" href="#" target="_blank" rel="noopener">LinkedIn</a>
           </div>
         </div>
         <div class="hero__visual" id="hero-visual"></div>
@@ -82,45 +83,9 @@
         <p class="lede">Hiring, or need marketing that shows up in metrics? Open to full-time roles and marketing projects in ORM, AEO, creators and social.</p>
       </header>
       <div class="contact glass">
-        <form class="enq" id="enq" novalidate>
-          <div class="field">
-            <label for="e-name">Name <span class="req" aria-hidden="true">*</span></label>
-            <input id="e-name" name="name" type="text" autocomplete="name" required aria-describedby="e-name-err">
-            <p class="field__err" id="e-name-err" hidden>Please enter your name.</p>
-          </div>
-          <div class="field">
-            <label for="e-email">Email <span class="req" aria-hidden="true">*</span></label>
-            <input id="e-email" name="email" type="email" autocomplete="email" required aria-describedby="e-email-err">
-            <p class="field__err" id="e-email-err" hidden>Please enter a valid email address.</p>
-          </div>
-          <div class="field">
-            <label for="e-org">Organisation</label>
-            <input id="e-org" name="organisation" type="text" autocomplete="organization">
-          </div>
-          <div class="field">
-            <label for="e-type">I'm reaching out about <span class="req" aria-hidden="true">*</span></label>
-            <select id="e-type" name="enquiry_category" required aria-describedby="e-type-err"><option value="">Choose one</option></select>
-            <p class="field__err" id="e-type-err" hidden>Please choose one.</p>
-          </div>
-          <div class="field field--wide">
-            <label for="e-msg">Message <span class="req" aria-hidden="true">*</span></label>
-            <textarea id="e-msg" name="message" rows="5" required aria-describedby="e-msg-err"></textarea>
-            <p class="field__err" id="e-msg-err" hidden>Please write a message.</p>
-          </div>
-          <input type="text" name="_gotcha" class="honeypot" tabindex="-1" autocomplete="off" aria-hidden="true">
-          <div class="enq__foot field--wide">
-            <button class="btn btn--primary" type="submit" id="e-submit"><span class="btn__label">Send message</span></button>
-            <p class="enq__status" id="e-status" role="status" aria-live="polite"></p>
-          </div>
-        </form>
-        <aside class="direct" aria-label="Reach me directly">
-          <h3>Prefer to write directly?</h3>
-          <p>Fields marked * are required. You will see a confirmation here only once the message has actually been sent.</p>
-          <p class="direct__links">
-            <a class="btn btn--ghost" id="link-email" href="#">Email</a>
-            <a class="btn btn--ghost" id="link-linkedin" href="#" target="_blank" rel="noopener">LinkedIn</a>
-          </p>
-        </aside>
+        <p class="contact__label">Email me directly</p>
+        <a class="contact__mail" id="mail-addr" href="#"></a>
+        <a class="btn btn--primary" id="link-email" href="#">Send an email</a>
       </div>
     </section>
   </main>
