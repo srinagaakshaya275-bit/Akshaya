@@ -29,12 +29,10 @@ window.ARCHIVE = {
     formEndpoint: ""
   },
 
-  /* Hero. `lead` is white, `accent` is blue. */
+  /* Hero headline. `lead` is white, `accent` is blue. */
   hero: {
-    eyebrow: "ORM · AEO · Social · Creators · On-ground",
     lead: "Marketing that",
-    accent: "shows up in metrics.",
-    path: ["Internships", "Marketing Ops", "Associate Marketing Manager"]
+    accent: "shows up in metrics."
   },
 
   /* Portrait: put a photo in assets/ and set src, e.g. "assets/portrait.jpg". */
@@ -43,13 +41,12 @@ window.ARCHIVE = {
   /* The stat strip under the hero. */
   highlights: [
     { value: "2.5M", label: "Monthly organic reach" },
-    { value: "369K", label: "Followers managed" },
-    { value: "3,600+", label: "Leads a month" },
-    { value: "5", label: "AI verdicts flipped" }
+    { value: "369K", label: "Audience managed" },
+    { value: "3,600+", label: "Leads a month" }
   ],
 
   /* The scrolling band under the stat strip. */
-  marquee: ["ORM", "AEO", "GEO", "Influencer marketing", "UGC", "Social media", "Community", "Offline & events"],
+  marquee: ["ORM", "AEO", "GEO", "SEO", "SERP visibility", "Influencer marketing", "UGC", "Performance marketing", "Social media", "Community management", "Content creation", "Content writing", "Campaign planning", "Brand marketing", "Lead generation", "BTL marketing", "Offline events", "Performance tracking", "Process improvement"],
 
   /* Projects shown in the Impact section, in order (ids from `projects`). */
   impact: ["CF-001", "CF-006", "CF-002"],
@@ -63,9 +60,9 @@ window.ARCHIVE = {
     ],
     cards: [
       { title: "ORM & AEO", text: "Fixing what people and AI find when they search you.", icon: "search" },
-      { title: "Social Media", text: "Organic growth across Instagram, LinkedIn, YouTube and Reddit.", icon: "chat" },
-      { title: "Creators & UGC", text: "Creator programs that build trust as well as reach.", icon: "video" },
-      { title: "Community", text: "Student and creator communities built on value exchange.", icon: "people" },
+      { title: "Social Media", text: "Organic growth across Instagram, LinkedIn, YouTube, X, Reddit and Quora.", icon: "chat" },
+      { title: "Performance & UGC", text: "Performance ads and performance marketing, with creators and UGC in the mix.", icon: "video" },
+      { title: "Community Management", text: "Managing student communities.", icon: "people" },
       { title: "Offline & Events", text: "Hackathons, on-ground events and BTL marketing.", icon: "pin" }
     ],
     principles: [
@@ -113,20 +110,33 @@ window.ARCHIVE = {
   /* The Skills section cards. `search` shows a small search mock-up in the first card. */
   skillCards: [
     { title: "ORM & Search", sub: "What people and AI find when they look you up", icon: "search", search: true,
-      items: ["ORM", "AEO / GEO", "SEO & SERP visibility", "Crisis management", "Reddit & Quora citations"] },
-    { title: "Marketing", sub: "Campaigns, creators and community", icon: "mega",
-      items: ["Campaign planning & execution", "Brand marketing", "Creator partnerships", "UGC", "Community management", "Lead generation"] },
+      items: ["ORM", "AEO / GEO", "SEO", "SERP & Search Visibility", "Crisis Management", "Reddit & Quora Citations", "Brand Sentiment Tracking", "Keyword Research", "Backlinking"] },
+    { title: "Marketing", sub: "Campaigns, creators and growth", icon: "mega",
+      items: ["Campaign Planning & Execution", "Brand Marketing", "Influencer Marketing", "Performance Marketing", "Performance Ads", "UGC", "Lead Generation", "Funnel Optimisation", "Budget Planning", "Go-to-Market Planning"] },
     { title: "Content & Social", sub: "From idea to shoot to post", icon: "video",
-      items: ["Social media strategy", "Content creation", "Video shooting & editing", "Copywriting", "Content calendars"] },
+      items: ["Social Media Strategy", "Content Creation", "Content Writing", "Copywriting", "Video Shooting & Editing", "Short-Form Video", "Content Calendars", "Community Management", "Creative Briefing", "Storytelling"] },
     { title: "Offline & Events", sub: "Where the brand meets people in person", icon: "pin",
-      items: ["Hackathons", "On-ground events", "BTL & guerilla campaigns"] },
+      items: ["Hackathons", "On-Ground Events", "BTL Marketing", "Guerilla Campaigns", "Event Planning & Logistics", "Vendor Coordination", "Vendor Negotiation"] },
     { title: "Analytics & Ops", sub: "Measure it, then fix it", icon: "chart",
-      items: ["Performance tracking & reporting", "UTM tracking", "Process improvement"] }
+      items: ["Performance Tracking & Reporting", "UTM Tracking", "Process Improvement", "Dashboarding", "Marketing Automation", "CRM Management", "Project Management", "Cross-Team Coordination"] },
+    { title: "Ways of Working", sub: "How the work gets done", icon: "people",
+      items: ["Time Management", "Ownership", "Problem Solving", "Communication", "Team Management"] }
   ],
-  tools: ["Meta Business Suite", "Sprout Social", "Agorapulse", "Hootsuite", "Metabase", "Notion", "Jira", "CRM tools", "ChatGPT", "Claude", "Automation tools", "Canva", "InShot", "VN", "Office 365"],
+  /* Tools: `brand` uses a logo from icons.js; `glyph` uses a generic icon (bolt, share, people, video, grid, chart, search). */
+  tools: [
+    { name: "Meta Business Suite", brand: "meta" }, { name: "Sprout Social", glyph: "share" }, { name: "Agorapulse", glyph: "share" },
+    { name: "Hootsuite", brand: "hootsuite" }, { name: "Metabase", brand: "metabase" }, { name: "Notion", brand: "notion" },
+    { name: "Jira", brand: "jira" }, { name: "CRM tools", glyph: "people" }, { name: "ChatGPT", brand: "openai" },
+    { name: "Claude", brand: "claude" }, { name: "Automation tools", glyph: "bolt" }, { name: "Canva", brand: "canva" },
+    { name: "InShot", glyph: "video" }, { name: "VN", glyph: "video" }, { name: "Office 365", glyph: "grid" },
+    /* Added: common for this role. Delete any you don't use. */
+    { name: "Google Analytics", brand: "googleanalytics" }, { name: "Google Search Console", brand: "googlesearchconsole" },
+    { name: "Google Ads", brand: "googleads" }, { name: "Semrush", brand: "semrush" }, { name: "Ahrefs", glyph: "search" },
+    { name: "HubSpot", brand: "hubspot" }, { name: "Zapier", brand: "zapier" }, { name: "Slack", brand: "slack" },
+    { name: "Figma", brand: "figma" }, { name: "CapCut", glyph: "video" }
+  ],
 
   /* ---------------------------- EXPERIENCE ------------------------------ */
-  masaiBlurb: "I own reputation, creator marketing and social for an edtech brand working with IITs and BITSoM.",
 
   /* type: "full-time" | "internship". Listed oldest first; the site shows newest first. */
   roles: [
@@ -182,7 +192,7 @@ window.ARCHIVE = {
     },
     {
       id: "XP-006", type: "full-time", company: "Masai School", title: "Marketing Operations Specialist",
-      dates: "Jun 2025 – [Mon 2026]", startYear: 2025, endYear: 2026, place: "Bengaluru",
+      dates: "Jun 2025 – Apr 2026", startYear: 2025, endYear: 2026, place: "Bengaluru",
       summary: "ORM, influencer marketing, Instagram and LinkedIn, and lead generation.",
       responsibilities: [
         { text: "Owned ORM across platforms: improving online presence, resolving inbound escalations and managing crises.", skills: ["orm", "crisis"] },
@@ -198,12 +208,12 @@ window.ARCHIVE = {
     },
     {
       id: "XP-007", type: "full-time", company: "Masai School", title: "Associate Marketing Manager",
-      dates: "[Mon 2026] – Present", startYear: 2026, endYear: 2026, place: "Bengaluru", promoted: true,
+      dates: "Apr 2026 – Present", startYear: 2026, endYear: 2026, place: "Bengaluru",
       summary: "AEO, SERP visibility, organic leads, and BTL and on-ground events.",
       responsibilities: [
-        { text: "Run integrated campaigns across digital, social and offline channels, coordinating content, design and growth.", skills: ["campaign"] },
-        { text: "Lead organic brand visibility across search, answer engines, web pages, Quora and Reddit.", skills: ["aeo", "seo", "leadgen"] },
-        { text: "Plan and run BTL activations, guerilla campaigns, hackathons and on-ground events end to end.", skills: ["offline"] }
+        { text: "Running integrated campaigns across digital, social and offline channels, coordinating content, design and growth.", skills: ["campaign"] },
+        { text: "Leading organic brand visibility across search, answer engines, web pages, Quora and Reddit.", skills: ["aeo", "seo", "leadgen"] },
+        { text: "Planning and running BTL activations, guerilla campaigns, hackathons and on-ground events end to end.", skills: ["offline"] }
       ],
       achievements: [
         { value: "30 days", label: "Neutral → positive AI sentiment" },
@@ -237,27 +247,26 @@ window.ARCHIVE = {
       objective: "Shift what AI answers say about the brand and its courses from doubtful to positive.",
       strategy: "AI answers summarise what the web already says. So instead of arguing with the answer, change the sources it pulls from.",
       execution: [
-        "Scouted and negotiated with 30 creators a month across Tamil, Hindi, Telugu and English channels, on a ₹[X]L monthly budget.",
+        "Collaborated with creators end to end every month, on a ₹15L per month budget.",
         "Briefed creators documentary-style rather than testimonial-style, for Tier 2 and 3 audiences.",
         "Reviewed every script, and tuned titles and descriptions to the queries that feed AI Overviews.",
         "Tracked sentiment weekly and reported monthly, adjusting briefs as the answers moved."
       ],
-      deliverables: ["60 creator videos in two months", "Weekly sentiment tracker", "Monthly reports"],
+      deliverables: ["400+ creator videos live", "Weekly sentiment tracker", "Monthly reports"],
       visuals: [], visualHints: ["Before: AI Overview screenshot, brand blurred", "After: AI Overview screenshot, brand blurred"], video: "",
       outcome: [
-        { value: "60", label: "Videos live" }, { value: "600+", label: "Bookings" },
-        { value: "55", label: "Registrations" }, { value: "5", label: "AI verdicts turned positive" }
+        { value: "400+", label: "Videos live" }, { value: "1,000+", label: "Bookings" },
+        { value: "100+", label: "Registrations" }, { value: "7", label: "AI verdicts turned positive" }
       ],
+      /* One row per offering. Replace the [Before] / [After] rows and add context when you have it. */
       verdicts: [
-        { q: "Digital marketing course", before: "Scam allegations", after: "Potentially worthwhile" },
-        { q: "Business analytics course", before: "Can be good", after: "Best course, job-ready curriculum" },
-        { q: "The brand itself", before: "An existing option", after: "Good, intensive, industry-relevant career school" }
+        { q: "Offering 1", before: "Scam allegations", after: "Potentially worthwhile" },
+        { q: "Offering 2", before: "Can be good", after: "Best course, job-ready curriculum" },
+        { q: "Offering 3", before: "An existing option", after: "Good, intensive, industry-relevant career school" },
+        { q: "Offering 4", before: "[Before]", after: "[After]" },
+        { q: "Offering 5", before: "[Before]", after: "[After]" }
       ],
-      learnings: [
-        "Fix the source first: the brand's own fees page was causing part of the pricing confusion.",
-        "Neutral, explainer-style videos moved AI answers more than glowing reviews did.",
-        "Regional creators reach the audiences that big channels miss."
-      ]
+      learnings: []
     },
     {
       id: "CF-002", layout: "exhibit", type: "content", filedUnder: "Content strategy · Social",
@@ -342,7 +351,7 @@ window.ARCHIVE = {
       ],
       deliverables: ["[Number of creator posts]"],
       visuals: [], visualHints: ["Creator content collage", "Leaderboard screenshot"], video: "",
-      outcome: [{ value: "989", label: "Visitors" }, { value: "311", label: "Bookings" }, { value: "148", label: "Registrations" }],
+      outcome: [{ value: "900+", label: "Visitors" }, { value: "300+", label: "Bookings" }, { value: "150+", label: "Registrations" }],
       learnings: ["[What you learned]"]
     },
     {

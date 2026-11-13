@@ -6,6 +6,8 @@
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
   const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
   document.documentElement.classList.add('js');
+  /* sections are built by script, so the browser's saved scroll spot is wrong on refresh: start at the top (or the #hash) */
+  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
 
   const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   /* [bracketed] text is a placeholder: keep it visible, in italics */
@@ -38,10 +40,8 @@
 
   /* ---------- hero ---------- */
   const H = A.hero;
-  $('#hero-eyebrow').innerHTML = `<i aria-hidden="true"></i>${esc(H.eyebrow)}`;
   $('#hero-h').innerHTML = `${esc(H.lead)} <span>${esc(H.accent)}</span>`;
   $('#hero-intro').textContent = A.meta.intro;
-  $('#hero-path').innerHTML = H.path.map(esc).join(' <i aria-hidden="true">→</i> ');
   $('#hero-resume').href = A.meta.resume;
 
   const growth = [
@@ -52,16 +52,14 @@
   const bars = (g) => `<div class="gbar"><div class="gbar__top"><span>${g.name} followers</span><b>${g.a} → ${g.b}</b></div>
     <div class="gbar__track" role="img" aria-label="${g.name} followers grew from ${g.a} to ${g.b}"><i class="gbar__from" style="width:${(g.from / max) * 100}%"></i><i class="gbar__to" style="width:${(g.to / max) * 100}%"></i></div></div>`;
   $('#hero-visual').innerHTML = `
-    <span class="float float--a"><i aria-hidden="true"></i>AI Overview sentiment flipped</span>
     <div class="perf glass">
       <div class="perf__top"><span>Impact snapshot</span><em>Masai School</em></div>
       <b class="perf__big">2.5M</b><span class="perf__sub">monthly organic reach</span>
       <div class="perf__bars">${growth.map(bars).join('')}</div>
       <div class="perf__tiles">
-        ${stat({ value: '3,600+', label: 'Leads / month' })}${stat({ value: '₹15L', label: 'Budget / month' })}${stat({ value: '5', label: 'AI verdicts flipped' })}
+        ${stat({ value: '3,600+', label: 'Leads / month' })}${stat({ value: '₹15L', label: 'Budget / month' })}${stat({ value: '7+', label: 'AI verdicts flipped, ongoing' })}
       </div>
-    </div>
-    <span class="float float--b"><i aria-hidden="true"></i>4,000+ DMs resolved</span>`;
+    </div>`;
   $('#stats').innerHTML = A.highlights.map((h) => `<li><b>${esc(h.value)}</b><span>${esc(h.label)}</span></li>`).join('');
   $('#marquee').innerHTML = [0, 1].map(() => `<ul>${A.marquee.map((m) => `<li>${esc(m)}</li>`).join('')}</ul>`).join('');
 
@@ -81,22 +79,17 @@
   /* ---------- experience ---------- */
   const full = A.roles.filter((r) => r.type === 'full-time').reverse();
   const interns = A.roles.filter((r) => r.type === 'internship').reverse();
-  const top = full.find((r) => r.promoted) || full[0];
-  const tl = full.map((r, i) => `${i > 0 && full[i - 1].promoted ? '<li class="tl__promo"><span>↑ Promoted</span></li>' : ''}
-    <li class="tl__item"><i class="tl__dot${i === 0 ? ' is-now' : ''}" aria-hidden="true"></i>
+  const tl = full.map((r, i) => `<li class="tl__item"><i class="tl__dot${i === 0 ? ' is-now' : ''}" aria-hidden="true"></i>
       <div class="role glass"><div class="role__top"><h3>${esc(r.title)}</h3><span class="role__dates">${ph(r.dates)}</span></div>
-      <p>${esc(r.summary)}</p>
-      <ul class="role__list">${r.responsibilities.map((x) => `<li>${esc(x.text)}</li>`).join('')}</ul></div></li>`).join('');
+      <ul class="role__list">${r.responsibilities.map((x) => `<li>${ph(x.text)}</li>`).join('')}</ul></div></li>`).join('');
   const internRow = (r) => `<details class="int">
-      <summary><span class="int__title">${esc(r.title)}</span><span class="int__co">${esc(r.company)}</span><span class="int__dates">${esc(r.dates)}</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
-      <div class="int__body"><p class="int__place">${esc(r.place)}</p><ul>${r.responsibilities.map((x) => `<li>${esc(x.text)}</li>`).join('')}</ul>
+      <summary><span class="int__title">${esc(r.title)}</span><span class="int__co">${esc(r.company)}</span><span class="int__dates">${esc(r.dates)}</span></summary>
+      <div class="int__body"><p class="int__place">${esc(r.place)}</p><ul>${r.responsibilities.map((x) => `<li>${ph(x.text)}</li>`).join('')}</ul>
       ${r.achievements.length ? `<div class="tiles tiles--sm">${r.achievements.map((a) => stat(a)).join('')}</div>` : ''}</div></details>`;
-  $('#experience').innerHTML = `${head('Experience', 'exp-h', 'Where I’ve worked')}
+  $('#experience').innerHTML = `${head('Experience', 'exp-h', 'Where I\u2019ve worked')}
     <div class="exp glass">
       <div class="exp__top"><h3>Masai School</h3><span class="role__dates">Jun 2025 – Present</span></div>
-      <p class="exp__blurb">${esc(A.masaiBlurb)}</p>
       <ol class="tl">${tl}</ol>
-      <div class="tiles">${top.achievements.map((a) => stat(a)).join('')}</div>
     </div>
     <h3 class="sub">Internships</h3>
     <div class="ints glass">${interns.map(internRow).join('')}</div>`;
@@ -125,14 +118,14 @@
   const pc = (id) => {
     const p = byId(id);
     return `<article class="pcard glass">
-      <p class="eyebrow">${esc(typeName(p.type))}</p>
-      <h3>${esc(p.title)}</h3><p class="pcard__sum">${esc(p.summary)}</p>
+      <p class="eyebrow">${esc(typeName(p.type))}${p.year ? ' · ' + ph(p.year) : ''}</p>
+      <h3>${ph(p.title)}</h3><p class="pcard__sum">${ph(p.summary)}</p>
       <div class="tiles tiles--col">${p.outcome.slice(0, 3).map((o) => stat(o, 'tile--row')).join('')}</div>
       <a class="more" href="${id === 'CF-001' ? '#case-study' : '#'}" ${id === 'CF-001' ? '' : `data-open="${id}"`}>${id === 'CF-001' ? 'Read the case study' : 'Read the file'} <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
     </article>`;
   };
   $('#impact').innerHTML = `${head('Impact', 'impact-h', 'Work that moved the numbers')}
-    <div class="pcards">${A.impact.map(pc).join('')}</div>
+    <div class="pcards">${[...A.impact, ...A.projects.map((p) => p.id).filter((id) => !A.impact.includes(id))].map(pc).join('')}</div>
     <div class="growth">${growth.map(line).join('')}</div>`;
 
   /* ---------- case study (CF-001) ---------- */
@@ -146,35 +139,11 @@
     </div>
     <div class="glass vt">
       <div class="vt__top"><h3>AI Overview sentiment</h3><span class="vt__key"><i class="k-bad"></i>Before <i class="k-good"></i>After</span></div>
-      <ul>${cs.verdicts.map((v) => `<li><span class="q">${esc(v.q)}</span><span class="pill pill--bad">${esc(v.before)}</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span class="pill pill--good">${esc(v.after)}</span></li>`).join('')}</ul>
+      <ul>${cs.verdicts.map((v) => `<li><span class="q">${esc(v.q)}</span><span class="pill pill--bad">${ph(v.before)}</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span class="pill pill--good">${ph(v.after)}</span></li>`).join('')}</ul>
       <div class="vt__src"><span class="tag">Reddit</span><span class="tag">Quora</span><p>Reddit and Quora answers also get cited as sources in AI answers about a brand.</p></div>
     </div>
     <div class="outcome"><p class="eyebrow">The outcome</p><ul>${cs.outcome.map((o) => `<li><b>${ph(o.value)}</b><span>${ph(o.label)}</span></li>`).join('')}</ul></div>
-    <div class="shots">${cs.visualHints.map((h) => `<figure class="shot"><div class="shot__ph"><span>${ph('[' + h + ']')}</span></div></figure>`).join('')}</div>
-    <p class="eyebrow learn__h">What I learned</p>
-    <ul class="learn3">${cs.learnings.map((x) => `<li class="glass">${esc(x)}</li>`).join('')}</ul>`;
-
-  /* ---------- work ---------- */
-  const work = A.projects.filter((p) => p.id !== 'CF-001');
-  const types = [...new Set(work.map((p) => p.type))];
-  let filt = 'all';
-  const card = (p) => `<article class="wcard glass">
-      <p class="wcard__meta"><span>${esc(typeName(p.type))}</span><span>${ph(p.year)}</span></p>
-      <h3><button type="button" class="wcard__btn" data-open="${p.id}">${ph(p.title)}</button></h3>
-      <p class="wcard__sum">${ph(p.summary)}</p>
-      <dl class="wcard__rows"><div><dt>Role</dt><dd>${ph(p.role)}</dd></div><div><dt>Outcome</dt><dd class="hi">${p.outcome.slice(0, 1).map((o) => ph(o.value + ' ' + o.label)).join('')}</dd></div></dl></article>`;
-  $('#impact').insertAdjacentHTML('beforeend', `<h3 class="sub">More projects</h3>
-    <div class="filters" role="group" aria-label="Filter projects" id="filters">
-      <button type="button" data-f="all" aria-pressed="true">All <span>${work.length}</span></button>
-      ${types.map((t) => `<button type="button" data-f="${t}" aria-pressed="false">${esc(typeName(t))} <span>${work.filter((p) => p.type === t).length}</span></button>`).join('')}
-    </div>
-    <div class="wgrid" id="wgrid"></div>`);
-  const drawWork = () => { $('#wgrid').innerHTML = work.filter((p) => filt === 'all' || p.type === filt).map(card).join(''); };
-  drawWork();
-  $('#filters').addEventListener('click', (e) => {
-    const b = e.target.closest('button'); if (!b) return;
-    filt = b.dataset.f; $$('#filters button').forEach((x) => x.setAttribute('aria-pressed', String(x === b))); drawWork();
-  });
+    <div class="shots">${cs.visualHints.map((h) => `<figure class="shot"><div class="shot__ph"><span>${ph('[' + h + ']')}</span></div></figure>`).join('')}</div>`;
 
   /* ---------- project dialog ---------- */
   const dlg = $('#rec'); let opener = null;
@@ -209,26 +178,32 @@
     <div class="mock__ai"><b>AI Overview</b><div><s></s><s></s><em>Positive</em></div></div></div>`;
   const scard = (c, i) => `<div class="scard glass scard--${i}"><div class="scard__h"><span class="card__ico">${icon(c.icon)}</span><div><h3>${esc(c.title)}</h3><p>${esc(c.sub)}</p></div></div>
     ${c.search ? searchMock : ''}<ul class="dots">${c.items.map((x) => `<li>${esc(x)}</li>`).join('')}</ul></div>`;
-  const init = (t) => t.slice(0, 2);
+  const GLYPH = {
+    bolt: '<path d="M13 3 5 14h6l-1 7 8-11h-6l1-7Z"/>', share: '<circle cx="6" cy="12" r="2.500"/><circle cx="18" cy="6" r="2.500"/><circle cx="18" cy="18" r="2.500"/><path d="m8.200 10.800 7.600-3.600M8.200 13.200l7.600 3.600"/>',
+    people: ICON.people, video: '<rect x="3" y="6" width="13" height="12" rx="3"/><path d="m16 10 5-3v10l-5-3"/>', grid: '<rect x="4" y="4" width="7" height="7" rx="1.500"/><rect x="13" y="4" width="7" height="7" rx="1.500"/><rect x="4" y="13" width="7" height="7" rx="1.500"/><rect x="13" y="13" width="7" height="7" rx="1.500"/>',
+    chart: '<path d="M4 20V4M4 20h16"/><path d="m8 15 4-4 3 3 5-6"/>', search: '<circle cx="11" cy="11" r="7"/><path d="m20 20-3.500-3.500"/>'
+  };
+  const toolIcon = (t) => t.brand && window.BRAND && window.BRAND[t.brand]
+    ? `<svg viewBox="0 0 24 24" aria-hidden="true" class="brand"><path d="${window.BRAND[t.brand]}"/></svg>`
+    : `<svg viewBox="0 0 24 24" aria-hidden="true">${GLYPH[t.glyph] || GLYPH.grid}</svg>`;
   const certs = A.coursework.flatMap((c) => c.items);
   $('#skills').innerHTML = `${head('Skills', 'skills-h', 'What I bring to the table')}
     <div class="sgrid">${A.skillCards.map(scard).join('')}
       <div class="scard glass scard--tools"><div class="scard__h"><span class="card__ico">${icon('wrench')}</span><div><h3>Tools</h3><p>What I work in every day</p></div></div>
-        <ul class="tools">${A.tools.map((t) => `<li><i>${esc(init(t))}</i>${esc(t)}</li>`).join('')}</ul></div>
+        <ul class="tools">${A.tools.map((t) => `<li><i>${toolIcon(t)}</i>${esc(t.name)}</li>`).join('')}</ul></div>
     </div>
     <h3 class="sub">Education</h3>
     <div class="edu2">
       <div class="glass edu2__main"><div class="edu2__top"><div><h3>${esc(A.education[0].institution)}</h3><p>${esc(A.education[0].program)}</p></div><span class="role__dates">${esc(A.education[0].years)}</span></div>
         <div class="tile edu2__score"><b>${esc(A.education[0].score.replace('CGPA ', ''))}</b><span>CGPA</span></div>
         <ul class="edu2__rows">${A.education.slice(1).map((e) => `<li><span>${esc(e.program)} · ${esc(e.years)}</span><b>${esc(e.score)}</b></li>`).join('')}</ul></div>
-      <div class="glass edu2__certs"><p class="eyebrow">Certifications & coursework</p><ul>${certs.map((c) => `<li>${icon('award')}${esc(c)}</li>`).join('')}</ul></div>
+      <div class="glass edu2__certs"><p class="eyebrow">Certifications & coursework</p><ul>${certs.map((c) => { const n = typeof c === 'string' ? c : c.name, u = typeof c === 'string' ? '' : c.url; return u ? `<li><a href="${esc(u)}" target="_blank" rel="noopener">${icon('award')}${esc(n)}<span class="sr"> (opens certificate)</span></a></li>` : `<li>${icon('award')}${esc(n)}</li>`; }).join('')}</ul></div>
     </div>
     <p class="resume-line"><a class="btn btn--ghost" href="${esc(A.meta.resume)}" download>Download resume (PDF)</a></p>`;
 
   /* ---------- contact ---------- */
   $('#link-email').href = `mailto:${A.meta.email}`;
   $('#link-linkedin').href = A.meta.linkedin;
-  $('#link-resume').href = A.meta.resume;
   $('#foot-updated').textContent = A.meta.updated;
   $('#e-type').insertAdjacentHTML('beforeend', A.enquiryTypes.map((t) => `<option>${esc(t)}</option>`).join(''));
 
@@ -248,6 +223,12 @@
       if (r.ok) { form.reset(); say('Thank you. Your message has been sent.', 'ok'); } else say('The message could not be sent. Please use the email button.', 'bad');
     } catch (err) { say('The message could not be sent. Please check your connection or use the email button.', 'bad'); }
     submit.disabled = false;
+  });
+
+  /* land on the hero (or the #hash target) */
+  requestAnimationFrame(() => {
+    let t = null; try { t = location.hash.length > 1 ? $(location.hash) : null; } catch (e) { /* not a selector */ }
+    if (t) t.scrollIntoView({ behavior: 'instant' }); else window.scrollTo({ top: 0, behavior: 'instant' });
   });
 
   /* ---------- motion: progress bar, scroll reveal (once), active nav ---------- */
