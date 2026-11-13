@@ -96,6 +96,26 @@
     <div class="ints glass">${interns.map(internRow).join('')}</div>`;
 
   /* ---------- impact ---------- */
+  /* two real data points per chart: no invented months in between */
+  const line = (g) => {
+    const lo = Math.min(g.from, g.to) * 0.6, hi = g.to * 1.08, W = 600, H = 220, px = 48;
+    const y = (v) => 24 + (1 - (v - lo) / (hi - lo)) * (H - 80);
+    const x1 = px, x2 = W - px, y1 = y(g.from), y2 = y(g.to), id = 'lg' + g.name;
+    const pct = Math.round((g.to / g.from - 1) * 100);
+    return `<div class="growth__card glass">
+      <div class="growth__top"><div><p class="eyebrow">${g.name} followers</p><h3>${g.a} <i aria-hidden="true">→</i> ${g.b}</h3></div><span class="badge">+${pct}%${g.name === 'Instagram' ? ' organic' : ''}</span></div>
+      <svg class="chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="${g.name} followers grew from ${g.a} to ${g.b}" preserveAspectRatio="xMidYMid meet">
+        <defs><linearGradient id="${id}s" x1="0" x2="1"><stop offset="0" stop-color="#22D3EE"/><stop offset=".5" stop-color="#4C8DFF"/><stop offset="1" stop-color="#8B7BFF"/></linearGradient>
+        <linearGradient id="${id}f" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#4C8DFF" stop-opacity=".35"/><stop offset="1" stop-color="#4C8DFF" stop-opacity="0"/></linearGradient></defs>
+        <g class="chart__grid">${[0.25, 0.5, 0.75, 1].map((t) => `<line x1="${px}" x2="${W - px}" y1="${24 + t * (H - 80)}" y2="${24 + t * (H - 80)}"/>`).join('')}</g>
+        <path d="M${x1} ${y1}L${x2} ${y2}V${H - 56}H${x1}Z" fill="url(#${id}f)"/>
+        <path d="M${x1} ${y1}L${x2} ${y2}" stroke="url(#${id}s)" stroke-width="5" stroke-linecap="round"/>
+        <circle cx="${x1}" cy="${y1}" r="9" class="chart__dot"/><circle cx="${x2}" cy="${y2}" r="9" class="chart__dot"/>
+        <text x="${x1}" y="${y1 - 20}" class="chart__val">${g.a}</text><text x="${x2}" y="${y2 - 20}" text-anchor="end" class="chart__val">${g.b}</text>
+        <text x="${x1}" y="${H - 18}" class="chart__lbl">Start</text><text x="${x2}" y="${H - 18}" text-anchor="end" class="chart__lbl">Now</text>
+      </svg></div>`;
+  };
+
   const pc = (id) => {
     const p = byId(id);
     return `<article class="pcard glass">
@@ -107,29 +127,26 @@
   };
   $('#impact').innerHTML = `${head('Impact', 'impact-h', 'Work that moved the numbers')}
     <div class="pcards">${A.impact.map(pc).join('')}</div>
-    <div class="growth glass">
-      <div class="growth__top"><div><p class="eyebrow">Organic growth, zero ad spend</p><h3>Followers, start to now</h3></div><span class="badge">+70% Instagram</span></div>
-      <div class="growth__bars">${growth.map(bars).join('')}</div>
-      <p class="growth__note">Instagram and LinkedIn run end to end on recurring formats that earned their place through data.</p>
-    </div>`;
+    <div class="growth">${growth.map(line).join('')}</div>`;
 
   /* ---------- case study (CF-001) ---------- */
   const cs = byId('CF-001');
-  $('#case-study').innerHTML = `${head('Case study', 'case-h', esc(cs.title), esc(cs.summary))}
-    <div class="case">
-      <div class="case__main">
-        <div class="glass case__block"><h3>The challenge</h3><p>${ph(cs.challenge)}</p></div>
-        <div class="glass case__block"><h3>The idea</h3><p>${ph(cs.strategy)}</p></div>
-        <div class="glass case__block"><h3>What I did</h3><ol class="steps">${cs.execution.map((x) => `<li>${ph(x)}</li>`).join('')}</ol></div>
-      </div>
-      <aside class="case__side">
-        <div class="glass case__block verdicts"><h3>How the AI answers changed</h3>
-          <ul>${cs.verdicts.map((v) => `<li><span class="q">${esc(v.q)}</span><span class="v"><s>${esc(v.before)}</s><i aria-hidden="true">→</i><b>${esc(v.after)}</b></span></li>`).join('')}</ul></div>
-        <div class="tiles tiles--2">${cs.outcome.map((o) => stat(o)).join('')}</div>
-      </aside>
+  $('#case-study').innerHTML = `<header class="sec__head"><p class="eyebrow">Featured case study</p><h2 id="case-h">${esc(cs.title)}</h2>
+      <ul class="tags tags--lg">${cs.skills.slice(0, 3).map((s) => `<li>${esc(skillName[s])}</li>`).join('')}</ul></header>
+    <div class="case2">
+      <div class="glass case__block"><h3>The problem</h3><p>${ph(cs.challenge)}</p></div>
+      <div class="glass case__block"><h3>The approach</h3><p>${ph(cs.strategy)}</p></div>
+      <div class="glass case__block case2__wide"><h3>What I did</h3><ol class="steps2">${cs.execution.map((x, i) => `<li><b>${String(i + 1).padStart(2, '0')}</b><span>${ph(x)}</span></li>`).join('')}</ol></div>
     </div>
+    <div class="glass vt">
+      <div class="vt__top"><h3>AI Overview sentiment</h3><span class="vt__key"><i class="k-bad"></i>Before <i class="k-good"></i>After</span></div>
+      <ul>${cs.verdicts.map((v) => `<li><span class="q">${esc(v.q)}</span><span class="pill pill--bad">${esc(v.before)}</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span class="pill pill--good">${esc(v.after)}</span></li>`).join('')}</ul>
+      <div class="vt__src"><span class="tag">Reddit</span><span class="tag">Quora</span><p>Reddit and Quora answers also get cited as sources in AI answers about a brand.</p></div>
+    </div>
+    <div class="outcome"><p class="eyebrow">The outcome</p><ul>${cs.outcome.map((o) => `<li><b>${ph(o.value)}</b><span>${ph(o.label)}</span></li>`).join('')}</ul></div>
     <div class="shots">${cs.visualHints.map((h) => `<figure class="shot"><div class="shot__ph"><span>${ph('[' + h + ']')}</span></div></figure>`).join('')}</div>
-    <div class="glass case__block learn"><h3>What I learned</h3><ul>${cs.learnings.map((x) => `<li>${esc(x)}</li>`).join('')}</ul></div>`;
+    <p class="eyebrow learn__h">What I learned</p>
+    <ul class="learn3">${cs.learnings.map((x) => `<li class="glass">${esc(x)}</li>`).join('')}</ul>`;
 
   /* ---------- work ---------- */
   const work = A.projects.filter((p) => p.id !== 'CF-001');
@@ -138,11 +155,9 @@
   const card = (p) => `<article class="wcard glass">
       <p class="wcard__meta"><span>${esc(typeName(p.type))}</span><span>${ph(p.year)}</span></p>
       <h3><button type="button" class="wcard__btn" data-open="${p.id}">${ph(p.title)}</button></h3>
-      <p>${ph(p.summary)}</p>
-      <div class="wcard__out">${p.outcome.slice(0, 2).map((o) => `<span><b>${ph(o.value)}</b> ${ph(o.label)}</span>`).join('')}</div>
-      <ul class="tags">${p.skills.slice(0, 3).map((s) => `<li>${esc(skillName[s])}</li>`).join('')}</ul>
-      ${hasPh(p) ? '<span class="draft">Draft</span>' : ''}</article>`;
-  $('#work').innerHTML = `${head('Work', 'work-h', 'Selected projects', 'Campaigns, creator programs and social work. Open one for the full file.')}
+      <p class="wcard__sum">${ph(p.summary)}</p>
+      <dl class="wcard__rows"><div><dt>Role</dt><dd>${ph(p.role)}</dd></div><div><dt>Outcome</dt><dd class="hi">${p.outcome.slice(0, 1).map((o) => ph(o.value + ' ' + o.label)).join('')}</dd></div></dl></article>`;
+  $('#work').innerHTML = `${head('Selected work', 'work-h', 'Projects worth talking about')}
     <div class="filters" role="group" aria-label="Filter projects" id="filters">
       <button type="button" data-f="all" aria-pressed="true">All <span>${work.length}</span></button>
       ${types.map((t) => `<button type="button" data-f="${t}" aria-pressed="false">${esc(typeName(t))} <span>${work.filter((p) => p.type === t).length}</span></button>`).join('')}
@@ -229,7 +244,7 @@
   const onScroll = () => { const h = document.documentElement; prog.style.transform = `scaleX(${h.scrollTop / Math.max(1, h.scrollHeight - h.clientHeight)})`; $('#bar').classList.toggle('is-scrolled', h.scrollTop > 8); };
   addEventListener('scroll', onScroll, { passive: true }); onScroll();
 
-  const targets = '.sec__head, .about__copy, .card, .exp, .ints, .pcard, .growth, .case__block, .tiles--2, .shot, .wcard, .sgroup, .resume > div, .course, .contact, .hero__copy, .hero__visual, .stats li';
+  const targets = '.sec__head, .about__copy, .card, .exp, .ints, .pcard, .growth, .case__block, .vt, .outcome, .learn3 li, .growth__card, .shot, .wcard, .sgroup, .resume > div, .course, .contact, .hero__copy, .hero__visual, .stats li';
   const io = 'IntersectionObserver' in window && !reduceMotion
     ? new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); } }), { rootMargin: '0px 0px -6% 0px' })
     : null;
