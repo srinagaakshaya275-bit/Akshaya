@@ -241,8 +241,10 @@ window.ARCHIVE = {
   projects: [
     {
       id: "CF-001", layout: "feature", type: "campaigns", filedUnder: "ORM · AEO · Creators",
+      headline: "AI answers about the brand moved from doubtful to positive across 7 offerings.",
+      baseline: "Google AI Overviews were returning scam allegations and mixed verdicts.",
+      efficiency: "[Cost per booking or per registration, if you can share it]",
       title: "Rewriting what AI says about a brand", year: "2025–26", years: [2025, 2026],
-      stamp: "Verdicts flipped ×5",
       role: "Scouting, negotiation, script reviews and sentiment tracking", roleIds: ["XP-007"],
       skills: ["aeo", "orm", "creator", "seo", "analytics"],
       summary: "AI Overviews were calling courses scams. A creator-led YouTube program changed the sources the answers were built from.",
@@ -289,6 +291,9 @@ window.ARCHIVE = {
     },
     {
       id: "CF-002", layout: "exhibit", type: "content", filedUnder: "Content strategy · Social",
+      headline: "Both accounts grew organically with no ad spend.",
+      baseline: "Instagram started at 98K and LinkedIn at 162K followers.",
+      efficiency: "[Cost per booking from social, if you can share it]",
       title: "Organic growth, zero ad spend", year: "2025–26", years: [2025, 2026], showGrowth: true,
       /* numbers on the Impact card; the full list opens in the file */
       cardStats: [{ value: "378K", label: "Best Instagram post reach" }, { value: "344K", label: "Best LinkedIn post reach" }, { value: "1,000", label: "Bookings from social" }],

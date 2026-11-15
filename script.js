@@ -132,6 +132,11 @@
     $('#rec-inner').innerHTML = `<button type="button" class="rec__close" data-close aria-label="Close">×</button>
       <p class="eyebrow">${esc(typeName(p.type))}</p><h2 id="rec-title">${ph(p.title)}</h2><p class="lede">${ph(p.summary)}</p>
       <div class="tiles">${p.outcome.map((o) => stat(o)).join('')}</div>
+      <dl class="rec__dl rec__dl--top">
+        <dt>The result</dt><dd>${ph(p.headline || '[One sentence: what changed because of this work]')}</dd>
+        <dt>Before and after</dt><dd>${ph(p.baseline || '[Where it started, and where it ended up]')}</dd>
+        <dt>Cost and efficiency</dt><dd>${ph(p.efficiency || '[Cost per lead, booking or registration, or how it compared with a benchmark]')}</dd>
+      </dl>
       ${p.showGrowth ? `<div class="growth growth--in">${growth.map(line).join('')}</div>` : ''}
       ${p.verdicts ? `<div class="vt vt--in">
         <div class="vt__top"><h3>AI Overview sentiment</h3><span class="vt__key"><i class="k-bad"></i>Before <i class="k-good"></i>After</span></div>
