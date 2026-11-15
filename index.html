@@ -36,7 +36,7 @@
 
   <header class="bar" id="bar">
     <div class="bar__in">
-      <a class="brand" href="#top" aria-label="Akshaya Reddy, back to top">AR</a>
+      <a class="brand" href="#top" aria-label="Akshaya Reddy, back to top">AR<i class="brand__dot" aria-hidden="true"></i></a>
       <button class="menu" id="menu" type="button" aria-expanded="false" aria-controls="nav"><span class="sr">Menu</span><b></b><b></b></button>
       <nav class="nav" id="nav" aria-label="Sections">
         <a href="#about">About</a>
@@ -91,11 +91,6 @@
             <label for="e-email">Email <span class="req" aria-hidden="true">*</span></label>
             <input id="e-email" name="email" type="email" autocomplete="email" required aria-required="true" aria-describedby="e-email-err">
             <p class="field__err" id="e-email-err" hidden>Please enter a valid email address.</p>
-          </div>
-          <div class="field field--wide">
-            <label for="e-type">What is this about? <span class="req" aria-hidden="true">*</span></label>
-            <select id="e-type" name="enquiry_type" required aria-required="true" aria-describedby="e-type-err"><option value="">Choose one</option></select>
-            <p class="field__err" id="e-type-err" hidden>Please choose one.</p>
           </div>
           <div class="field field--wide">
             <label for="e-msg">Message <span class="req" aria-hidden="true">*</span></label>

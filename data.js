@@ -19,7 +19,7 @@ window.ARCHIVE = {
     focus: "ORM, AEO, creator partnerships, social and on-ground marketing",
     intro: "I make brands look right wherever people check them, from Google and AI answers to the feed and the campus floor.",
     location: "Bengaluru, India",
-    updated: "13 Nov 2026",
+    updated: "13 November 2026",
     email: "srinagaakshaya275@gmail.com",
     linkedin: "https://www.linkedin.com/in/akshayareddyp/",
     resume: "Akshaya_Resume.pdf",
@@ -52,7 +52,7 @@ window.ARCHIVE = {
   marquee: ["ORM", "AEO", "GEO", "SEO", "SERP visibility", "Influencer marketing", "UGC", "Performance marketing", "Social media", "Community management", "Content creation", "Content writing", "Campaign planning", "Brand marketing", "Lead generation", "BTL marketing", "Offline events", "Performance tracking", "Process improvement"],
 
   /* Projects shown in the Impact section, in order (ids from `projects`). */
-  impact: ["CF-001", "CF-006", "CF-002"],
+  impact: ["CF-001", "CF-006", "CF-010", "CF-002"],
 
   /* ---------------------------- ABOUT ---------------------------------- */
   about: {
@@ -141,7 +141,7 @@ window.ARCHIVE = {
   roles: [
     {
       id: "XP-001", type: "internship", company: "Center for Teaching & Learning", title: "Administrative & Social Media Intern",
-      dates: "Aug 2023 – Jan 2024", startYear: 2023, endYear: 2024, place: "Amaravati, AP",
+      dates: "August 2023 – January 2024", startYear: 2023, endYear: 2024, place: "Amaravati, AP",
       summary: "Social media and orientation reporting.",
       responsibilities: [
         { text: "Created structured reports, agendas and presentations for orientation sessions to support organisational planning.", skills: [] },
@@ -152,7 +152,7 @@ window.ARCHIVE = {
     },
     {
       id: "XP-002", type: "internship", company: "GrowUMedia", title: "Content Marketing Strategy Intern",
-      dates: "Feb – Jun 2024", startYear: 2024, endYear: 2024, place: "Remote",
+      dates: "February – June 2024", startYear: 2024, endYear: 2024, place: "Remote",
       summary: "Social pages and podcast marketing for 4 clients.",
       responsibilities: [
         { text: "Managed content calendars and social media platforms, curating engaging content tailored to diverse audiences.", skills: [] },
@@ -163,18 +163,18 @@ window.ARCHIVE = {
     },
     {
       id: "XP-003", type: "internship", company: "Trixal Media", title: "Social Media Marketing Intern",
-      dates: "Jul – Aug 2024", startYear: 2024, endYear: 2024, place: "Remote",
+      dates: "July – August 2024", startYear: 2024, endYear: 2024, place: "Remote",
       summary: "Social content and visual assets aligned to brand identity.",
       responsibilities: [
         { text: "Created and scheduled social media content, improving brand presence and engagement by 65%.", skills: [] },
         { text: "Managed paid advertising campaigns, increasing visibility and engagement through targeted marketing strategies.", skills: [] },
         { text: "Collaborated on sustainability-focused campaigns to align brand messaging with environmental initiatives.", skills: [] }
       ],
-      achievements: [{ value: "+65%", label: "Engagement" }]
+      achievements: [{ value: "+65%", label: "Engagement throughout socials" }]
     },
     {
       id: "XP-004", type: "internship", company: "Phantasm Solutions", title: "Digital Marketing Strategy Intern",
-      dates: "Sep – Dec 2024", startYear: 2024, endYear: 2024, place: "Remote",
+      dates: "September – December 2024", startYear: 2024, endYear: 2024, place: "Remote",
       summary: "Marketing and budget plans, SEO and backlinking for clients.",
       responsibilities: [
         { text: "Optimised SEO strategies, backlinking and content marketing to enhance digital presence and brand positioning.", skills: [] },
@@ -185,18 +185,18 @@ window.ARCHIVE = {
     },
     {
       id: "XP-005", type: "internship", company: "Runverve", title: "Social Media Marketing Intern",
-      dates: "Dec 2024 – May 2025", startYear: 2024, endYear: 2025, place: "Remote",
+      dates: "December 2024 – May 2025", startYear: 2024, endYear: 2025, place: "Remote",
       summary: "Multi-platform content and campaigns for launches and webinars.",
       responsibilities: [
         { text: "Developing and managing engaging content for athletes and the sports tech community across multiple platforms.", skills: [] },
         { text: "Tracking and analysing social media performance, optimising content for brand visibility and engagement.", skills: [] },
         { text: "Creating and executing multi-platform content strategies to enhance brand awareness and audience interaction.", skills: [] }
       ],
-      achievements: [{ value: "10+", label: "IPs developed" }]
+      achievements: [{ value: "10+", label: "IP's developed" }]
     },
     {
       id: "XP-006", type: "full-time", company: "Masai School", title: "Marketing Operations Specialist",
-      dates: "Jun 2025 – Apr 2026", startYear: 2025, endYear: 2026, place: "Bengaluru",
+      dates: "June 2025 – April 2026", startYear: 2025, endYear: 2026, place: "Bengaluru",
       summary: "ORM, influencer marketing, Instagram and LinkedIn, and lead generation.",
       responsibilities: [
         { text: "Owned ORM across platforms: improving online presence, resolving inbound escalations and managing crises.", skills: ["orm", "crisis"] },
@@ -212,7 +212,7 @@ window.ARCHIVE = {
     },
     {
       id: "XP-007", type: "full-time", company: "Masai School", title: "Associate Marketing Manager",
-      dates: "Apr 2026 – Present", startYear: 2026, endYear: 2026, place: "Bengaluru",
+      dates: "April 2026 – Present", startYear: 2026, endYear: 2026, place: "Bengaluru",
       summary: "AEO, SERP visibility, organic leads, and BTL and on-ground events.",
       responsibilities: [
         { text: "Running integrated campaigns across digital, social and offline channels, coordinating content, design and growth.", skills: ["campaign"] },
@@ -274,8 +274,23 @@ window.ARCHIVE = {
       learnings: []
     },
     {
+      id: "CF-010", layout: "feature", type: "creators", filedUnder: "Influencer marketing",
+      title: "Influencer Marketing", year: "", years: [],
+      role: "[Your role]", roleIds: ["XP-006"],
+      skills: ["creator", "ugc", "campaign"],
+      summary: "[One line on your influencer marketing work. Content coming.]",
+      challenge: "[The challenge]",
+      objective: "[The objective]",
+      strategy: "[Your strategy]",
+      execution: ["[What you did]"],
+      deliverables: ["[Deliverables]"],
+      visuals: [], visualHints: [], video: "",
+      outcome: [{ value: "[number]", label: "[Metric]" }],
+      learnings: []
+    },
+    {
       id: "CF-002", layout: "exhibit", type: "content", filedUnder: "Content strategy · Social",
-      title: "Organic growth, zero ad spend", year: "2025–26", years: [2025, 2026],
+      title: "Organic growth, zero ad spend", year: "2025–26", years: [2025, 2026], showGrowth: true,
       role: "Instagram & LinkedIn owner", roleIds: ["XP-006"],
       skills: ["social", "content", "calendar", "analytics"],
       summary: "Instagram and LinkedIn run end to end on recurring formats that earned their place through data.",
@@ -415,8 +430,5 @@ window.ARCHIVE = {
   coursework: [
     { group: "Digital marketing", items: ["Fundamentals of Digital Marketing", "Search Engine Optimisation", "Google Analytics", "Google Ads", "CRM", "Omni-channel Marketing", "Gen AI", "Content Writing"] },
     { group: "Social media marketing", items: ["Fundamentals of Social Media Marketing", "Social Media Marketing Specialization (Meta)", "Social Media Monitoring", "Content Creating using Canva"] }
-  ],
-
-  /* "What is this about?" options in the contact form */
-  enquiryTypes: ["I'm hiring for a role", "I have a marketing project", "Creator or brand collaboration", "Something else"]
+  ]
 };

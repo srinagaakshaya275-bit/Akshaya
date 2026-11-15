@@ -85,7 +85,7 @@
       ${r.achievements.length ? `<div class="tiles tiles--sm">${r.achievements.map((a) => stat(a)).join('')}</div>` : ''}</div></details>`;
   $('#experience').innerHTML = `${head('Experience', 'exp-h', 'Where I\u2019ve worked')}
     <div class="exp glass">
-      <div class="exp__top"><h3>Masai School</h3><span class="role__dates">Jun 2025 – Present</span></div>
+      <div class="exp__top"><h3>Masai School</h3><span class="role__dates">June 2025 – Present</span></div>
       <ol class="tl">${tl}</ol>
     </div>
     <h3 class="sub">Internships</h3>
@@ -115,7 +115,7 @@
   const pc = (id) => {
     const p = byId(id);
     return `<article class="pcard glass">
-      <p class="eyebrow">${esc(typeName(p.type))}${p.year ? ' · ' + ph(p.year) : ''}</p>
+      <p class="eyebrow">${esc(typeName(p.type))}</p>
       <h3>${ph(p.title)}</h3><p class="pcard__sum">${ph(p.summary)}</p>
       <div class="tiles tiles--col">${p.outcome.slice(0, 3).map((o) => stat(o, 'tile--row')).join('')}</div>
       <a class="more" href="#" data-open="${id}">Read the file <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
@@ -123,7 +123,7 @@
   };
   $('#impact').innerHTML = `${head('Impact', 'impact-h', 'Work that moved the numbers')}
     <div class="pcards">${[...A.impact, ...A.projects.map((p) => p.id).filter((id) => !A.impact.includes(id))].map(pc).join('')}</div>
-    <div class="growth">${growth.map(line).join('')}</div>`;
+`;
 
   /* ---------- project dialog ---------- */
   const dlg = $('#rec'); let opener = null;
@@ -131,8 +131,9 @@
   const open = (id, from) => {
     const p = byId(id); if (!p) return; opener = from || null;
     $('#rec-inner').innerHTML = `<button type="button" class="rec__close" data-close aria-label="Close">×</button>
-      <p class="eyebrow">${esc(typeName(p.type))} · ${ph(p.year)}</p><h2 id="rec-title">${ph(p.title)}</h2><p class="lede">${ph(p.summary)}</p>
+      <p class="eyebrow">${esc(typeName(p.type))}</p><h2 id="rec-title">${ph(p.title)}</h2><p class="lede">${ph(p.summary)}</p>
       <div class="tiles">${p.outcome.map((o) => stat(o)).join('')}</div>
+      ${p.showGrowth ? `<div class="growth growth--in">${growth.map(line).join('')}</div>` : ''}
       ${p.verdicts ? `<div class="vt vt--in">
         <div class="vt__top"><h3>AI Overview sentiment</h3><span class="vt__key"><i class="k-bad"></i>Before <i class="k-good"></i>After</span></div>
         <ul>${p.verdicts.map((v) => `<li><span class="q">${esc(v.q)}</span><span class="pill pill--bad">${ph(v.before)}</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span class="pill pill--good">${ph(v.after)}</span></li>`).join('')}</ul>
@@ -189,10 +190,9 @@
   $('#mail-addr').href = `mailto:${A.meta.email}`;
   $('#mail-addr').textContent = A.meta.email;
   $('#hero-linkedin').href = A.meta.linkedin;
-  $('#e-type').insertAdjacentHTML('beforeend', A.enquiryTypes.map((t) => `<option>${esc(t)}</option>`).join(''));
 
   const form = $('#enq'), status = $('#e-status'), submit = $('#e-submit');
-  const fields = [['e-name', (v) => v.trim().length > 0], ['e-email', (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim())], ['e-type', (v) => v !== ''], ['e-msg', (v) => v.trim().length > 0]];
+  const fields = [['e-name', (v) => v.trim().length > 0], ['e-email', (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim())], ['e-msg', (v) => v.trim().length > 0]];
   const mark = (id, ok) => { const el = $('#' + id); el.classList.toggle('is-invalid', !ok); el.setAttribute('aria-invalid', String(!ok)); $('#' + id + '-err').hidden = ok; return ok; };
   fields.forEach(([id, test]) => { $('#' + id).addEventListener('blur', () => mark(id, test($('#' + id).value))); $('#' + id).addEventListener('input', () => { if ($('#' + id).classList.contains('is-invalid')) mark(id, test($('#' + id).value)); }); });
   const say = (msg, kind) => { status.textContent = msg; status.className = 'enq__status' + (kind ? ' is-' + kind : ''); };
@@ -204,13 +204,13 @@
     if (!A.meta.formEndpoint) {
       /* no form service connected: hand the message to the visitor's email app, and say so honestly */
       const body = `${form.elements.message.value.trim()}\n\n${form.elements.name.value.trim()}\n${form.elements.email.value.trim()}`;
-      location.href = `mailto:${A.meta.email}?subject=${encodeURIComponent(form.elements.enquiry_type.value + ' · ' + form.elements.name.value.trim())}&body=${encodeURIComponent(body)}`;
+      location.href = `mailto:${A.meta.email}?subject=${encodeURIComponent('Message from ' + form.elements.name.value.trim())}&body=${encodeURIComponent(body)}`;
       say('Your email app should open with this message ready. Press send there to deliver it. If nothing opens, email me directly using the address below.', '');
       return;
     }
     submit.disabled = true; say('Sending…');
     try {
-      const fd = new FormData(form); fd.append('_subject', `${form.elements.enquiry_type.value} · ${form.elements.name.value.trim()}`); fd.append('_template', 'table');
+      const fd = new FormData(form); fd.append('_subject', `Portfolio message from ${form.elements.name.value.trim()}`); fd.append('_template', 'table');
       const r = await fetch(A.meta.formEndpoint, { method: 'POST', headers: { Accept: 'application/json' }, body: fd });
       let data = {}; try { data = await r.json(); } catch (e) { /* not JSON */ }
       /* FormSubmit answers success "true"/true only when it has accepted the message */
