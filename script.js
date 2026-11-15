@@ -42,6 +42,7 @@
   const H = A.hero;
   $('#hero-h').innerHTML = `${esc(H.lead)} <span>${esc(H.accent)}</span>`;
   $('#hero-intro').textContent = A.meta.intro;
+  $('#hero-who').innerHTML = `${A.portrait && A.portrait.src ? `<img class="avatar" src="${esc(A.portrait.src)}" alt="${esc(A.portrait.alt || A.meta.name)}" width="72" height="72">` : ''}<span><b>${esc(A.meta.name)}</b>${esc(A.meta.positioning)}</span>`;
   $('#hero-resume').href = A.meta.resume;
 
   const growth = A.growth;
@@ -50,10 +51,10 @@
     <div class="gbar__track" role="img" aria-label="${g.name} followers grew from ${g.a} to ${g.b}"><i class="gbar__from" style="width:${(g.from / max) * 100}%"></i><i class="gbar__to" style="width:${(g.to / max) * 100}%"></i></div></div>`;
   $('#hero-visual').innerHTML = `
     <div class="perf glass">
-      <div class="perf__top"><span>Impact snapshot</span><em>Masai School</em></div>
+      <div class="perf__top"><span>Impact snapshot</span><em>Masai</em></div>
       <div class="perf__bars">${growth.map(bars).join('')}</div>
       <div class="perf__tiles">
-        ${stat({ value: '₹15L', label: 'Budget managed in a month' })}${stat({ value: '7+', label: 'AI verdicts flipped, ongoing' })}
+        ${stat({ value: '₹15L', label: 'Budget managed in a month' })}${stat({ value: '7+', label: 'AI verdicts flipped' })}
       </div>
     </div>`;
   $('#stats').innerHTML = A.highlights.map((h) => `<li><b>${esc(h.value)}</b><span>${esc(h.label)}</span></li>`).join('');
@@ -84,7 +85,7 @@
       ${r.achievements.length ? `<div class="tiles tiles--sm">${r.achievements.map((a) => stat(a)).join('')}</div>` : ''}</div></details>`;
   $('#experience').innerHTML = `${head('Experience', 'exp-h', 'Where I\u2019ve worked')}
     <div class="exp glass">
-      <div class="exp__top"><h3>Masai School</h3><span class="role__dates">June 2025 – Present</span></div>
+      <div class="exp__top"><h3>Masai</h3><span class="role__dates">June 2025 – Present</span></div>
       <ol class="tl">${tl}</ol>
     </div>
     <h3 class="sub">Internships</h3>
@@ -181,13 +182,8 @@
       <div class="scard glass scard--tools"><div class="scard__h"><span class="card__ico">${icon('wrench')}</span><div><h3>Tools</h3><p>What I work in every day</p></div></div>
         <ul class="tools">${A.tools.map((t) => `<li><i>${toolIcon(t)}</i>${esc(t.name)}</li>`).join('')}</ul></div>
     </div>
-    <h3 class="sub">Education</h3>
-    <div class="edu2">
-      <div class="glass edu2__main"><div class="edu2__top"><div><h3>${esc(A.education[0].institution)}</h3><p>${esc(A.education[0].program)}</p></div><span class="role__dates">${esc(A.education[0].years)}</span></div>
-        <div class="tile edu2__score"><b>${esc(A.education[0].score.replace('CGPA ', ''))}</b><span>CGPA</span></div>
-        <ul class="edu2__rows">${A.education.slice(1).map((e) => `<li><span>${esc(e.program)} · ${esc(e.years)}</span><b>${esc(e.score)}</b></li>`).join('')}</ul></div>
-      <div class="glass edu2__certs"><p class="eyebrow">Certifications & coursework</p><ul>${certs.map((c) => { const n = typeof c === 'string' ? c : c.name, u = typeof c === 'string' ? '' : c.url; return u ? `<li><a href="${esc(u)}" target="_blank" rel="noopener">${icon('award')}${esc(n)}<span class="sr"> (opens certificate)</span></a></li>` : `<li>${icon('award')}${esc(n)}</li>`; }).join('')}</ul></div>
-    </div>
+    <h3 class="sub">Certifications</h3>
+    <div class="glass edu2__certs edu2__certs--solo"><ul>${certs.map((c) => { const n = typeof c === 'string' ? c : c.name, u = typeof c === 'string' ? '' : c.url; return u ? `<li><a href="${esc(u)}" target="_blank" rel="noopener">${icon('award')}${esc(n)}<span class="sr"> (opens certificate)</span></a></li>` : `<li>${icon('award')}${esc(n)}</li>`; }).join('')}</ul></div>
     <p class="resume-line"><a class="btn btn--ghost" href="${esc(A.meta.resume)}" download>Download resume (PDF)</a> <a class="btn btn--ghost" href="${esc(A.meta.linkedin)}" target="_blank" rel="noopener">LinkedIn</a></p>`;
 
   /* ---------- contact ---------- */

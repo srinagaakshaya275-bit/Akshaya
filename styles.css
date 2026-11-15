@@ -554,3 +554,9 @@ h2 { background: linear-gradient(180deg, #FFFFFF 30%, #B9D3FF); -webkit-backgrou
 .perf__tiles { grid-template-columns: repeat(2, 1fr); }
 @media (max-width: 559px) { .perf__tiles { grid-template-columns: 1fr; } }
 .rec__dl--top { margin-top: 18px; padding-bottom: 6px; border-bottom: 1px solid var(--line); }
+
+.edu2__certs--solo { padding: clamp(24px, 3vw, 36px); }
+.edu2__certs--solo ul { display: grid; gap: 12px; grid-template-columns: 1fr; }
+@media (min-width: 700px) { .edu2__certs--solo ul { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 1000px) { .edu2__certs--solo ul { grid-template-columns: 1fr 1fr 1fr; } }
+.edu2__certs--solo li:first-child { grid-column: auto; }

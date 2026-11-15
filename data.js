@@ -15,7 +15,7 @@
 window.ARCHIVE = {
   meta: {
     name: "Akshaya Reddy",
-    positioning: "Associate Marketing Manager at Masai School",
+    positioning: "Associate Marketing Manager at Masai",
     focus: "ORM, AEO, creator partnerships, social and on-ground marketing",
     intro: "I make brands look right wherever people check them, from Google and AI answers to the feed and the campus floor.",
     location: "Bengaluru, India",
@@ -27,6 +27,9 @@ window.ARCHIVE = {
        the "Fill the form" button stays hidden and only email shows. */
     googleForm: ""
   },
+
+  /* Photo in the hero pill. Replace assets/portrait.jpg, or set src to "" to hide the photo. */
+  portrait: { src: "assets/portrait.jpg", alt: "Akshaya Reddy" },
 
   /* Hero headline. `lead` is white, `accent` is blue. */
   hero: {
@@ -43,12 +46,12 @@ window.ARCHIVE = {
   /* The stat strip under the hero. */
   highlights: [
     { value: "2.5M", label: "Monthly organic reach" },
-    { value: "369K", label: "Audience managed" },
+    { value: "380K", label: "Audience managed" },
     { value: "3,600+", label: "Leads a month" }
   ],
 
   /* The scrolling band under the stat strip. */
-  marquee: ["ORM", "AEO", "GEO", "SEO", "SERP visibility", "Influencer marketing", "UGC", "Performance marketing", "Social media", "Community management", "Content creation", "Content writing", "Campaign planning", "Brand marketing", "Lead generation", "BTL marketing", "Offline events", "Performance tracking", "Process improvement"],
+  marquee: ["ORM", "AEO", "GEO", "SEO", "Influencer marketing", "UGC", "Performance marketing", "Social media", "Community management", "Content writing", "Campaign planning", "Brand marketing", "Lead generation", "BTL marketing", "Offline events", "Performance tracking"],
 
   /* Projects shown in the Impact section, in order (ids from `projects`). */
   impact: ["CF-001", "CF-006", "CF-010", "CF-002"],
@@ -112,15 +115,15 @@ window.ARCHIVE = {
   /* The Skills section cards. `search` shows a small search mock-up in the first card. */
   skillCards: [
     { title: "ORM & Search", sub: "What people and AI find when they look you up", icon: "search", search: true,
-      items: ["ORM", "AEO / GEO", "SEO", "SERP & Search Visibility", "Crisis Management", "Reddit & Quora Citations", "Brand Sentiment Tracking", "Keyword Research", "Backlinking"] },
+      items: ["ORM", "AEO / GEO", "SEO", "SERP & Search Visibility", "Keyword Research", "Crisis Management"] },
     { title: "Marketing", sub: "Campaigns, creators and growth", icon: "mega",
-      items: ["Campaign Planning & Execution", "Brand Marketing", "Influencer Marketing", "Performance Marketing", "Performance Ads", "UGC", "Lead Generation", "Funnel Optimisation", "Budget Planning", "Go-to-Market Planning"] },
+      items: ["Campaign Planning & Execution", "Brand Marketing", "Influencer Marketing", "Performance Marketing", "UGC", "Lead Generation", "Budget Planning"] },
     { title: "Content & Social", sub: "From idea to shoot to post", icon: "video",
-      items: ["Social Media Strategy", "Content Creation", "Content Writing", "Copywriting", "Video Shooting & Editing", "Short-Form Video", "Content Calendars", "Community Management", "Creative Briefing", "Storytelling"] },
+      items: ["Social Media Strategy", "Content Writing", "Video Shooting & Editing", "Content Calendars", "Community Management"] },
     { title: "Offline & Events", sub: "Where the brand meets people in person", icon: "pin",
-      items: ["Hackathons", "On-Ground Events", "BTL Marketing", "Guerilla Campaigns", "Event Planning & Logistics"] },
+      items: ["Hackathons", "On-Ground Events", "BTL Marketing", "Guerilla Campaigns"] },
     { title: "Analytics & Ops", sub: "Measure it, then fix it", icon: "chart",
-      items: ["Performance Tracking & Reporting", "UTM Tracking", "Process Improvement", "Dashboarding", "Marketing Automation", "Project Management", "Cross-Team Coordination"] }
+      items: ["Performance Tracking & Reporting", "UTM Tracking", "Marketing Automation", "Process Improvement", "Project Management"] }
   ],
   /* Tools: `brand` uses a logo from icons.js; `glyph` uses a generic icon (bolt, share, people, video, grid, chart, search). */
   tools: [
@@ -139,7 +142,7 @@ window.ARCHIVE = {
   /* type: "full-time" | "internship". Listed oldest first; the site shows newest first. */
   roles: [
     {
-      id: "XP-001", type: "internship", company: "Center for Teaching & Learning", title: "Administrative & Social Media Intern",
+      id: "XP-001", type: "internship", company: "Centre for Teaching & Learning", title: "Administrative & Social Media Intern",
       dates: "August 2023 – January 2024", startYear: 2023, endYear: 2024, place: "Amaravati, AP",
       summary: "Social media and orientation reporting.",
       responsibilities: [
@@ -194,23 +197,23 @@ window.ARCHIVE = {
       achievements: [{ value: "10+", label: "IP's developed" }]
     },
     {
-      id: "XP-006", type: "full-time", company: "Masai School", title: "Marketing Operations Specialist",
+      id: "XP-006", type: "full-time", company: "Masai", title: "Marketing Operations Specialist",
       dates: "June 2025 – April 2026", startYear: 2025, endYear: 2026, place: "Bengaluru",
       summary: "ORM, influencer marketing, Instagram and LinkedIn, and lead generation.",
       responsibilities: [
-        { text: "Owned ORM across platforms: improving online presence, resolving inbound escalations and managing crises.", skills: ["orm", "crisis"] },
-        { text: "Ran influencer marketing end to end: scouting, negotiation, research, content writing, UGC and campaign creatives.", skills: ["creator", "ugc", "copy"] },
+        { text: "Owned ORM across platforms: improved online presence, resolved inbound escalations and managed crises.", skills: ["orm", "crisis"] },
+        { text: "Ran influencer marketing end to end: scouted and negotiated with creators, researched, wrote content and built UGC and campaign creatives.", skills: ["creator", "ugc", "copy"] },
         { text: "Managed Instagram and LinkedIn, owned monthly content calendars and drove lead generation.", skills: ["social", "calendar", "leadgen"] }
       ],
       roleIds: [],
       achievements: [
         { value: "4,000+", label: "DMs handled" },
         { value: "100+", label: "Escalations resolved" },
-        { value: "369K", label: "Followers managed" }
+        { value: "380K", label: "Followers managed" }
       ]
     },
     {
-      id: "XP-007", type: "full-time", company: "Masai School", title: "Associate Marketing Manager",
+      id: "XP-007", type: "full-time", company: "Masai", title: "Associate Marketing Manager",
       dates: "April 2026 – Present", startYear: 2026, endYear: 2026, place: "Bengaluru",
       summary: "AEO, SERP visibility, organic leads, and BTL and on-ground events.",
       responsibilities: [
@@ -241,7 +244,7 @@ window.ARCHIVE = {
   projects: [
     {
       id: "CF-001", layout: "feature", type: "campaigns", filedUnder: "ORM · AEO · Creators",
-      headline: "AI answers about the brand moved from doubtful to positive across 7 offerings.",
+      headline: "AI answers about the brand moved from doubtful to positive across 7+ offerings.",
       baseline: "Google AI Overviews were returning scam allegations and mixed verdicts.",
       efficiency: "[Cost per booking or per registration, if you can share it]",
       title: "Rewriting what AI says about a brand", year: "2025–26", years: [2025, 2026],
@@ -261,7 +264,7 @@ window.ARCHIVE = {
       visuals: [], visualHints: ["Before: AI Overview screenshot, brand blurred", "After: AI Overview screenshot, brand blurred"], video: "",
       outcome: [
         { value: "400+", label: "Videos live" }, { value: "1,000+", label: "Bookings" },
-        { value: "100+", label: "Registrations" }, { value: "7", label: "AI verdicts turned positive" }
+        { value: "100+", label: "Registrations" }, { value: "7+", label: "AI verdicts turned positive" }
       ],
       /* One row per offering. Replace the [Before] / [After] rows and add context when you have it. */
       verdicts: [
@@ -344,21 +347,6 @@ window.ARCHIVE = {
       deliverables: ["[Deliverables]"],
       visuals: [], visualHints: ["Channel post screenshot"], video: "",
       outcome: [{ value: "1,606", label: "Paid in 2 months" }],
-      learnings: ["[What you learned]"]
-    },
-    {
-      id: "CF-005", layout: "text", type: "creators", filedUnder: "Creator partnerships",
-      title: "Regional Creator Network", year: "2025–26", years: [2025, 2026],
-      role: "Scouting & negotiation", roleIds: ["XP-006"],
-      skills: ["creator"],
-      summary: "Scouted Tamil, Kannada and Telugu creators, including mega creators.",
-      challenge: "[The challenge]",
-      objective: "Reach regional audiences that big channels miss.",
-      strategy: "[Your strategy]",
-      execution: ["Scouted and negotiated with Tamil, Kannada and Telugu creators, including mega creators."],
-      deliverables: ["[Deliverables]"],
-      visuals: [], visualHints: ["Creator roster or content"], video: "",
-      outcome: [{ value: "[number]", label: "Creators onboarded" }],
       learnings: ["[What you learned]"]
     },
     {

@@ -9,6 +9,7 @@ A dark, glass-style single-page portfolio. Plain HTML, CSS and vanilla JavaScrip
 | `script.js` | Builds each section from `data.js`; project pop-ups, filters, form, scroll effects |
 | `icons.js` | Tool logos (simple-icons, CC0) used in the Skills > Tools card |
 | `styles.css` | The design. Colours and fonts are tokens at the top (`:root`) |
+| `404.html`, `favicon.*`, `apple-touch-icon.png`, `assets/og-image.png` | Not-found page, browser icon, and the 1200x630 link-preview image |
 | `Akshaya_Resume.pdf` | Linked from the Resume and Contact sections |
 
 ## Sections
@@ -33,3 +34,6 @@ python3 -m http.server 8000   # then open http://localhost:8000
 
 ## Deploy (GitHub Pages)
 Repo → Settings → Pages → Build and deployment → Source: **Deploy from a branch** → pick the branch (`main` once merged) and `/ (root)` → Save. The site appears at `https://<username>.github.io/<repo>/` after a minute. Every commit to that branch redeploys it.
+
+## Security and analytics
+`index.html` has a Content-Security-Policy that only allows this site's own files, Google Fonts, and Google Analytics/Tag Manager. If you add another service (a different analytics tool, an embed), its address must be added to that policy or the browser will block it. Search Console verification by HTML meta tag needs no change.
