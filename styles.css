@@ -483,8 +483,8 @@ h2 { background: linear-gradient(180deg, #FFFFFF 30%, #B9D3FF); -webkit-backgrou
 
 /* tools: logo tiles */
 .tools i svg { width: 20px; height: 20px; }
-.tools i svg.brand { fill: #04101F; stroke: none; }
-.tools i svg:not(.brand) { stroke: #04101F; stroke-width: 2; }
+.tools i svg.logo { fill: #04101F; stroke: none; }
+.tools i svg:not(.logo) { stroke: #04101F; stroke-width: 2; }
 /* certificate links */
 .edu2__certs li a { display: flex; align-items: center; gap: 14px; width: 100%; min-height: 44px; margin: -14px -18px; padding: 14px 18px; border-radius: 20px; }
 .edu2__certs li:has(a) { padding: 0; }
@@ -516,3 +516,24 @@ h2 { background: linear-gradient(180deg, #FFFFFF 30%, #B9D3FF); -webkit-backgrou
 .contact__mail:hover { color: #9CC6FF; }
 .resume-line { display: flex; flex-wrap: wrap; gap: 12px; }
 @media (min-width: 980px) { .contact { grid-template-columns: 1fr; } }
+
+/* ===== contact form (replaces the email-only card) ===== */
+.contact { display: block; text-align: left; padding: clamp(24px, 4vw, 48px); max-width: 820px; margin-inline: auto; }
+@media (min-width: 980px) { .contact { grid-template-columns: none; } }
+.enq { display: grid; gap: 20px; width: 100%; max-width: none; margin: 0; }
+.enq__intro { color: var(--muted); font-size: 16.5px; max-width: 60ch; }
+.req { color: #FFFFFF; font-weight: 700; margin-left: 2px; }
+.enq__alt { color: var(--muted); font-size: 15px; }
+.enq__alt a { color: var(--ink); text-decoration: underline; text-underline-offset: 4px; display: inline-flex; align-items: center; min-height: 44px; }
+.enq__status { flex-basis: 100%; }
+@media (min-width: 640px) { .enq { grid-template-columns: 1fr 1fr; } .field--wide { grid-column: 1 / -1; } }
+
+/* brand mark */
+.brand { letter-spacing: .04em; }
+
+/* AI table inside the project pop-up */
+.vt--in { margin-top: 18px; padding: 20px; border: 1px solid var(--line); border-radius: 24px; background: rgba(4, 10, 30, .5); }
+
+/* tool logos: dead centre in their tile */
+.tools i { display: flex; align-items: center; justify-content: center; }
+.tools i svg { display: block; margin: 0; }

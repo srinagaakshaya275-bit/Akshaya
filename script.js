@@ -42,7 +42,6 @@
   const H = A.hero;
   $('#hero-h').innerHTML = `${esc(H.lead)} <span>${esc(H.accent)}</span>`;
   $('#hero-intro').textContent = A.meta.intro;
-  $('#hero-who').innerHTML = `${A.portrait && A.portrait.src ? `<img class="avatar" src="${esc(A.portrait.src)}" alt="${esc(A.portrait.alt || A.meta.name)}" width="72" height="72">` : ''}<span><b>${esc(A.meta.name)}</b>${esc(A.meta.positioning)}</span>`;
   $('#hero-resume').href = A.meta.resume;
 
   const growth = A.growth;
@@ -55,7 +54,7 @@
       <b class="perf__big">2.5M</b><span class="perf__sub">monthly organic reach</span>
       <div class="perf__bars">${growth.map(bars).join('')}</div>
       <div class="perf__tiles">
-        ${stat({ value: '3,600+', label: 'Leads / month' })}${stat({ value: '₹15L', label: 'Budget / month' })}${stat({ value: '7+', label: 'AI verdicts flipped, ongoing' })}
+        ${stat({ value: '3,600+', label: 'Leads / month' })}${stat({ value: '₹15L', label: 'Budget managed in a month' })}${stat({ value: '7+', label: 'AI verdicts flipped, ongoing' })}
       </div>
     </div>`;
   $('#stats').innerHTML = A.highlights.map((h) => `<li><b>${esc(h.value)}</b><span>${esc(h.label)}</span></li>`).join('');
@@ -119,29 +118,12 @@
       <p class="eyebrow">${esc(typeName(p.type))}${p.year ? ' · ' + ph(p.year) : ''}</p>
       <h3>${ph(p.title)}</h3><p class="pcard__sum">${ph(p.summary)}</p>
       <div class="tiles tiles--col">${p.outcome.slice(0, 3).map((o) => stat(o, 'tile--row')).join('')}</div>
-      <a class="more" href="${id === 'CF-001' ? '#case-study' : '#'}" ${id === 'CF-001' ? '' : `data-open="${id}"`}>${id === 'CF-001' ? 'Read the case study' : 'Read the file'} <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <a class="more" href="#" data-open="${id}">Read the file <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
     </article>`;
   };
   $('#impact').innerHTML = `${head('Impact', 'impact-h', 'Work that moved the numbers')}
     <div class="pcards">${[...A.impact, ...A.projects.map((p) => p.id).filter((id) => !A.impact.includes(id))].map(pc).join('')}</div>
     <div class="growth">${growth.map(line).join('')}</div>`;
-
-  /* ---------- case study (CF-001) ---------- */
-  const cs = byId('CF-001');
-  $('#case-study').innerHTML = `<header class="sec__head"><p class="eyebrow">Featured case study</p><h2 id="case-h">${esc(cs.title)}</h2>
-      <ul class="tags tags--lg">${cs.skills.slice(0, 3).map((s) => `<li>${esc(skillName[s])}</li>`).join('')}</ul></header>
-    <div class="case2">
-      <div class="glass case__block"><h3>The problem</h3><p>${ph(cs.challenge)}</p></div>
-      <div class="glass case__block"><h3>The approach</h3><p>${ph(cs.strategy)}</p></div>
-      <div class="glass case__block case2__wide"><h3>What I did</h3><ol class="steps2">${cs.execution.map((x, i) => `<li><b>${String(i + 1).padStart(2, '0')}</b><span>${ph(x)}</span></li>`).join('')}</ol></div>
-    </div>
-    <div class="glass vt">
-      <div class="vt__top"><h3>AI Overview sentiment</h3><span class="vt__key"><i class="k-bad"></i>Before <i class="k-good"></i>After</span></div>
-      <ul>${cs.verdicts.map((v) => `<li><span class="q">${esc(v.q)}</span><span class="pill pill--bad">${ph(v.before)}</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span class="pill pill--good">${ph(v.after)}</span></li>`).join('')}</ul>
-      <div class="vt__src"><span class="tag">Reddit</span><span class="tag">Quora</span><p>Reddit and Quora answers also get cited as sources in AI answers about a brand.</p></div>
-    </div>
-    <div class="outcome"><p class="eyebrow">The outcome</p><ul>${cs.outcome.map((o) => `<li><b>${ph(o.value)}</b><span>${ph(o.label)}</span></li>`).join('')}</ul></div>
-    <div class="shots">${cs.visualHints.map((h) => `<figure class="shot"><div class="shot__ph"><span>${ph('[' + h + ']')}</span></div></figure>`).join('')}</div>`;
 
   /* ---------- project dialog ---------- */
   const dlg = $('#rec'); let opener = null;
@@ -151,6 +133,10 @@
     $('#rec-inner').innerHTML = `<button type="button" class="rec__close" data-close aria-label="Close">×</button>
       <p class="eyebrow">${esc(typeName(p.type))} · ${ph(p.year)}</p><h2 id="rec-title">${ph(p.title)}</h2><p class="lede">${ph(p.summary)}</p>
       <div class="tiles">${p.outcome.map((o) => stat(o)).join('')}</div>
+      ${p.verdicts ? `<div class="vt vt--in">
+        <div class="vt__top"><h3>AI Overview sentiment</h3><span class="vt__key"><i class="k-bad"></i>Before <i class="k-good"></i>After</span></div>
+        <ul>${p.verdicts.map((v) => `<li><span class="q">${esc(v.q)}</span><span class="pill pill--bad">${ph(v.before)}</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span class="pill pill--good">${ph(v.after)}</span></li>`).join('')}</ul>
+        ${p.sourcesNote ? `<div class="vt__src">${p.sourcesNote.tags.map((t) => `<span class="tag">${esc(t)}</span>`).join('')}<p>${esc(p.sourcesNote.text)}</p></div>` : ''}</div>` : ''}
       <dl class="rec__dl">
         <dt>My role</dt><dd>${ph(p.role)}</dd>
         <dt>Challenge</dt><dd>${ph(p.challenge)}</dd>
@@ -158,9 +144,8 @@
         <dt>Strategy</dt><dd>${ph(p.strategy)}</dd>
         <dt>What I did</dt><dd>${list(p.execution)}</dd>
         <dt>Deliverables</dt><dd>${list(p.deliverables)}</dd>
-        <dt>Learnings</dt><dd>${list(p.learnings)}</dd>
+        ${p.learnings && p.learnings.length ? `<dt>Learnings</dt><dd>${list(p.learnings)}</dd>` : ''}
       </dl>
-      <div class="shots shots--sm">${p.visualHints.map((h) => `<figure class="shot"><div class="shot__ph"><span>${ph('[' + h + ']')}</span></div></figure>`).join('')}</div>
       <ul class="tags">${p.skills.map((s) => `<li>${esc(skillName[s])}</li>`).join('')}</ul>`;
     if (!dlg.open) dlg.showModal();
   };
@@ -177,12 +162,13 @@
   const scard = (c, i) => `<div class="scard glass scard--${i}"><div class="scard__h"><span class="card__ico">${icon(c.icon)}</span><div><h3>${esc(c.title)}</h3><p>${esc(c.sub)}</p></div></div>
     ${c.search ? searchMock : ''}<ul class="dots">${c.items.map((x) => `<li>${esc(x)}</li>`).join('')}</ul></div>`;
   const GLYPH = {
+    sprout: '<path d="M12 21v-9"/><path d="M12 12c0-4 3-6 7-6 0 4-3 6-7 6Z"/><path d="M12 15c0-3-2.500-5-6-5 0 3.500 2.500 5 6 5Z"/>', pulse: '<path d="M3 12h4l2-6 4 12 2-6h6"/>',
     bolt: '<path d="M13 3 5 14h6l-1 7 8-11h-6l1-7Z"/>', share: '<circle cx="6" cy="12" r="2.500"/><circle cx="18" cy="6" r="2.500"/><circle cx="18" cy="18" r="2.500"/><path d="m8.200 10.800 7.600-3.600M8.200 13.200l7.600 3.600"/>',
     people: ICON.people, video: '<rect x="3" y="6" width="13" height="12" rx="3"/><path d="m16 10 5-3v10l-5-3"/>', grid: '<rect x="4" y="4" width="7" height="7" rx="1.500"/><rect x="13" y="4" width="7" height="7" rx="1.500"/><rect x="4" y="13" width="7" height="7" rx="1.500"/><rect x="13" y="13" width="7" height="7" rx="1.500"/>',
     chart: '<path d="M4 20V4M4 20h16"/><path d="m8 15 4-4 3 3 5-6"/>', search: '<circle cx="11" cy="11" r="7"/><path d="m20 20-3.500-3.500"/>'
   };
   const toolIcon = (t) => t.brand && window.BRAND && window.BRAND[t.brand]
-    ? `<svg viewBox="0 0 24 24" aria-hidden="true" class="brand"><path d="${window.BRAND[t.brand]}"/></svg>`
+    ? `<svg viewBox="0 0 24 24" aria-hidden="true" class="logo"><path d="${window.BRAND[t.brand]}"/></svg>`
     : `<svg viewBox="0 0 24 24" aria-hidden="true">${GLYPH[t.glyph] || GLYPH.grid}</svg>`;
   const certs = A.coursework.flatMap((c) => c.items);
   $('#skills').innerHTML = `${head('Skills', 'skills-h', 'What I bring to the table')}
@@ -200,11 +186,35 @@
     <p class="resume-line"><a class="btn btn--ghost" href="${esc(A.meta.resume)}" download>Download resume (PDF)</a> <a class="btn btn--ghost" href="${esc(A.meta.linkedin)}" target="_blank" rel="noopener">LinkedIn</a></p>`;
 
   /* ---------- contact ---------- */
-  $('#link-email').href = `mailto:${A.meta.email}`;
   $('#mail-addr').href = `mailto:${A.meta.email}`;
   $('#mail-addr').textContent = A.meta.email;
   $('#hero-linkedin').href = A.meta.linkedin;
-  $('#foot-updated').textContent = A.meta.updated;
+  $('#e-type').insertAdjacentHTML('beforeend', A.enquiryTypes.map((t) => `<option>${esc(t)}</option>`).join(''));
+
+  const form = $('#enq'), status = $('#e-status'), submit = $('#e-submit');
+  const fields = [['e-name', (v) => v.trim().length > 0], ['e-email', (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim())], ['e-type', (v) => v !== ''], ['e-msg', (v) => v.trim().length > 0]];
+  const mark = (id, ok) => { const el = $('#' + id); el.classList.toggle('is-invalid', !ok); el.setAttribute('aria-invalid', String(!ok)); $('#' + id + '-err').hidden = ok; return ok; };
+  fields.forEach(([id, test]) => { $('#' + id).addEventListener('blur', () => mark(id, test($('#' + id).value))); $('#' + id).addEventListener('input', () => { if ($('#' + id).classList.contains('is-invalid')) mark(id, test($('#' + id).value)); }); });
+  const say = (msg, kind) => { status.textContent = msg; status.className = 'enq__status' + (kind ? ' is-' + kind : ''); };
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault(); say('');
+    const results = fields.map(([id, test]) => mark(id, test($('#' + id).value)));
+    if (results.includes(false)) { $('.is-invalid', form).focus(); say('Please fill in every field above.', 'bad'); return; }
+    if (form.elements._gotcha.value) return;
+    if (!A.meta.formEndpoint) {
+      /* no form service connected: hand the message to the visitor's email app, and say so honestly */
+      const body = `${form.elements.message.value.trim()}\n\n${form.elements.name.value.trim()}\n${form.elements.email.value.trim()}`;
+      location.href = `mailto:${A.meta.email}?subject=${encodeURIComponent(form.elements.enquiry_type.value + ' · ' + form.elements.name.value.trim())}&body=${encodeURIComponent(body)}`;
+      say('Your email app should open with this message ready. Press send there to deliver it. If nothing opens, email me directly using the address below.', '');
+      return;
+    }
+    submit.disabled = true; say('Sending…');
+    try {
+      const r = await fetch(A.meta.formEndpoint, { method: 'POST', headers: { Accept: 'application/json' }, body: new FormData(form) });
+      if (r.ok) { form.reset(); say('Thank you. Your message has been sent.', 'ok'); } else say('The message could not be sent. Please email me directly instead.', 'bad');
+    } catch (err) { say('The message could not be sent. Please check your connection or email me directly.', 'bad'); }
+    submit.disabled = false;
+  });
 
   /* land on the hero (or the #hash target) */
   requestAnimationFrame(() => {
@@ -217,7 +227,7 @@
   const onScroll = () => { const h = document.documentElement; prog.style.transform = `scaleX(${h.scrollTop / Math.max(1, h.scrollHeight - h.clientHeight)})`; $('#bar').classList.toggle('is-scrolled', h.scrollTop > 8); };
   addEventListener('scroll', onScroll, { passive: true }); onScroll();
 
-  const targets = '.sec__head, .about__copy, .card, .exp, .ints, .pcard, .growth, .case__block, .vt, .outcome, .learn3 li, .growth__card, .shot, .wcard, .how li, .scard, .edu2 > div, .resume-line, .contact, .hero__copy, .hero__visual, .stats li';
+  const targets = '.sec__head, .about__copy, .card, .exp, .ints, .pcard, .growth, .growth__card, .how li, .scard, .edu2 > div, .resume-line, .contact, .hero__copy, .hero__visual, .stats li';
   const io = 'IntersectionObserver' in window && !reduceMotion
     ? new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); } }), { rootMargin: '0px 0px -6% 0px' })
     : null;

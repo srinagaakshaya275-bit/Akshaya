@@ -22,7 +22,11 @@ window.ARCHIVE = {
     updated: "13 Nov 2026",
     email: "srinagaakshaya275@gmail.com",
     linkedin: "https://www.linkedin.com/in/akshayareddyp/",
-    resume: "Akshaya_Resume.pdf"
+    resume: "Akshaya_Resume.pdf",
+    /* Contact form. With this empty, "Send message" opens the visitor's email app with the message
+       ready to send to you. To have it deliver straight to your inbox, create a free form at
+       https://formspree.io and paste its endpoint here, e.g. "https://formspree.io/f/abcdwxyz". */
+    formEndpoint: ""
   },
 
   /* Hero headline. `lead` is white, `accent` is blue. */
@@ -30,9 +34,6 @@ window.ARCHIVE = {
     lead: "Marketing that",
     accent: "shows up in metrics."
   },
-
-  /* Portrait shown in the hero. Replace assets/portrait.jpg, or set src to "" to hide it. */
-  portrait: { src: "assets/portrait.jpg", alt: "Akshaya Reddy" },
 
   /* Follower growth, used by the hero card and the Impact charts. from/to are in thousands. */
   growth: [
@@ -118,23 +119,19 @@ window.ARCHIVE = {
     { title: "Content & Social", sub: "From idea to shoot to post", icon: "video",
       items: ["Social Media Strategy", "Content Creation", "Content Writing", "Copywriting", "Video Shooting & Editing", "Short-Form Video", "Content Calendars", "Community Management", "Creative Briefing", "Storytelling"] },
     { title: "Offline & Events", sub: "Where the brand meets people in person", icon: "pin",
-      items: ["Hackathons", "On-Ground Events", "BTL Marketing", "Guerilla Campaigns", "Event Planning & Logistics", "Vendor Coordination", "Vendor Negotiation"] },
+      items: ["Hackathons", "On-Ground Events", "BTL Marketing", "Guerilla Campaigns", "Event Planning & Logistics"] },
     { title: "Analytics & Ops", sub: "Measure it, then fix it", icon: "chart",
-      items: ["Performance Tracking & Reporting", "UTM Tracking", "Process Improvement", "Dashboarding", "Marketing Automation", "CRM Management", "Project Management", "Cross-Team Coordination"] },
-    { title: "Ways of Working", sub: "How the work gets done", icon: "people",
-      items: ["Time Management", "Ownership", "Problem Solving", "Communication", "Team Management"] }
+      items: ["Performance Tracking & Reporting", "UTM Tracking", "Process Improvement", "Dashboarding", "Marketing Automation", "Project Management", "Cross-Team Coordination"] }
   ],
   /* Tools: `brand` uses a logo from icons.js; `glyph` uses a generic icon (bolt, share, people, video, grid, chart, search). */
   tools: [
-    { name: "Meta Business Suite", brand: "meta" }, { name: "Sprout Social", glyph: "share" }, { name: "Agorapulse", glyph: "share" },
+    { name: "Meta Business Suite", brand: "meta" }, { name: "Sprout Social", glyph: "sprout" }, { name: "Agorapulse", glyph: "pulse" },
     { name: "Hootsuite", brand: "hootsuite" }, { name: "Metabase", brand: "metabase" }, { name: "Notion", brand: "notion" },
     { name: "Jira", brand: "jira" }, { name: "CRM tools", glyph: "people" }, { name: "ChatGPT", brand: "openai" },
-    { name: "Claude", brand: "claude" }, { name: "Automation tools", glyph: "bolt" }, { name: "Canva", brand: "canva" },
-    { name: "InShot", glyph: "video" }, { name: "VN", glyph: "video" }, { name: "Office 365", glyph: "grid" },
+    { name: "Claude", brand: "claude" }, { name: "Automation tools", glyph: "bolt" }, { name: "Canva", brand: "canva" }, { name: "VN", glyph: "video" }, { name: "Office 365", glyph: "grid" },
     /* Added: common for this role. Delete any you don't use. */
-    { name: "Google Analytics", brand: "googleanalytics" }, { name: "Google Search Console", brand: "googlesearchconsole" },
-    { name: "Google Ads", brand: "googleads" }, { name: "Semrush", brand: "semrush" }, { name: "Ahrefs", glyph: "search" },
-    { name: "HubSpot", brand: "hubspot" }, { name: "Zapier", brand: "zapier" }, { name: "Slack", brand: "slack" },
+    { name: "Google Analytics", brand: "googleanalytics" }, { name: "Semrush", brand: "semrush" }, { name: "Ahrefs", glyph: "search" },
+    { name: "HubSpot", brand: "hubspot" },
     { name: "Figma", brand: "figma" }, { name: "CapCut", glyph: "video" }
   ],
 
@@ -151,7 +148,7 @@ window.ARCHIVE = {
         { text: "Managed internal and external communication, including social media updates and engagement initiatives.", skills: [] },
         { text: "Assisted with event coordination and documentation, ensuring streamlined information flow and accessibility.", skills: [] }
       ],
-      achievements: []
+      achievements: [{ value: "20+", label: "Orientation sessions managed" }]
     },
     {
       id: "XP-002", type: "internship", company: "GrowUMedia", title: "Content Marketing Strategy Intern",
@@ -162,7 +159,7 @@ window.ARCHIVE = {
         { text: "Led podcast marketing efforts for multiple clients, aligning content with audience preferences and brand identity.", skills: [] },
         { text: "Researched industry trends and optimised content strategies for improved audience engagement.", skills: [] }
       ],
-      achievements: [{ value: "4", label: "Podcast marketing clients" }]
+      achievements: [{ value: "4", label: "Podcast marketing clients" }, { value: "5+", label: "Social pages marketed end to end" }]
     },
     {
       id: "XP-003", type: "internship", company: "Trixal Media", title: "Social Media Marketing Intern",
@@ -184,7 +181,7 @@ window.ARCHIVE = {
         { text: "Conducted competitor analysis and web performance tracking to refine digital marketing strategies.", skills: [] },
         { text: "Developed content calendars and marketing plans to drive engagement across social media and online platforms.", skills: [] }
       ],
-      achievements: []
+      achievements: [{ value: "15+", label: "Branding strategies developed" }]
     },
     {
       id: "XP-005", type: "internship", company: "Runverve", title: "Social Media Marketing Intern",
@@ -195,7 +192,7 @@ window.ARCHIVE = {
         { text: "Tracking and analysing social media performance, optimising content for brand visibility and engagement.", skills: [] },
         { text: "Creating and executing multi-platform content strategies to enhance brand awareness and audience interaction.", skills: [] }
       ],
-      achievements: []
+      achievements: [{ value: "10+", label: "IPs developed" }]
     },
     {
       id: "XP-006", type: "full-time", company: "Masai School", title: "Marketing Operations Specialist",
@@ -226,7 +223,7 @@ window.ARCHIVE = {
         { value: "30 days", label: "Neutral → positive AI sentiment" },
         { value: "2.5M", label: "Monthly organic reach" },
         { value: "3,600+", label: "Organic leads a month" },
-        { value: "₹15L", label: "Monthly budget managed" }
+        { value: "₹15L", label: "Budget managed in a month" }
       ]
     }
   ],
@@ -273,6 +270,7 @@ window.ARCHIVE = {
         { q: "Offering 4", before: "[Before]", after: "[After]" },
         { q: "Offering 5", before: "[Before]", after: "[After]" }
       ],
+      sourcesNote: { tags: ["Reddit", "Quora"], text: "Reddit and Quora answers also get cited as sources in AI answers about a brand." },
       learnings: []
     },
     {
@@ -417,5 +415,8 @@ window.ARCHIVE = {
   coursework: [
     { group: "Digital marketing", items: ["Fundamentals of Digital Marketing", "Search Engine Optimisation", "Google Analytics", "Google Ads", "CRM", "Omni-channel Marketing", "Gen AI", "Content Writing"] },
     { group: "Social media marketing", items: ["Fundamentals of Social Media Marketing", "Social Media Marketing Specialization (Meta)", "Social Media Monitoring", "Content Creating using Canva"] }
-  ]
+  ],
+
+  /* "What is this about?" options in the contact form */
+  enquiryTypes: ["I'm hiring for a role", "I have a marketing project", "Creator or brand collaboration", "Something else"]
 };
