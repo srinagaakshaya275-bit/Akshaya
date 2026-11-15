@@ -165,7 +165,7 @@ window.ARCHIVE = {
       dates: "July – August 2024", startYear: 2024, endYear: 2024, place: "Remote",
       summary: "Social content and visual assets aligned to brand identity.",
       responsibilities: [
-        { text: "Created and scheduled social media content, improving brand presence and engagement by 65%.", skills: [] },
+        { text: "Created and scheduled social media content, improving brand presence and audience engagement.", skills: [] },
         { text: "Managed paid advertising campaigns, increasing visibility and engagement through targeted marketing strategies.", skills: [] },
         { text: "Collaborated on sustainability-focused campaigns to align brand messaging with environmental initiatives.", skills: [] }
       ],
@@ -290,6 +290,8 @@ window.ARCHIVE = {
     {
       id: "CF-002", layout: "exhibit", type: "content", filedUnder: "Content strategy · Social",
       title: "Organic growth, zero ad spend", year: "2025–26", years: [2025, 2026], showGrowth: true,
+      /* numbers on the Impact card; the full list opens in the file */
+      cardStats: [{ value: "378K", label: "Best Instagram post reach" }, { value: "344K", label: "Best LinkedIn post reach" }, { value: "1,000", label: "Bookings from social" }],
       role: "Instagram & LinkedIn owner", roleIds: ["XP-006"],
       skills: ["social", "content", "calendar", "analytics"],
       summary: "Instagram and LinkedIn run end to end on recurring formats that earned their place through data.",

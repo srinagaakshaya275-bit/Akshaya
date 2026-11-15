@@ -51,10 +51,9 @@
   $('#hero-visual').innerHTML = `
     <div class="perf glass">
       <div class="perf__top"><span>Impact snapshot</span><em>Masai School</em></div>
-      <b class="perf__big">2.5M</b><span class="perf__sub">monthly organic reach</span>
       <div class="perf__bars">${growth.map(bars).join('')}</div>
       <div class="perf__tiles">
-        ${stat({ value: '3,600+', label: 'Leads / month' })}${stat({ value: '₹15L', label: 'Budget managed in a month' })}${stat({ value: '7+', label: 'AI verdicts flipped, ongoing' })}
+        ${stat({ value: '₹15L', label: 'Budget managed in a month' })}${stat({ value: '7+', label: 'AI verdicts flipped, ongoing' })}
       </div>
     </div>`;
   $('#stats').innerHTML = A.highlights.map((h) => `<li><b>${esc(h.value)}</b><span>${esc(h.label)}</span></li>`).join('');
@@ -117,7 +116,7 @@
     return `<article class="pcard glass">
       <p class="eyebrow">${esc(typeName(p.type))}</p>
       <h3>${ph(p.title)}</h3><p class="pcard__sum">${ph(p.summary)}</p>
-      <div class="tiles tiles--col">${p.outcome.slice(0, 3).map((o) => stat(o, 'tile--row')).join('')}</div>
+      <div class="tiles tiles--col">${(p.cardStats || p.outcome).slice(0, 3).map((o) => stat(o, 'tile--row')).join('')}</div>
       <a class="more" href="#" data-open="${id}">Read the file <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
     </article>`;
   };

@@ -548,3 +548,8 @@ h2 { background: linear-gradient(180deg, #FFFFFF 30%, #B9D3FF); -webkit-backgrou
 .contact__actions { display: flex; flex-wrap: wrap; gap: 12px; margin: 22px 0 8px; }
 .contact .btn--ghost { color: var(--ink); }
 [hidden] { display: none !important; }
+
+.perf__top { margin-bottom: 22px; }
+.perf__bars { margin-top: 4px; }
+.perf__tiles { grid-template-columns: repeat(2, 1fr); }
+@media (max-width: 559px) { .perf__tiles { grid-template-columns: 1fr; } }
