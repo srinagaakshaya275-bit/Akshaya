@@ -210,8 +210,11 @@
     }
     submit.disabled = true; say('Sending…');
     try {
-      const r = await fetch(A.meta.formEndpoint, { method: 'POST', headers: { Accept: 'application/json' }, body: new FormData(form) });
-      if (r.ok) { form.reset(); say('Thank you. Your message has been sent.', 'ok'); } else say('The message could not be sent. Please email me directly instead.', 'bad');
+      const fd = new FormData(form); fd.append('_subject', `${form.elements.enquiry_type.value} · ${form.elements.name.value.trim()}`); fd.append('_template', 'table');
+      const r = await fetch(A.meta.formEndpoint, { method: 'POST', headers: { Accept: 'application/json' }, body: fd });
+      let data = {}; try { data = await r.json(); } catch (e) { /* not JSON */ }
+      /* FormSubmit answers success "true"/true only when it has accepted the message */
+      if (r.ok && (data.success === true || data.success === 'true')) { form.reset(); say('Thank you. Your message has been sent.', 'ok'); } else say('The message could not be sent. Please email me directly instead.', 'bad');
     } catch (err) { say('The message could not be sent. Please check your connection or email me directly.', 'bad'); }
     submit.disabled = false;
   });

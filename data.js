@@ -23,10 +23,10 @@ window.ARCHIVE = {
     email: "srinagaakshaya275@gmail.com",
     linkedin: "https://www.linkedin.com/in/akshayareddyp/",
     resume: "Akshaya_Resume.pdf",
-    /* Contact form. With this empty, "Send message" opens the visitor's email app with the message
-       ready to send to you. To have it deliver straight to your inbox, create a free form at
-       https://formspree.io and paste its endpoint here, e.g. "https://formspree.io/f/abcdwxyz". */
-    formEndpoint: ""
+    /* Contact form. Messages are delivered to `email` through FormSubmit.co (free, no account). The first
+       message ever sent triggers one activation email to you: open it and click Activate. After that every
+       message lands in your inbox. Set formEndpoint to "" to fall back to opening the visitor's email app. */
+    formEndpoint: "https://formsubmit.co/ajax/srinagaakshaya275@gmail.com"
   },
 
   /* Hero headline. `lead` is white, `accent` is blue. */
