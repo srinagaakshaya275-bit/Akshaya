@@ -23,10 +23,9 @@ window.ARCHIVE = {
     email: "srinagaakshaya275@gmail.com",
     linkedin: "https://www.linkedin.com/in/akshayareddyp/",
     resume: "Akshaya_Resume.pdf",
-    /* Contact form. Messages are delivered to `email` through FormSubmit.co (free, no account). The first
-       message ever sent triggers one activation email to you: open it and click Activate. After that every
-       message lands in your inbox. Set formEndpoint to "" to fall back to opening the visitor's email app. */
-    formEndpoint: "https://formsubmit.co/ajax/srinagaakshaya275@gmail.com"
+    /* Contact: paste your Google Form link here (Google Forms > Send > link icon). While it is empty
+       the "Fill the form" button stays hidden and only email shows. */
+    googleForm: ""
   },
 
   /* Hero headline. `lead` is white, `accent` is blue. */

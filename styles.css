@@ -544,3 +544,7 @@ h2 { background: linear-gradient(180deg, #FFFFFF 30%, #B9D3FF); -webkit-backgrou
 .growth--in .growth__card { padding: 20px; }
 .growth--in .growth__top h3 { font-size: 24px; }
 @media (min-width: 700px) { .growth--in { grid-template-columns: 1fr 1fr; } }
+
+.contact__actions { display: flex; flex-wrap: wrap; gap: 12px; margin: 22px 0 8px; }
+.contact .btn--ghost { color: var(--ink); }
+[hidden] { display: none !important; }

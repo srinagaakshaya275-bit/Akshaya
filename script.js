@@ -191,33 +191,8 @@
   $('#mail-addr').textContent = A.meta.email;
   $('#hero-linkedin').href = A.meta.linkedin;
 
-  const form = $('#enq'), status = $('#e-status'), submit = $('#e-submit');
-  const fields = [['e-name', (v) => v.trim().length > 0], ['e-email', (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim())], ['e-msg', (v) => v.trim().length > 0]];
-  const mark = (id, ok) => { const el = $('#' + id); el.classList.toggle('is-invalid', !ok); el.setAttribute('aria-invalid', String(!ok)); $('#' + id + '-err').hidden = ok; return ok; };
-  fields.forEach(([id, test]) => { $('#' + id).addEventListener('blur', () => mark(id, test($('#' + id).value))); $('#' + id).addEventListener('input', () => { if ($('#' + id).classList.contains('is-invalid')) mark(id, test($('#' + id).value)); }); });
-  const say = (msg, kind) => { status.textContent = msg; status.className = 'enq__status' + (kind ? ' is-' + kind : ''); };
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault(); say('');
-    const results = fields.map(([id, test]) => mark(id, test($('#' + id).value)));
-    if (results.includes(false)) { $('.is-invalid', form).focus(); say('Please fill in every field above.', 'bad'); return; }
-    if (form.elements._gotcha.value) return;
-    if (!A.meta.formEndpoint) {
-      /* no form service connected: hand the message to the visitor's email app, and say so honestly */
-      const body = `${form.elements.message.value.trim()}\n\n${form.elements.name.value.trim()}\n${form.elements.email.value.trim()}`;
-      location.href = `mailto:${A.meta.email}?subject=${encodeURIComponent('Message from ' + form.elements.name.value.trim())}&body=${encodeURIComponent(body)}`;
-      say('Your email app should open with this message ready. Press send there to deliver it. If nothing opens, email me directly using the address below.', '');
-      return;
-    }
-    submit.disabled = true; say('Sending…');
-    try {
-      const fd = new FormData(form); fd.append('_subject', `Portfolio message from ${form.elements.name.value.trim()}`); fd.append('_template', 'table');
-      const r = await fetch(A.meta.formEndpoint, { method: 'POST', headers: { Accept: 'application/json' }, body: fd });
-      let data = {}; try { data = await r.json(); } catch (e) { /* not JSON */ }
-      /* FormSubmit answers success "true"/true only when it has accepted the message */
-      if (r.ok && (data.success === true || data.success === 'true')) { form.reset(); say('Thank you. Your message has been sent.', 'ok'); } else say('The message could not be sent. Please email me directly instead.', 'bad');
-    } catch (err) { say('The message could not be sent. Please check your connection or email me directly.', 'bad'); }
-    submit.disabled = false;
-  });
+  $('#link-email').href = `mailto:${A.meta.email}`;
+  if (A.meta.googleForm) { const f = $('#link-form'); f.href = A.meta.googleForm; f.hidden = false; }
 
   /* land on the hero (or the #hash target) */
   requestAnimationFrame(() => {

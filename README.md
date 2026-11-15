@@ -23,8 +23,8 @@ Hero · stat strip · skills marquee · About (with How I work) · Experience ·
 - **Tools**: in `tools`, use `brand` (a logo from `icons.js`) or `glyph` (a generic icon). **Certificates**: make a coursework item `{ name: "...", url: "https://..." }` and it becomes a link.
 - **Update the date** in `meta.updated` when you change anything.
 
-## Contact form
-Messages go to your email through FormSubmit.co (`meta.formEndpoint` in `data.js`), no account needed. **One-time step:** after the site is live, send yourself a test message from the form, open the activation email FormSubmit sends to your inbox (check spam) and click Activate. Until then the form says it could not send. Set `formEndpoint` to `""` to make the button open the visitor's email app instead. The form never says "sent" unless the service accepted the message.
+## Contact
+Paste your Google Form link into `meta.googleForm` in `data.js` and a "Fill the form" button appears beside "Email me". Leave it empty to show email only.
 
 ## Run locally
 ```bash
